@@ -8,6 +8,7 @@ import dotIcon from "@/public/figma/dot.png";
 import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import driverImage from "@/public/figma/drivers.png";
 import TripExperience from "@/components/ui/TripExperience/TripExperience";
+import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 export default function page() {
   return (
     <>
@@ -71,6 +72,39 @@ export default function page() {
       ]}
     />
     <TripExperience/>
+              <FeatureSection
+      imageSide="left"
+      title="چرا سفر شهری با دات‌وان؟"
+      description=""
+      image={{
+        src: driverImage,
+        alt: "راننده دات‌وان تریپ",
+        width: 720,
+        height: 480,
+      }}
+      features={[
+        {
+          title: "راحتی بیشتر",
+          description:
+            "خودروهای مدرن و محیطی مناسب برای رفت‌وآمدهای روزمره.",
+        },
+        {
+          title: "رانندگان آموزش‌دیده",
+          description:
+            "رانندگانی که پیش از شروع همکاری، مراحل احراز هویت، ارزیابی و آموزش را پشت سر گذاشته‌اند.",
+        },
+        {
+          title: "امنیت در طول سفر",
+          description:
+            "پایش مسیر و موقعیت خودرو برای تجربه سفری مطمئن‌تر.",
+        },
+        {
+          title:"مدیریت هوشمند سفر",
+          description:"فناوری دات‌وان، اطلاعات و مراحل سفر را از درخواست تا پایان مدیریت می‌کند."
+        }
+      ]}
+    />
+    <DownloadBanner/>
     </>
   );
 }
