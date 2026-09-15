@@ -5,12 +5,12 @@ import taxiIcon from "@/public/figma/taxi.png";
 import heroImage from "@/public/figma/svgs/service-city.svg";
 import importIcon from "@/public/figma/import.png";
 import dotIcon from "@/public/figma/dot.png";
-import FeatureSection from "@/components/FeatureSection/FeatureSection";
+import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import driverImage from "@/public/figma/drivers.png";
 export default function page() {
   return (
     <>
-      <Header variant="dark" />
+      <Header variant="light" />
       {/* <Hero/> */}
       <HeroDynamic
         badge={{

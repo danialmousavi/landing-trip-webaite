@@ -110,9 +110,8 @@ main {
   backdrop-filter: blur(10px);
 }
 .button-dark {
-  color: #fff;
-  background: linear-gradient(165deg, #000, #4c4c4c);
-  border-bottom-color: #000;
+  color: #000000;
+  background: #0000000F;
   padding-inline: 24px;
 }
 .pill {
