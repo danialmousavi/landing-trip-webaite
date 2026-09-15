@@ -1,0 +1,166 @@
+.section {
+  width: min(100% - 48px, 1120px);
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: 3vw 12.5vw;
+  gap: 80px;
+
+  direction: ltr;
+}
+
+.content {
+  flex: 1;
+  direction: rtl;
+  text-align: right;
+}
+
+.content h2 {
+  margin: 0 0 16px;
+
+  color: #111;
+
+  font-size: 24px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.description {
+  margin: 0;
+
+  color: #555;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 2;
+  padding-left:12% ;
+}
+
+.features {
+  margin-top: 20px;
+}
+
+.features h3 {
+  margin: 0 0 12px;
+
+  color: #333;
+
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.features ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.features li {
+  position: relative;
+
+  margin-bottom: 10px;
+  padding-right: 14px;
+
+  color: #333;
+
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.features li::before {
+
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  color: #08b9d2;
+}
+
+.features li strong {
+  font-weight: 700;
+}
+
+.imageWrapper {
+  flex: 0 0 360px;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+}
+
+.image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+}
+
+/* -------------------------
+   Image Position
+------------------------- */
+
+.imageRight {
+  direction: ltr;
+}
+
+.imageLeft {
+  flex-direction: row-reverse;
+}
+
+/* -------------------------
+   Responsive
+------------------------- */
+
+@media (max-width: 900px) {
+  .section {
+    gap: 40px;
+  }
+
+  .imageWrapper {
+    flex-basis: 320px;
+  }
+
+  .content h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section,
+  .imageLeft,
+  .imageRight {
+    width: min(100% - 32px, 600px);
+
+    flex-direction: column;
+
+    gap: 32px;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .content h2 {
+    font-size: 23px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    flex-basis: auto;
+
+    order: -1;
+  }
+
+  .image {
+    width: 100%;
+  }
+}

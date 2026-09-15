@@ -7,7 +7,6 @@ import logoDark from "@/public/figma/logo-footer.png";
 import ShakeHand from "@/public/figma/agreement.png";
 
 import {
-  BriefcaseBusiness,
   Download,
   Menu,
   X,

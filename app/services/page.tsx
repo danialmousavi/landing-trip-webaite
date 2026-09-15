@@ -5,6 +5,8 @@ import taxiIcon from "@/public/figma/taxi.png";
 import heroImage from "@/public/figma/svgs/service-city.svg";
 import importIcon from "@/public/figma/import.png";
 import dotIcon from "@/public/figma/dot.png";
+import FeatureSection from "@/components/FeatureSection/FeatureSection";
+import driverImage from "@/public/figma/drivers.png";
 export default function page() {
   return (
     <>
@@ -39,6 +41,35 @@ export default function page() {
           height: 600,
         }}
       />
+          <FeatureSection
+      imageSide="right"
+      title="برای هر مسیر شهری، یک تجربه بهتر"
+      description="دات‌وان تریپ با ترکیب خودروهای مدرن، رانندگان آموزش‌دیده و فناوری هوشمند، سفرهای شهری را مدیریت می‌کند."
+      image={{
+        src: driverImage,
+        alt: "راننده دات‌وان تریپ",
+        width: 720,
+        height: 480,
+      }}
+      features={[
+        {
+          title: "راحتی",
+          description:
+            "خودروهای مناسب و محیطی آرام برای یک سفر راحت‌تر.",
+        },
+        {
+          title: "امنیت",
+          description:
+            "رانندگان احراز هویت‌شده و آموزش‌دیده، همراه با نظارت بر سفر.",
+        },
+        {
+          title: "شفافیت",
+          description:
+            "اطلاعات سفر و مسیر، از شروع تا پایان در اختیار شماست.",
+        },
+      ]}
+    />
+
     </>
   );
 }
