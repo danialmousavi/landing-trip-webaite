@@ -7,6 +7,7 @@ import importIcon from "@/public/figma/import.png";
 import dotIcon from "@/public/figma/dot.png";
 import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import driverImage from "@/public/figma/drivers.png";
+import TripExperience from "@/components/ui/TripExperience/TripExperience";
 export default function page() {
   return (
     <>
@@ -69,7 +70,7 @@ export default function page() {
         },
       ]}
     />
-
+    <TripExperience/>
     </>
   );
 }
