@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/figma/logo.png";
 import logoDark from "@/public/figma/logo-footer.png";
+import ShakeHand from "@/public/figma/agreement.png";
+
 import {
   BriefcaseBusiness,
   Download,
@@ -74,8 +76,8 @@ export default function Header({
           type="button"
           className="button button-brand"
         >
-          <BriefcaseBusiness size={18} />
           همکاری با تریپ
+        <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
         </button>
 
         <button
