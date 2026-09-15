@@ -1,7 +1,10 @@
+import Header from '@/components/ui/Header/Header'
 import React from 'react'
 
 export default function page() {
   return (
-    <div>page</div>
+    <>
+    <Header variant="dark" />
+    </>
   )
 }

@@ -1,0 +1,112 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import logo from "@/public/figma/logo.png";
+import logoDark from "@/public/figma/logo-footer.png";
+import {
+  BriefcaseBusiness,
+  Download,
+  Menu,
+  X,
+} from "lucide-react";
+
+type HeaderProps = {
+  variant?: "light" | "dark";
+};
+
+const navItems = [
+  { label: "صفحه اصلی", href: "#home" },
+  { label: "خدمات", href: "#services" },
+  { label: "ناوگان", href: "#fleet" },
+  { label: "اخبار", href: "#news" },
+  { label: "بلاگ", href: "#blog" },
+  { label: "درباره ما", href: "#about" },
+  { label: "تماس با ما", href: "#contact" },
+];
+
+export default function Header({
+  variant = "light",
+}: HeaderProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header
+      className={`nav-shell ${
+        variant === "dark" ? "nav-dark" : "nav-light"
+      }`}
+    >
+        
+      {/* Logo */}
+      <a
+        href="#home"
+        aria-label="دات‌وان تریپ"
+        className="brand"
+      >
+        <Image
+          src={variant === "dark" ? logoDark : logo}
+          alt="دات‌وان تریپ"
+          width={140}
+          height={50}
+          priority
+        />
+      </a>
+
+      {/* Desktop Navigation */}
+      <nav
+        className={`main-nav ${menuOpen ? "open" : ""}`}
+        aria-label="منوی اصلی"
+      >
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={() => setMenuOpen(false)}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      {/* Actions */}
+      <div className="nav-actions">
+        <button
+          type="button"
+          className="button button-brand"
+        >
+          <BriefcaseBusiness size={18} />
+          همکاری با تریپ
+        </button>
+
+        <button
+          type="button"
+          className={`button ${variant === "dark" ? "button-glass" : "button-dark"}`}
+        >
+          <Download size={18} />
+          دانلود اپلیکیشن
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <button
+        type="button"
+        className="menu-button"
+        aria-label={
+          menuOpen
+            ? "بستن منو"
+            : "باز کردن منو"
+        }
+        aria-expanded={menuOpen}
+        onClick={() =>
+          setMenuOpen((prev) => !prev)
+        }
+      >
+        {menuOpen ? (
+          <X size={22} />
+        ) : (
+          <Menu size={22} />
+        )}
+      </button>
+    </header>
+  );
+}
