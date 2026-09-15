@@ -9,6 +9,7 @@ import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import driverImage from "@/public/figma/drivers.png";
 import TripExperience from "@/components/ui/TripExperience/TripExperience";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
+import FAQ from "@/components/ui/Faq/Faq";
 export default function page() {
   return (
     <>
@@ -105,6 +106,7 @@ export default function page() {
       ]}
     />
     <DownloadBanner/>
+    <FAQ/>
     </>
   );
 }
