@@ -8,6 +8,7 @@ import ShakeHand from "@/public/figma/agreement.png";
 
 import { Download, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type HeaderProps = {
   variant?: "light" | "dark";
@@ -25,7 +26,10 @@ const navItems = [
 
 export default function Header({ variant = "light" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const address=usePathname();
+  console.log('====================================');
+  console.log(address);
+  console.log('====================================');
   return (
     <header
       className={`nav-shell ${variant === "dark" ? "nav-dark" : "nav-light"}`}
@@ -43,7 +47,7 @@ export default function Header({ variant = "light" }: HeaderProps) {
 
       {/* Desktop Navigation */}
       <nav
-        className={`main-nav ${menuOpen ? "open" : ""}`}
+        className={`main-nav ${menuOpen ? "open" : ""} `}
         aria-label="منوی اصلی"
       >
         {navItems.map((item) => (
@@ -52,7 +56,9 @@ export default function Header({ variant = "light" }: HeaderProps) {
             href={item.href}
             onClick={() => setMenuOpen(false)}
           >
-            {item.label}
+            <span className={`${item.href==address?"nav-selected":""}`}>
+               {item.label}
+            </span>
           </Link>
         ))}
       </nav>

@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/ui/Header/Header";
 import {
   Apple,
   BriefcaseBusiness,
@@ -120,7 +121,7 @@ export default function Home() {
           src={`${A}hero-bg.png`}
           alt="خودروی دات‌وان تریپ"
         />
-        <header className="nav-shell">
+        {/* <header className="nav-shell">
           <a className="brand" href="#home" aria-label="دات‌وان تریپ">
             <img src={`${A}logo.png`} alt="دات‌وان تریپ" />
           </a>
@@ -151,7 +152,8 @@ export default function Home() {
           >
             {menuOpen ? <X /> : <Menu />}
           </button>
-        </header>
+        </header> */}
+        <Header variant="dark"/>
         <div className="hero-content">
           <h1>
             نسل جدید حمل‌ونقل،

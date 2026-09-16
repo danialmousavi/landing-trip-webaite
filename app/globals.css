@@ -190,8 +190,8 @@ main {
   text-decoration: none;
   opacity: 0.92;
 }
-.main-nav a:first-child {
-  font-weight: 700;
+.nav-selected{
+  font-weight: 800;
 }
 .main-nav a:hover {
   color: var(--brand);
