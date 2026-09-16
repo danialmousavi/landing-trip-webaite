@@ -16,6 +16,7 @@ import FlexibleTravel from "@/components/ui/FlexibleTravel/FlexibleTravel";
 export default function page() {
   return (
     <>
+
     <Header/>
       <Hero
         badge={{
