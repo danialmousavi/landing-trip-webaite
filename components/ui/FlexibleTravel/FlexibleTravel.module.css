@@ -1,0 +1,130 @@
+.section {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: #ffffff;
+  font-family: inherit;
+  margin-bottom: 100px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- هدر --- */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 600px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827; /* رنگ تیره برای عنوان */
+  margin: 0 0 12px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6b7280; /* خاکستری ملایم */
+  margin: 0;
+}
+
+/* --- گرید ویژگی‌ها --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ۴ ستون مساوی در دسکتاپ */
+  gap: 32px;
+  width: 100%;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* استایل کادر پس‌زمینه آیکون (مطابق با عکس) */
+.iconWrapper {
+  width: 64px;
+  height: 64px;
+  background-color: #f9fafb; /* خاکستری بسیار روشن */
+  border-radius: 16px; /* گوشه‌های گرد */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: #111827; /* رنگ آیکون در صورت استفاده از SVG با currentColor */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.featureCard:hover .iconWrapper {
+  transform: translateY(-4px); /* انیمیشن نرم هنگام هاور */
+  background-color: #f3f4f6;
+}
+
+.featureTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 12px 0;
+}
+
+.featureDesc {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 260px; /* جلوگیری از کشیدگی بیش از حد متن در هر ستون */
+}
+
+/* ==========================================
+   طراحی واکنش‌گرا (Responsive)
+   ========================================== */
+
+/* تبلت: تبدیل ۴ ستون به ۲ ستون */
+@media (max-width: 1024px) {
+  .section {
+    padding: 60px 20px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 48px; /* فاصله بیشتر بین ردیف‌ها */
+  }
+
+  .featureDesc {
+    max-width: 300px;
+  }
+}
+
+/* موبایل: تبدیل ۲ ستون به ۱ ستون */
+@media (max-width: 640px) {
+  .section {
+    padding: 40px 16px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .featureDesc {
+    max-width: 100%; /* در موبایل اجازه می‌دهیم کل عرض را بگیرد */
+    padding: 0 16px;
+  }
+}

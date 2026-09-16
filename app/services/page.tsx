@@ -57,6 +57,7 @@ export default function page() {
         width: 720,
         height: 480,
       }}
+      featTitle="مزیت ها"
       features={[
         {
           title: "راحتی",

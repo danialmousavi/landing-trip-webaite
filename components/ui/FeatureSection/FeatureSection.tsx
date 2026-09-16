@@ -9,7 +9,7 @@ type Feature = {
 
 type FeatureSectionProps = {
   title: string;
-  description: string;
+  description?: string;
 
   image: {
     src: StaticImageData;
@@ -19,7 +19,7 @@ type FeatureSectionProps = {
   };
 
   imageSide?: "left" | "right";
-
+  featTitle?: string;
   features?: Feature[];
 };
 
@@ -28,6 +28,7 @@ export default function FeatureSection({
   description,
   image,
   imageSide = "right",
+  featTitle,
   features = [],
 }: FeatureSectionProps) {
   return (
@@ -39,19 +40,16 @@ export default function FeatureSection({
       <div className={styles.content}>
         <h2>{title}</h2>
 
-        <p className={styles.description}>
-          {description}
-        </p>
+        <p className={styles.description}>{description}</p>
 
         {features.length > 0 && (
           <div className={styles.features}>
-            <h3>مزیت‌ها</h3>
+            <h3>{featTitle}</h3>
 
-            <ul >
+            <ul>
               {features.map((feature, index) => (
                 <li key={`${feature.title}-${index}`}>
-                  <strong>{feature.title}:</strong>{" "}
-                  {feature.description}
+                  <strong>{feature.title}:</strong> {feature.description}
                 </li>
               ))}
             </ul>
