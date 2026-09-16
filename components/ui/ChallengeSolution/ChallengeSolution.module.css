@@ -36,7 +36,8 @@
 
 .cabinFrame {
   position: absolute;
-  top: 0;
+  /* Two-thirds remain above the comparison block; the last third is masked by it. */
+  top: 30.625%;
   left: 43.59%;
   width: 50%;
   height: auto;
@@ -46,12 +47,13 @@
   border: 5px solid #fff;
   border-radius: 24px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  transform: rotate(-6.36deg);
+  transform: rotate(6.36deg);
 }
 
 .fleetFrame {
   position: absolute;
-  top: 34.375%;
+  /* Half of the 200px frame remains visible above the comparison block. */
+  top: 62.5%;
   left: 0;
   width: 55.13%;
   height: auto;
@@ -80,7 +82,7 @@
 .copy {
   position: absolute;
   z-index: 3;
-  right: 48px;
+  right: 0;
   bottom: 68px;
   width: min(720px, 60%);
   text-align: right;
@@ -151,9 +153,9 @@
 .cell {
   padding: 22px 24px;
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 180%;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
   color: #171717;
   text-align: center;
 }
