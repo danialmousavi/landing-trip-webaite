@@ -1,0 +1,175 @@
+.section {
+  width: 95%;
+  max-width: 1280px;
+  margin: 80px auto;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.shell {
+  padding: 72px 48px 56px;
+  border: 2px solid #f2f2f2;
+  border-radius: 24px;
+  /* background: #111; */
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 180%;
+  color: #000;
+  margin: 0;
+}
+
+.lead {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 180%;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.topRow,
+.bottomRow {
+  display: grid;
+  gap: 32px 24px;
+}
+
+.topRow {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.bottomRow {
+  grid-template-columns: repeat(2, minmax(0, 280px));
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+
+.stepCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepTitle {
+  margin: 0;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 180%;
+  color: #000;
+}
+
+.iconBox {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.stepText {
+  margin: 0;
+  max-width: 280px;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 180%;
+  color: #414141;
+}
+
+.ctaWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  background: var(--brand, #00b7ce);
+  color: #fff;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow:
+    inset 0 6px 7px rgba(255, 255, 255, 0.08),
+    0 4px 14px rgba(0, 183, 206, 0.18);
+  transition:
+    transform 0.2s,
+    filter 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+@media (max-width: 900px) {
+  .shell {
+    padding: 48px 28px 40px;
+  }
+
+  .topRow,
+  .bottomRow {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    margin-top: 0;
+    gap: 28px;
+  }
+
+  .bottomRow {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    margin: 40px auto;
+  }
+
+  .shell {
+    padding: 36px 20px 32px;
+    border-radius: 20px;
+  }
+
+  .ctaWrap {
+    margin-top: 36px;
+  }
+
+  .cta {
+    width: 100%;
+    max-width: 280px;
+  }
+}

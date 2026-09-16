@@ -1,0 +1,279 @@
+.section {
+  width: 95%;
+  max-width: 1280px;
+  margin: 80px auto;
+  padding-top: 64px;
+  box-sizing: border-box;
+  font-family: inherit;
+  overflow: visible;
+}
+
+.shell {
+  position: relative;
+  overflow: visible;
+  border-radius: 24px;
+}
+
+.intro {
+  position: relative;
+  min-height: 320px;
+  border-radius: 24px 24px 0 0;
+  /* background: #111; */
+  /* color: #fff; */
+  overflow: visible;
+}
+
+.photos {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 0;
+  width: min(390px, calc(100vw - 48px));
+  height: auto;
+  aspect-ratio: 390 / 320;
+  pointer-events: none;
+}
+
+.cabinFrame {
+  position: absolute;
+  /* Two-thirds remain above the comparison block; the last third is masked by it. */
+  top: 30.625%;
+  left: 43.59%;
+  width: 50%;
+  height: auto;
+  aspect-ratio: 195 / 255;
+  z-index: 1;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: rotate(6.36deg);
+}
+
+.fleetFrame {
+  position: absolute;
+  /* Half of the 200px frame remains visible above the comparison block. */
+  top: 62.5%;
+  left: 0;
+  width: 55.13%;
+  height: auto;
+  aspect-ratio: 215 / 200;
+  z-index: 2;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: rotate(-9.02deg);
+  transform-origin: top left;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.shell,
+.intro,
+.headings,
+.comparison,
+.tableBody {
+  box-sizing: border-box;
+}
+
+.copy {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 68px;
+  width: min(720px, 60%);
+  text-align: right;
+}
+
+.title {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 180%;
+  margin: 0 0 12px;
+  color: black;
+}
+
+.description {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 180%;
+  margin: 0;
+  /* color: rgba(255, 255, 255, 0.72); */
+  color: black;
+}
+
+.comparison {
+  position: relative;
+  z-index: 4;
+}
+
+.headings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 72px;
+  padding: 20px 16px;
+  border-radius: 16px 16px 0 0;
+  background: #111;
+}
+
+.headings h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 180%;
+  text-align: center;
+  color: #fff;
+}
+
+.tableBody {
+  overflow: hidden;
+  border: 2px solid #f2f2f2;
+  border-radius: 0 0 24px 24px;
+  background: #fff;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.row + .row {
+  border-top: 1px solid #eee;
+}
+
+.cell {
+  padding: 22px 24px;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
+  color: #171717;
+  text-align: center;
+}
+
+.cell + .cell {
+  border-right: 1px solid #eee;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-top: 48px;
+  }
+
+  .intro {
+    min-height: 0;
+  }
+
+  .photos {
+    position: relative;
+    top: 0;
+    left: auto;
+    width: min(390px, calc(100vw - 48px));
+    height: auto;
+    margin: -28px auto 0;
+    z-index: 2;
+  }
+
+  .cabinFrame {
+    top: 0;
+    left: 43.59%;
+    width: 50%;
+    height: auto;
+  }
+
+  .fleetFrame {
+    left: 0;
+    top: 34.375%;
+    width: 55.13%;
+    height: auto;
+  }
+
+  .copy {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    z-index: 3;
+    width: auto;
+    max-width: none;
+    padding: 16px 24px 28px;
+  }
+
+  .headings {
+    min-height: 64px;
+    padding: 16px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    margin: 40px auto;
+    padding-top: 28px;
+  }
+
+  .cabinFrame,
+  .fleetFrame {
+    border-width: 4px;
+    border-radius: 18px;
+  }
+
+  .shell {
+    border-radius: 20px;
+  }
+
+  .intro {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .title,
+  .description {
+    text-align: center;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .headings {
+    display: none;
+  }
+
+  .tableBody {
+    border-radius: 0 0 20px 20px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    padding: 16px 16px 8px;
+  }
+
+  .row + .row {
+    border-top: 1px solid #eee;
+  }
+
+  .cell {
+    padding: 10px 4px 12px;
+    text-align: center;
+  }
+
+  .cell + .cell {
+    border-right: 0;
+  }
+
+  .cell::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 6px;
+    color: #00b7ce;
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
