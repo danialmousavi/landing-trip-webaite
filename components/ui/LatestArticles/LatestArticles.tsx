@@ -26,6 +26,7 @@ type LatestArticlesProps = {
   seeAllLabel?: string;
   seeAllHref?: string;
   featuredCount?: number;
+  compact?: boolean;
   articles?: LatestArticle[];
 };
 
@@ -133,6 +134,7 @@ export default function LatestArticles({
   seeAllLabel = "همه مطالب",
   seeAllHref = "#",
   featuredCount = 3,
+  compact = false,
   articles = defaultArticles,
 }: LatestArticlesProps) {
   const [query, setQuery] = useState("");
@@ -152,8 +154,9 @@ export default function LatestArticles({
     });
   }, [allLabel, articles, category, query]);
 
-  const featured = filtered.slice(0, featuredCount);
-  const rest = filtered.slice(featuredCount);
+  const showFeatured = !compact && featuredCount > 0;
+  const featured = showFeatured ? filtered.slice(0, featuredCount) : [];
+  const rest = showFeatured ? filtered.slice(featuredCount) : filtered;
 
   return (
     <section className={styles.section} dir="rtl" aria-label={title}>

@@ -25,7 +25,7 @@ export default function page() {
     
     <PopularArticles/>
     <LatestArticles/>
- 
+    <LatestArticles compact />
     <FAQ/>
     {/* <Footer/> */}
     </>
