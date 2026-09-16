@@ -56,30 +56,16 @@
   position: absolute;
   z-index: 0;
   top: var(--car-top);
-  /* top: 50%; */
   bottom: 0;
   inset-inline: 0;
   display: flex;
+  align-items: flex-end;
   justify-content: center;
-
-  @media (min-width: 768px) {
-    top: 10%;
-    bottom: 10%;
-  }
-
 }
 
 .carImage {
-  height: min-content;
   height: 100%;
-  
   width: auto;
-
-  @media (min-width: 768px) {
-    /* width: 100%; */
-  }
-
-
   max-width: 100%;
   object-fit: contain;
 }
@@ -100,20 +86,28 @@
 
 .title {
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 700;
   color: #171717;
   line-height: 180%;
   margin: 0 0 12px 0;
+
+  @media (min-width: 769px) {
+    font-size: 24px;
+  }
 }
 
 .description {
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: #6b7280;
   line-height: 180%;
   margin: 0;
+
+  @media (min-width: 769px) {
+    font-size: 16px;
+  }
 }
 
 .modelInfo {
@@ -126,13 +120,17 @@
 
 .vehicleName {
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: #00b7ce;
   line-height: 48px;
   width: 100%;
   margin: 0 0 16px 0;
   text-align: right;
+
+  @media (min-width: 769px) {
+    font-size: 20px;
+  }
 }
 
 .specCard {
@@ -228,6 +226,11 @@
   pointer-events: auto;
   transform: translateY(-50%);
   transition: transform 0.2s;
+  /* display: none; */
+
+  @media (min-width: 769px) {
+    display: block
+  }
 }
 
 .navButton:hover {
@@ -240,16 +243,25 @@
 }
 
 .navRight {
-  right: calc(var(--nav-size) / -2);
+    right: calc(var(--nav-size) / -2);
 }
 
 .navLeft {
-  left: calc(var(--nav-size) / -2);
+ 
+    left: calc(var(--nav-size) / -2);
+  
 }
 
 /* ==========================================
    Responsive Design (واکنش‌گرایی)
    ========================================== */
+
+@media (min-width: 769px) {
+  .carLayer {
+    top: 10%;
+    bottom: 10%;
+  }
+}
 
 @media (max-width: 1024px) {
   .header {
@@ -259,9 +271,9 @@
 
 @media (max-width: 768px) {
   .section {
-    /* در موبایل سرتیتر ستونی می‌شود، پس خودرو پایین‌تر می‌نشیند */
-    --frame-min-height: 560px;
-    --car-top: 52%;
+    --frame-min-height: auto;
+    --frame-peek: 14px;
+    --frame-gap: 12px;
     --nav-size: 32px;
 
     margin: 40px 0;
@@ -269,13 +281,14 @@
 
   .frame {
     border-radius: 20px;
-    padding: 24px 20px;
+    padding: 24px 16px 20px;
+    min-height: 0;
   }
 
   .header {
     grid-template-columns: 1fr;
     justify-items: center;
-    gap: 24px;
+    gap: 16px;
   }
 
   .intro {
@@ -285,11 +298,49 @@
 
   .modelInfo {
     width: 100%;
-    max-width: 320px;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .vehicleName {
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 12px;
   }
 
   .specCard {
     width: 100%;
+    max-width: 280px;
     margin-inline: auto;
+  }
+
+  .carLayer {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    inset-inline: auto;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    margin-top: 8px;
+    padding-inline: 4px;
+  }
+
+  .carImage {
+    width: 100%;
+    height: auto;
+    max-height: 168px;
+    object-fit: contain;
+    transform: scale(1.2);
+
+    @media (min-width: 769px) {
+      transform: unset;
+    }
+  }
+
+  .footer {
+    margin-top: 12px;
+    padding-top: 4px;
   }
 }

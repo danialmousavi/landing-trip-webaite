@@ -124,15 +124,6 @@ export default function VehicleShowcase({
               >
                 <article className={styles.frame}>
                   {/* خودرو به‌عنوان لایه پس‌زمینه، ۲۴۸ پیکسل پایین‌تر از بالای فریم */}
-                  <div className={styles.carLayer}>
-                    <Image
-                      src={vehicle.image.src}
-                      alt={vehicle.image.alt}
-                      className={styles.carImage}
-                      priority={index === 0}
-                    />
-                  </div>
-
                   <div className={styles.header}>
                     <div className={styles.intro}>
                       <h2 className={styles.title}>{title}</h2>
@@ -151,6 +142,15 @@ export default function VehicleShowcase({
                         ))}
                       </dl>
                     </div>
+                  </div>
+
+                  <div className={styles.carLayer}>
+                    <Image
+                      src={vehicle.image.src}
+                      alt={vehicle.image.alt}
+                      className={styles.carImage}
+                      priority={index === 0}
+                    />
                   </div>
 
                   <div className={styles.footer}>
