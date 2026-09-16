@@ -15,7 +15,7 @@ export type UseCaseCard = {
     height?: number;
   };
   imageLayout?: "cover" | "inset";
-  showBrandMark?: boolean;
+  decoration?: "wiggle" | "star";
   featured?: boolean;
 };
 
@@ -61,7 +61,7 @@ const defaultCards: UseCaseCard[] = [
     title: "سرویس‌های اختصاصی",
     description:
       "برای نیازهایی که به مدل جابه‌جایی متفاوت یا برنامه‌ریزی اختصاصی نیاز دارند.",
-    showBrandMark: true,
+    decoration: "star",
   },
   {
     id: "events",
@@ -76,13 +76,13 @@ const defaultCards: UseCaseCard[] = [
       height: 143,
     },
     imageLayout: "inset",
+    decoration: "wiggle",
   },
   {
     id: "multi-stop",
     number: 3,
     title: "تأمین خودرو و راننده",
     description: "تأمین خودرو و راننده برای بازه زمانی مشخص و برنامه‌های چندمقصدی.",
-    showBrandMark: true,
   },
 ];
 
@@ -156,14 +156,18 @@ export default function UseCaseGallery({
               </div>
             )}
 
-            {card.showBrandMark && (
+            {card.decoration && (
               <Image
-                src="/figma/logo.png"
+                src={`/figma/svgs/decorations/${card.decoration}.svg`}
                 alt=""
-                width={160}
-                height={90}
+                width={card.decoration === "wiggle" ? 240 : 153}
+                height={card.decoration === "wiggle" ? 105 : 156}
                 unoptimized
-                className={styles.brandMark}
+                className={`${styles.decoration} ${
+                  card.decoration === "wiggle"
+                    ? styles.wiggleDecoration
+                    : styles.starDecoration
+                }`}
                 aria-hidden="true"
               />
             )}

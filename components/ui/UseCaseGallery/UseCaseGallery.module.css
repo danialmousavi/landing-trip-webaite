@@ -102,15 +102,22 @@
   border-bottom-left-radius: 0;
 }
 
-.brandMark {
+.decoration {
   position: absolute;
-  top: 18px;
-  left: 18px;
-  width: 120px;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  max-width: 100%;
   height: auto;
-  opacity: 0.18;
-  filter: invert(1);
   pointer-events: none;
+}
+
+.wiggleDecoration {
+  width: min(240px, 70%);
+}
+
+.starDecoration {
+  width: min(153px, 45%);
 }
 
 .content {
@@ -217,8 +224,4 @@
     text-align: center;
   }
 
-  .brandMark {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
