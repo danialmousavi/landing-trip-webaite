@@ -15,7 +15,7 @@
 
 .intro {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .title {
@@ -23,8 +23,8 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 180%;
-  color: #fff;
-  margin: 0 0 8px;
+  color: #000;
+  margin: 0;
 }
 
 .lead {
@@ -61,6 +61,22 @@
   gap: 18px;
 }
 
+.stepCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepTitle {
+  margin: 0;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 180%;
+  color: #000;
+}
+
 .iconBox {
   display: grid;
   place-items: center;
@@ -84,7 +100,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 180%;
-  color: #414141
+  color: #414141;
 }
 
 .ctaWrap {

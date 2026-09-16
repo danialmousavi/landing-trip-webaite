@@ -4,6 +4,7 @@ import styles from "./ProcessSteps.module.css";
 
 export type ProcessStep = {
   id: string;
+  title: string;
   description: string;
   icon: string;
 };
@@ -19,28 +20,33 @@ type ProcessStepsProps = {
 const defaultSteps: ProcessStep[] = [
   {
     id: "needs",
+    title: "نیازسنجی سازمان",
     description:
       "نیازهای سازمان، تعداد کاربران، مسیرها، زمان‌بندی و نوع سرویس بررسی می‌شود.",
     icon: "/figma/svgs/small-icons/checklist.svg",
   },
   {
     id: "model",
+    title: "طراحی مدل سرویس",
     description: "مدل مناسب حمل‌ونقل بر اساس نیازهای شناسایی‌شده پیشنهاد می‌شود.",
     icon: "/figma/svgs/small-icons/bulb.svg",
   },
   {
     id: "details",
+    title: "نهایی‌سازی جزئیات",
     description:
       "جزئیات سرویس، نحوه اجرا و چارچوب همکاری مشخص می‌شود.",
     icon: "/figma/svgs/small-icons/shakeHands.svg",
   },
   {
     id: "launch",
+    title: "راه‌اندازی سرویس",
     description: "پس از نهایی شدن هماهنگی‌ها، اجرای سرویس سازمانی آغاز می‌شود.",
     icon: "/figma/svgs/small-icons/shuttel.svg",
   },
   {
     id: "optimize",
+    title: "پایش و بهینه‌سازی",
     description:
       "عملکرد سرویس بررسی می‌شود تا در صورت نیاز، برنامه حمل‌ونقل بهینه شود.",
     icon: "/figma/svgs/small-icons/refresh.svg",
@@ -48,7 +54,7 @@ const defaultSteps: ProcessStep[] = [
 ];
 
 export default function ProcessSteps({
-  title,
+  title = "فرآیند شروع همکاری سازمانی",
   description,
   steps = defaultSteps,
   ctaLabel = "شروع عملکرد سازمانی",
@@ -106,7 +112,10 @@ function StepItem({ step }: { step: ProcessStep }) {
           className={styles.icon}
         />
       </span>
-      <p className={styles.stepText}>{step.description}</p>
+      <div className={styles.stepCopy}>
+        <h3 className={styles.stepTitle}>{step.title}</h3>
+        <p className={styles.stepText}>{step.description}</p>
+      </div>
     </article>
   );
 }

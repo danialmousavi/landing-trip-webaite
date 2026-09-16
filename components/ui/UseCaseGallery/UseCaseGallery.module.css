@@ -34,6 +34,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+  direction: ltr;
 }
 
 .card {
@@ -41,6 +42,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  direction: rtl;
   min-height: 248px;
   padding: 20px;
   border: 2px solid #f2f2f2;
@@ -51,6 +53,19 @@
 
 .coverCard {
   padding: 0;
+}
+
+.featuredCard {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  direction: ltr;
+}
+
+.coverMedia {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .coverImage,
@@ -78,10 +93,52 @@
   pointer-events: none;
 }
 
-.caption {
+.content {
   position: relative;
   z-index: 1;
-  margin: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: auto;
+  gap: 6px;
+}
+
+.coverCard .content {
+  padding: 20px;
+}
+
+.featuredCard .content {
+  justify-content: flex-end;
+  direction: rtl;
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  margin-bottom: 4px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: var(--brand, #00b7ce);
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 180%;
+  color: inherit;
+}
+
+.caption {
+  margin: 0;
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -89,15 +146,13 @@
   text-align: right;
 }
 
-.coverCard .caption {
-  position: absolute;
-  inset-inline: 20px;
-  bottom: 20px;
-}
-
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featuredCard {
+    grid-column: span 2;
   }
 }
 
@@ -111,12 +166,26 @@
     gap: 12px;
   }
 
+  .featuredCard {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .coverMedia {
+    min-height: 190px;
+  }
+
   .card {
     min-height: 220px;
     border-radius: 20px;
   }
 
   .caption {
+    text-align: center;
+  }
+
+  .content {
+    align-items: center;
     text-align: center;
   }
 

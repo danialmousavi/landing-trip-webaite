@@ -61,7 +61,7 @@
   border: 5px solid #fff;
   border-radius: 22px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  transform: rotate(9.02deg);
+  transform: rotate(-9.02deg);
   transform-origin: top left;
 }
 
