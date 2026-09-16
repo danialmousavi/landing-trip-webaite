@@ -4,12 +4,15 @@ import styles from "./UseCaseGallery.module.css";
 
 export type UseCaseCard = {
   id: string;
+  number?: number;
   title?: string;
   description?: string;
   image?: {
     src: StaticImageData | string;
     alt: string;
     objectPosition?: string;
+    width?: number;
+    height?: number;
   };
   imageLayout?: "cover" | "inset";
   showBrandMark?: boolean;
@@ -27,6 +30,7 @@ const fleetSrc = "/figma/png/cars-navy.jpg";
 const defaultCards: UseCaseCard[] = [
   {
     id: "meetings",
+    number: 2,
     title: "جلسات و مأموریت‌های کاری",
     description: "برای جابه‌جایی کارکنان در جلسات، مأموریت‌ها و برنامه‌های کاری.",
     image: {
@@ -39,17 +43,21 @@ const defaultCards: UseCaseCard[] = [
   },
   {
     id: "commute",
+    number: 1,
     title: "رفت‌وآمد منظم کارکنان",
     description: "برای جابه‌جایی منظم کارکنان بین نقاط مشخص و محل کار.",
     image: {
       src: fleetSrc,
       alt: "خودروهای دات‌وان در محل کار",
       objectPosition: "70% 50%",
+      width: 255,
+      height: 94,
     },
     imageLayout: "inset",
   },
   {
     id: "custom",
+    number: 5,
     title: "سرویس‌های اختصاصی",
     description:
       "برای نیازهایی که به مدل جابه‌جایی متفاوت یا برنامه‌ریزی اختصاصی نیاز دارند.",
@@ -57,17 +65,21 @@ const defaultCards: UseCaseCard[] = [
   },
   {
     id: "events",
+    number: 4,
     title: "برنامه‌ها و رویدادهای سازمانی",
     description: "برای برنامه‌های سازمانی، جلسات، رویدادها و جابه‌جایی مهمانان.",
     image: {
       src: fleetSrc,
       alt: "ناوگان دات‌وان برای رویدادهای سازمانی",
       objectPosition: "center 70%",
+      width: 310,
+      height: 143,
     },
     imageLayout: "inset",
   },
   {
     id: "multi-stop",
+    number: 3,
     title: "تأمین خودرو و راننده",
     description: "تأمین خودرو و راننده برای بازه زمانی مشخص و برنامه‌های چندمقصدی.",
     showBrandMark: true,
@@ -93,7 +105,9 @@ export default function UseCaseGallery({
           <article
             className={`${styles.card} ${
               card.imageLayout === "cover" ? styles.coverCard : ""
-            } ${card.featured ? styles.featuredCard : ""}`}
+            } ${card.featured ? styles.featuredCard : ""} ${
+              card.number === 1 ? styles.imageOneCard : ""
+            } ${card.number === 4 ? styles.imageFourCard : ""}`}
             key={card.id}
           >
             {card.image && card.imageLayout === "cover" && (
@@ -115,7 +129,17 @@ export default function UseCaseGallery({
             )}
 
             {card.image && card.imageLayout === "inset" && (
-              <div className={styles.inset}>
+              <div
+                className={styles.inset}
+                style={
+                  card.image.width && card.image.height
+                    ? {
+                        width: `${card.image.width}px`,
+                        aspectRatio: `${card.image.width} / ${card.image.height}`,
+                      }
+                    : undefined
+                }
+              >
                 <Image
                   src={card.image.src}
                   alt={card.image.alt}
@@ -146,7 +170,7 @@ export default function UseCaseGallery({
 
             <div className={styles.content}>
               <span className={styles.number} aria-hidden="true">
-                {toPersianNumber(index + 1)}
+                .{card.number ?? index + 1}
               </span>
               {card.title && <h3 className={styles.cardTitle}>{card.title}</h3>}
               {card.description && (
@@ -158,10 +182,4 @@ export default function UseCaseGallery({
       </div>
     </section>
   );
-}
-
-function toPersianNumber(value: number) {
-  return String(value)
-    .padStart(2, "0")
-    .replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
 }
