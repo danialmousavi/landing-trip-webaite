@@ -1,16 +1,15 @@
 .section {
   /* ابعاد فریم مطابق فیگما */
-  --frame-width: 1320px;
   --frame-gap: 24px;
+  --frame-peek: 30px;
   --frame-min-height: 704px;
   --frame-padding: 4.54vw;
-  --frame-inset: 48px;
-  --slide-width: min(
-    var(--frame-width),
-    calc(100% - var(--frame-inset) * 2)
+  --frame-padding-sides: 3.78vw;
+  --slide-width: calc(
+    100% - (var(--frame-peek) * 2) - (var(--frame-gap) * 2)
   );
   /* ۲۴۸ از ۷۰۴ پیکسل ارتفاع فریم، تا نسبت فیگما در همه عرض‌ها حفظ شود */
-  --car-top: 35.43%;
+  --car-top: 15.43%;
   --nav-size: 38px;
 
   width: 100%;
@@ -45,7 +44,7 @@
   display: flex;
   flex-direction: column;
   min-height: var(--frame-min-height);
-  padding: var(--frame-padding);
+  padding: var(--frame-padding) var(--frame-padding-sides);
   border: 2px solid #f2f2f2;
   border-radius: 24px;
   background: #eeeeee;
@@ -57,15 +56,30 @@
   position: absolute;
   z-index: 0;
   top: var(--car-top);
+  /* top: 50%; */
   bottom: 0;
   inset-inline: 0;
   display: flex;
   justify-content: center;
+
+  @media (min-width: 768px) {
+    top: 10%;
+    bottom: 10%;
+  }
+
 }
 
 .carImage {
+  height: min-content;
   height: 100%;
+  
   width: auto;
+
+  @media (min-width: 768px) {
+    /* width: 100%; */
+  }
+
+
   max-width: 100%;
   object-fit: contain;
 }
@@ -85,43 +99,51 @@
 }
 
 .title {
-  font-size: 32px;
-  font-weight: 800;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
   color: #171717;
-  line-height: 1.5;
+  line-height: 180%;
   margin: 0 0 12px 0;
 }
 
 .description {
-  font-size: 15px;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   color: #6b7280;
-  line-height: 1.9;
+  line-height: 180%;
   margin: 0;
 }
 
 .modelInfo {
   width: 300px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
 }
 
 .vehicleName {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
   font-size: 20px;
-  font-weight: 800;
-  color: var(--brand);
-  line-height: 1.6;
+  font-weight: 700;
+  color: #00b7ce;
+  line-height: 48px;
+  width: 100%;
   margin: 0 0 16px 0;
+  text-align: right;
 }
 
 .specCard {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 276px;
-  border: 1px solid #e3e3e3;
-  border-radius: 16px;
+  border: 1px solid #D9D9D9;
+  border-radius: 24px;
   padding: 24px 20px;
-  /* کارت به لبه‌ی پدینگ سمت چپ فریم چسبیده است */
-  margin: 0 auto 0 0;
+  margin: 0;
   text-align: right;
 }
 
@@ -229,24 +251,7 @@
    Responsive Design (واکنش‌گرایی)
    ========================================== */
 
-/* زیر ۱۴۱۶ پیکسل، فریم از ۱۳۲۰ کوچک‌تر می‌شود و ارتفاع با همان نسبت کم می‌شود */
-@media (max-width: 1416px) {
-  .section {
-    --frame-min-height: calc((100vw - var(--frame-inset) * 2) / 1.875);
-  }
-}
-
-@media (max-width: 1200px) {
-  .title {
-    font-size: 28px;
-  }
-}
-
 @media (max-width: 1024px) {
-  .section {
-    --frame-inset: 40px;
-  }
-
   .header {
     gap: 24px;
   }
@@ -257,7 +262,6 @@
     /* در موبایل سرتیتر ستونی می‌شود، پس خودرو پایین‌تر می‌نشیند */
     --frame-min-height: 560px;
     --car-top: 52%;
-    --frame-inset: 28px;
     --nav-size: 32px;
 
     margin: 40px 0;
@@ -277,14 +281,6 @@
   .intro {
     max-width: 100%;
     text-align: center;
-  }
-
-  .title {
-    font-size: 22px;
-  }
-
-  .description {
-    font-size: 14px;
   }
 
   .modelInfo {
