@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import styles from "./FAQ.module.css";
 
 const faqItems = [
   [
@@ -27,51 +28,42 @@ const faqItems = [
 ];
 
 export default function FAQ() {
-  const [openFaq, setOpenFaq] = useState(0); 
+  const [openFaq, setOpenFaq] = useState(0);
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-6 py-16" dir="rtl">
-      
-      <div className="text-center mb-12 flex flex-col items-center">
-        <span className="text-gray-500 text-sm mb-2">آشنایی با دات‌وان تریپ</span>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-          سؤالات متداول
-        </h2>
-        <p className="text-gray-500 text-sm md:text-base max-w-xl">
+    <section className={styles.section}>
+      <div className={styles.header}>
+        <span className={styles.subtitle}>آشنایی با دات‌وان تریپ</span>
+        <h2 className={styles.title}>سؤالات متداول</h2>
+        <p className={styles.intro}>
           پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود.
         </p>
       </div>
 
-      <div className="flex flex-col space-y-2">
+      <div className={styles.faqList}>
         {faqItems.map(([question, answer], index) => {
           const isOpen = openFaq === index;
 
           return (
-            <div key={index} className="w-full border-b border-transparent">
+            <div key={index} className={styles.faqItem}>
               <button
-                className="flex w-full items-center justify-between py-4 text-right transition-colors"
+                className={styles.question}
                 onClick={() => setOpenFaq(isOpen ? -1 : index)}
                 aria-expanded={isOpen}
               >
-                <span className="text-gray-800 font-medium text-sm md:text-base">
-                  {question}
-                </span>
+                <span className={styles.questionText}>{question}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${
-                    isOpen ? "rotate-180" : ""
-                  }`}
+                  className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
                 />
               </button>
 
               <div
-                className={`grid transition-all duration-300 ease-in-out ${
-                  isOpen ? "grid-rows-[1fr] opacity-100 pb-4" : "grid-rows-[0fr] opacity-0"
+                className={`${styles.answerWrapper} ${
+                  isOpen ? styles.answerWrapperOpen : ""
                 }`}
               >
-                <div className="overflow-hidden">
-                  <p className="text-gray-500 text-sm leading-relaxed pr-2">
-                    {answer}
-                  </p>
+                <div className={styles.answerInner}>
+                  <p className={styles.answerText}>{answer}</p>
                 </div>
               </div>
             </div>
@@ -79,13 +71,9 @@ export default function FAQ() {
         })}
       </div>
 
-      {/* دکمه مشاهده بیشتر */}
-      <div className="flex justify-center mt-10">
-        <button className="bg-[#222] hover:bg-black text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-colors">
-          مشاهده سوالات بیشتر
-        </button>
+      <div className={styles.moreBtnWrapper}>
+        <button className={styles.moreBtn}>مشاهده سوالات بیشتر</button>
       </div>
-      
     </section>
   );
 }

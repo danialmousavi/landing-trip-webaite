@@ -1,0 +1,289 @@
+/* ==========================================
+   کانتینر اصلی
+   ========================================== */
+.section {
+  width: 100%;
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  direction: rtl;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   هدر (عنوان + توضیح)
+   ========================================== */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.intro {
+  color: #6b7280;
+  font-size: 16px;
+  max-width: 576px;
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   لیست سوالات
+   ========================================== */
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faqItem {
+  width: 100%;
+  border-bottom: 1px solid transparent;
+}
+
+.question {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  text-align: right;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+  gap: 12px;
+}
+
+.questionText {
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: right;
+  flex: 1;
+}
+
+.chevron {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ==========================================
+   بخش پاسخ (انیمیشن باز/بسته شدن)
+   ========================================== */
+.answerWrapper {
+  display: grid;
+  transition: all 0.3s ease-in-out;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.answerWrapperOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  padding-bottom: 16px;
+}
+
+.answerInner {
+  overflow: hidden;
+}
+
+.answerText {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.9;
+  padding-right: 8px;
+  margin: 0;
+}
+
+/* ==========================================
+   دکمه مشاهده بیشتر
+   ========================================== */
+.moreBtnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.moreBtn {
+  background-color: #222222;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: inherit;
+}
+
+.moreBtn:hover {
+  background-color: #000000;
+}
+
+/* ==========================================
+   طراحی واکنش‌گرا (Responsive)
+   ========================================== */
+
+/* تبلت */
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 20px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .intro {
+    font-size: 14px;
+    line-height: 1.8;
+    padding: 0 8px;
+  }
+
+  .questionText {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  .answerText {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  .question {
+    padding: 14px 0;
+  }
+
+  .chevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .moreBtnWrapper {
+    margin-top: 32px;
+  }
+}
+
+/* موبایل */
+@media (max-width: 480px) {
+  .section {
+    padding: 36px 16px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .subtitle {
+    font-size: 12.5px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .intro {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .faqList {
+    gap: 6px;
+  }
+
+  .question {
+    padding: 13px 0;
+    gap: 10px;
+  }
+
+  .questionText {
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+  }
+
+  .answerText {
+    font-size: 12.5px;
+    line-height: 1.85;
+    padding-right: 6px;
+  }
+
+  .moreBtn {
+    padding: 9px 20px;
+    font-size: 13px;
+  }
+}
+
+/* موبایل‌های خیلی کوچک */
+@media (max-width: 360px) {
+  .section {
+    padding: 30px 14px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .intro {
+    font-size: 12px;
+  }
+
+  .questionText {
+    font-size: 13px;
+  }
+
+  .answerText {
+    font-size: 12px;
+  }
+
+  .moreBtn {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+}
