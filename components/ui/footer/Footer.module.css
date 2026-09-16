@@ -21,6 +21,14 @@
   margin-bottom: 70px;
 }
 
+.brandWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
 .logoWrapper {
   margin-bottom: 24px;
 }
@@ -29,17 +37,32 @@
   object-fit: contain;
 }
 
+.brandText {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  font-size: 28px;
+}
+
+.brandName {
+  color: #111827;
+}
+
+.brandExclamation {
+  color: #00c5d2;
+  margin-right: 4px;
+}
+
 .description {
-  color: #4b5563; /* رنگ خاکستری تیره برای متن */
+  color: #4b5563;
   font-size: 14px;
   line-height: 2.2;
   max-width: 800px;
   margin: 0 0 32px 0;
-
 }
 
 .description strong {
-  color: #111827; /* رنگ مشکی برای بولدها */
+  color: #111827;
   font-weight: 800;
 }
 
@@ -57,13 +80,19 @@
   width: 32px;
   height: 32px;
   color: #6b7280;
-  /* این پس‌زمینه موقتی است، بعد از گذاشتن آیکون‌هایتان می‌توانید پاکش کنید */
   border-radius: 8px;
   transition: all 0.3s ease;
+  background-color: transparent;
 }
 
 .socialLink:hover {
   transform: translateY(-2px);
+}
+
+.socialLink img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* --- بخش لینک‌ها --- */
@@ -84,7 +113,6 @@
   font-weight: 800;
   color: #111827;
   margin: 0 0 24px 0;
-  /* حداقل ارتفاع تا ستون‌های بدون عنوان به هم نریزند */
   min-height: 24px;
 }
 
@@ -106,7 +134,7 @@
 }
 
 .linkItem:hover {
-  color: #00c5d2; /* تغییر رنگ به فیروزه‌ای برند هنگام هاور */
+  color: #00c5d2;
 }
 
 /* --- کپی‌رایت --- */
@@ -132,100 +160,186 @@
    طراحی واکنش‌گرا (Responsive)
    ========================================== */
 
+/* تبلت بزرگ و لپ‌تاپ کوچک */
 @media (max-width: 1024px) {
   .linksGrid {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 48px;
   }
-  
+
   .columnTitle {
     min-height: auto;
   }
-  
-  /* مخفی کردن عنوان خالی در موبایل تا فضای اضافه نگیرد */
+
   .columnTitle:empty {
     display: none;
   }
 }
 
+/* تبلت */
 @media (max-width: 768px) {
   .footer {
     padding-top: 50px;
   }
 
+  .topSection {
+    margin-bottom: 50px;
+  }
+
+  .brandWrapper {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .brandText {
+    font-size: 24px;
+  }
+
   .description {
-    font-size: 13.5px;
+    font-size: 13px;
     line-height: 2;
+    margin-bottom: 28px;
+  }
+
+  .socialIcons {
+    gap: 20px;
+  }
+
+  .socialLink {
+    width: 28px;
+    height: 28px;
   }
 
   .linksGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    row-gap: 40px;
+    row-gap: 36px;
+    padding-bottom: 40px;
+  }
+
+  .columnTitle {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+
+  .linkItem {
+    font-size: 13.5px;
+  }
+
+  .linkList {
+    gap: 14px;
+  }
+
+  .bottomSection {
+    padding: 20px 0;
+  }
+
+  .bottomSection p {
+    font-size: 12.5px;
   }
 }
 
+/* موبایل */
 @media (max-width: 480px) {
-  .linksGrid {
-    grid-template-columns: 1fr; /* یک‌ستونه شدن در موبایل */
-    text-align: center;
+  .footer {
+    padding-top: 40px;
   }
-  
+
+  .topSection {
+    margin-bottom: 40px;
+  }
+
+  .brandWrapper {
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .brandText {
+    font-size: 20px;
+  }
+
+  .logoImage {
+    width: 55px;
+    height: 55px;
+  }
+
+  .description {
+    font-size: 12.5px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+    text-align: justify;
+    text-align-last: center;
+    padding: 0 4px;
+  }
+
+  .socialIcons {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .socialLink {
+    width: 26px;
+    height: 26px;
+  }
+
+  .linksGrid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 0;
+    row-gap: 32px;
+    padding-bottom: 30px;
+  }
+
   .linkColumn {
     align-items: center;
   }
+
+  .columnTitle {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+
+  .linkItem {
+    font-size: 13px;
+  }
+
+  .linkList {
+    gap: 12px;
+  }
+
+  .bottomSection {
+    padding: 18px 0;
+  }
+
+  .bottomSection p {
+    font-size: 12px;
+    line-height: 1.8;
+    padding: 0 10px;
+  }
 }
 
-.topSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 70px;
-}
+/* موبایل‌های خیلی کوچک */
+@media (max-width: 360px) {
+  .brandText {
+    font-size: 18px;
+  }
 
-.brandWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
+  .description {
+    font-size: 12px;
+    line-height: 1.8;
+  }
 
-.logoImage {
-  object-fit: contain;
-}
+  .linkItem {
+    font-size: 12.5px;
+  }
 
-.brandText {
-  display: flex;
-  align-items: center;
-  font-weight: 900;
-  font-size: 28px;
-}
+  .columnTitle {
+    font-size: 14px;
+  }
 
-.brandName {
-  color: #111827; /* رنگ مشکی/خاکستری تیره */
-}
-
-.brandExclamation {
-  color: #00c5d2; /* علامت تعجب فیروزه‌ای رنگ */
-  margin-right: 4px; /* فاصله کم بین متن و علامت تعجب در زبان راست‌چین */
-}
-
-
-.socialLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background-color: transparent; 
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.socialLink img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  .bottomSection p {
+    font-size: 11.5px;
+  }
 }
