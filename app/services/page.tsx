@@ -12,6 +12,9 @@ import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import FAQ from "@/components/ui/Faq/Faq";
 import CoverageMap from "@/components/ui/CoverageMap/CoverageMap";
 import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
+import ChallengeSolution from "@/components/ui/ChallengeSolution/ChallengeSolution";
+import UseCaseGallery from "@/components/ui/UseCaseGallery/UseCaseGallery";
+import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
 export default function page() {
   return (
     <>
@@ -108,6 +111,9 @@ export default function page() {
       ]}
     />
     <VehicleShowcase/>
+    <ChallengeSolution/>
+    <UseCaseGallery/>
+    <ProcessSteps/>
     <CoverageMap/>
     <DownloadBanner/>
     <FAQ/>

@@ -1,0 +1,257 @@
+.section {
+  width: 95%;
+  max-width: 1280px;
+  margin: 80px auto;
+  padding-top: 96px;
+  box-sizing: border-box;
+  font-family: inherit;
+  overflow: visible;
+}
+
+.shell {
+  position: relative;
+  overflow: visible;
+  border-radius: 24px;
+  background: #111;
+}
+
+.photos {
+  position: absolute;
+  z-index: 1;
+  top: -118px;
+  left: -32px;
+  width: min(520px, 48%);
+  height: 500px;
+  pointer-events: none;
+}
+
+.cabinFrame,
+.fleetFrame {
+  position: absolute;
+  overflow: hidden;
+  border: 6px solid #fff;
+  border-radius: 24px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
+}
+
+.cabinFrame {
+  top: -6px;
+  left: 10%;
+  width: 52%;
+  height: 82%;
+  z-index: 1;
+  transform: rotate(12deg);
+}
+
+.fleetFrame {
+  left: -8%;
+  bottom: 9%;
+  width: 50%;
+  height: 34%;
+  z-index: 2;
+  transform: rotate(-11deg);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.top {
+  position: relative;
+  z-index: 2;
+  min-height: 300px;
+  padding: 48px 48px 0;
+  overflow: visible;
+  color: #fff;
+}
+
+.copy {
+  max-width: 70%;
+  margin-right: 0;
+  margin-left: auto;
+  padding-bottom: 32px;
+  text-align: right;
+}
+
+.title {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 180%;
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+.description {
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 180%;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.headings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 20px 8px 20px;
+}
+
+.headings h3 {
+  margin: 0;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 180%;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+}
+
+.table {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  border: 2px solid #f2f2f2;
+  border-top: 0;
+  border-radius: 0 0 24px 24px;
+  background: #fff;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.row + .row {
+  border-top: 1px solid #eee;
+}
+
+.cell {
+  padding: 22px 24px;
+  font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 180%;
+  color: #171717;
+  text-align: center;
+}
+
+.cell + .cell {
+  border-right: 1px solid #eee;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-top: 48px;
+  }
+
+  .photos {
+    position: relative;
+    top: 0;
+    left: auto;
+    width: min(380px, 88%);
+    height: 300px;
+    margin: -36px auto 8px;
+    z-index: 1;
+  }
+
+  .cabinFrame {
+    left: 18%;
+    width: 52%;
+    height: 88%;
+  }
+
+  .fleetFrame {
+    left: 0;
+    width: 64%;
+    height: 38%;
+  }
+
+  .top {
+    z-index: 2;
+    min-height: 0;
+    padding: 20px 24px 0;
+    background: #111;
+  }
+
+  .copy {
+    max-width: none;
+    margin: 0;
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    margin: 40px auto;
+    padding-top: 28px;
+  }
+
+  .cabinFrame,
+  .fleetFrame {
+    border-width: 4px;
+    border-radius: 18px;
+  }
+
+  .cabinFrame {
+    transform: rotate(7deg);
+  }
+
+  .fleetFrame {
+    transform: rotate(-6deg);
+  }
+
+  .shell {
+    border-radius: 20px;
+  }
+
+  .top {
+    border-radius: 0;
+  }
+
+  .title,
+  .description {
+    text-align: center;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .headings {
+    display: none;
+  }
+
+  .table {
+    border-radius: 0 0 20px 20px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    padding: 16px 16px 8px;
+  }
+
+  .row + .row {
+    border-top: 1px solid #eee;
+  }
+
+  .cell {
+    padding: 10px 4px 12px;
+    text-align: center;
+  }
+
+  .cell + .cell {
+    border-right: 0;
+  }
+
+  .cell::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 6px;
+    color: #00b7ce;
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
