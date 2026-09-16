@@ -9,6 +9,7 @@ import ShakeHand from "@/public/figma/agreement.png";
 import { Download, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import styles from "./Header.module.css";
 
 type HeaderProps = {
   variant?: "light" | "dark";
@@ -26,18 +27,21 @@ const navItems = [
 
 export default function Header({ variant = "light" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const address=usePathname();
-  console.log('====================================');
-  console.log(address);
-  console.log('====================================');
+  const address = usePathname();
+
+  // منطق: variant === "light" → هدر سفید، variant === "dark" → هدر مشکی
+  const isLightVariant = variant === "light";
+
   return (
     <header
-      className={`nav-shell ${variant === "dark" ? "nav-dark" : "nav-light"}`}
+      className={`${styles.navShell} ${
+        isLightVariant ? styles.navLight : styles.navDark
+      }`}
     >
       {/* Logo */}
-      <Link href="/" aria-label="دات‌وان تریپ" className="brand">
+      <Link href="/" aria-label="دات‌وان تریپ" className={styles.brand}>
         <Image
-          src={variant === "dark" ? logo : logoDark}
+          src={isLightVariant ? logoDark : logo}
           alt="دات‌وان تریپ"
           width={140}
           height={50}
@@ -45,9 +49,9 @@ export default function Header({ variant = "light" }: HeaderProps) {
         />
       </Link>
 
-      {/* Desktop Navigation */}
+      {/* Desktop & Mobile Navigation */}
       <nav
-        className={`main-nav ${menuOpen ? "open" : ""} `}
+        className={`${styles.mainNav} ${menuOpen ? styles.open : ""}`}
         aria-label="منوی اصلی"
       >
         {navItems.map((item) => (
@@ -56,15 +60,17 @@ export default function Header({ variant = "light" }: HeaderProps) {
             href={item.href}
             onClick={() => setMenuOpen(false)}
           >
-            <span className={`${item.href==address?"nav-selected":""}`}>
-               {item.label}
+            <span
+              className={`${item.href === address ? styles.navSelected : ""}`}
+            >
+              {item.label}
             </span>
           </Link>
         ))}
       </nav>
 
       {/* Actions */}
-      <div className="nav-actions">
+      <div className={styles.navActions}>
         <button type="button" className="button button-brand">
           همکاری با تریپ
           <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
@@ -72,17 +78,19 @@ export default function Header({ variant = "light" }: HeaderProps) {
 
         <button
           type="button"
-          className={`button ${variant === "dark" ? "button-glass" : "button-dark"}`}
+          className={`button ${
+            isLightVariant ? "button-dark" : "button-glass"
+          }`}
         >
           <Download size={18} />
           دانلود اپلیکیشن
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Button */}
       <button
         type="button"
-        className="menu-button"
+        className={styles.menuButton}
         aria-label={menuOpen ? "بستن منو" : "باز کردن منو"}
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((prev) => !prev)}

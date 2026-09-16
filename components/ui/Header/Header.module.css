@@ -1,0 +1,203 @@
+/* ==========================================
+   کانتینر اصلی هدر
+   ========================================== */
+.navShell {
+  position: absolute;
+  z-index: 3;
+  top: 32px;
+  inset-inline: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- هدر روشن (سفید) --- */
+.navLight {
+  color: #111827;
+}
+
+.navLight .mainNav a {
+  color: #111827;
+}
+
+.navLight .mainNav a:hover {
+  color: #00b7ce;
+}
+
+.navLight .menuButton {
+  color: #111827;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* --- هدر تیره (مشکی) --- */
+.navDark {
+  color: #ffffff;
+}
+
+.navDark .mainNav a {
+  color: #ffffff;
+}
+
+.navDark .mainNav a:hover {
+  color: #00b7ce;
+}
+
+.navDark .menuButton {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================
+   لوگو
+   ========================================== */
+.brand {
+  width: 64px;
+  height: 48px;
+  display: block;
+}
+
+.brand img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================
+   منوی اصلی (دسکتاپ)
+   ========================================== */
+.mainNav {
+  display: flex;
+  gap: clamp(22px, 3vw, 48px);
+  flex: 1;
+  justify-content: center;
+}
+
+.mainNav a {
+  color: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: color 0.2s ease;
+}
+
+.navSelected {
+  font-weight: 800;
+}
+
+.mainNav a:hover {
+  color: #00b7ce;
+}
+
+/* ==========================================
+   اکشن‌ها (دکمه‌ها)
+   ========================================== */
+.navActions {
+  display: flex;
+  gap: 8px;
+  direction: ltr;
+}
+
+.navActions button {
+  min-height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ==========================================
+   دکمه منو (موبایل)
+   ========================================== */
+.menuButton {
+  display: none;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* ==========================================
+   طراحی واکنش‌گرا (Responsive)
+   ========================================== */
+
+/* تبلت و موبایل */
+@media (max-width: 1000px) {
+  .navShell {
+    inset-inline: 24px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  /* --- منوی موبایل --- */
+  .mainNav {
+    position: fixed;
+    z-index: 20;
+    top: 78px;
+    left: 24px;
+    right: 24px;
+    padding: 24px;
+    border-radius: 18px;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    transition: background 0.3s ease;
+    gap: 20px;
+    flex: none;
+  }
+
+  .mainNav.open {
+    display: flex;
+  }
+
+  /* منوی موبایل در هدر روشن */
+  .navLight .mainNav {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .navLight .mainNav a {
+    color: #111827;
+  }
+
+  /* منوی موبایل در هدر تیره */
+  .navDark .mainNav {
+    background: rgba(20, 20, 20, 0.97);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .navDark .mainNav a {
+    color: #ffffff;
+  }
+
+  .navActions {
+    margin-right: auto;
+  }
+
+  .menuButton {
+    display: grid;
+    place-items: center;
+  }
+}
+
+/* موبایل کوچک */
+@media (max-width: 700px) {
+  .navShell {
+    top: 20px;
+    inset-inline: 16px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .navActions {
+    display: none;
+  }
+
+  .mainNav {
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    padding: 20px;
+  }
+}
