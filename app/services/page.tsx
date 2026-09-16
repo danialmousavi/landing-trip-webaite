@@ -12,6 +12,7 @@ import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import FAQ from "@/components/ui/Faq/Faq";
 import CoverageMap from "@/components/ui/CoverageMap/CoverageMap";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
+import Footer from "@/components/ui/footer/Footer";
 export default function page() {
   return (
     <>
@@ -111,6 +112,7 @@ export default function page() {
     <DownloadBanner/>
     <FAQ/>
     <FutureTransportBanner/>
+    <Footer/>
     </>
   );
 }
