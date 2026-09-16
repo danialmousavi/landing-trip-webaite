@@ -2,7 +2,7 @@
   width: 95%;
   max-width: 1280px;
   margin: 80px auto;
-  padding-top: 96px;
+  padding-top: 64px;
   box-sizing: border-box;
   font-family: inherit;
   overflow: visible;
@@ -12,64 +12,73 @@
   position: relative;
   overflow: visible;
   border-radius: 24px;
-  background: #111;
+}
+
+.intro {
+  position: relative;
+  min-height: 320px;
+  border-radius: 24px 24px 0 0;
+  /* background: #111; */
+  /* color: #fff; */
+  overflow: visible;
 }
 
 .photos {
   position: absolute;
-  z-index: 1;
-  top: -118px;
-  left: -32px;
-  width: min(520px, 48%);
-  height: 500px;
+  z-index: 2;
+  top: 12px;
+  left: -4px;
+  width: 450px;
+  height: 350px;
   pointer-events: none;
 }
 
-.cabinFrame,
+.cabinFrame {
+  position: absolute;
+  top: 10px;
+  left: 116px;
+  width: 320px;
+  height: 300px;
+  z-index: 1;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: rotate(6deg);
+}
+
 .fleetFrame {
   position: absolute;
-  overflow: hidden;
-  border: 6px solid #fff;
-  border-radius: 24px;
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
-}
-
-.cabinFrame {
-  top: -6px;
-  left: 10%;
-  width: 52%;
-  height: 82%;
-  z-index: 1;
-  transform: rotate(12deg);
-}
-
-.fleetFrame {
-  left: -8%;
-  bottom: 9%;
-  width: 50%;
-  height: 34%;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  height: 142px;
   z-index: 2;
-  transform: rotate(-11deg);
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: rotate(-7deg);
 }
 
 .photo {
   object-fit: cover;
 }
 
-.top {
-  position: relative;
-  z-index: 2;
-  min-height: 300px;
-  padding: 48px 48px 0;
-  overflow: visible;
-  color: #fff;
+.shell,
+.intro,
+.headings,
+.comparison,
+.tableBody {
+  box-sizing: border-box;
 }
 
 .copy {
-  max-width: 70%;
-  margin-right: 0;
-  margin-left: auto;
-  padding-bottom: 32px;
+  position: absolute;
+  z-index: 3;
+  right: 48px;
+  bottom: 68px;
+  width: min(720px, 60%);
   text-align: right;
 }
 
@@ -79,7 +88,7 @@
   font-weight: 700;
   line-height: 180%;
   margin: 0 0 12px;
-  color: #fff;
+  color: black;
 }
 
 .description {
@@ -88,17 +97,27 @@
   font-weight: 400;
   line-height: 180%;
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
+  /* color: rgba(255, 255, 255, 0.72); */
+  color: black;
+}
+
+.comparison {
+  position: relative;
+  z-index: 4;
 }
 
 .headings {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  padding: 20px 8px 20px;
+  min-height: 72px;
+  padding: 20px 16px;
+  background: #111;
 }
 
 .headings h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   font-family: "IRANSansXFaNum", "IRANSansX", Tahoma, Arial, sans-serif;
   font-size: 16px;
@@ -106,15 +125,11 @@
   line-height: 180%;
   text-align: center;
   color: #fff;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
 }
 
-.table {
-  position: relative;
-  z-index: 3;
+.tableBody {
   overflow: hidden;
   border: 2px solid #f2f2f2;
-  border-top: 0;
   border-radius: 0 0 24px 24px;
   background: #fff;
 }
@@ -147,39 +162,47 @@
     padding-top: 48px;
   }
 
+  .intro {
+    min-height: 0;
+  }
+
   .photos {
     position: relative;
     top: 0;
     left: auto;
     width: min(380px, 88%);
-    height: 300px;
-    margin: -36px auto 8px;
-    z-index: 1;
+    height: 236px;
+    margin: -28px auto 0;
+    z-index: 2;
   }
 
   .cabinFrame {
-    left: 18%;
-    width: 52%;
-    height: 88%;
+    top: 0;
+    left: 23%;
+    width: 68%;
+    height: 82%;
   }
 
   .fleetFrame {
     left: 0;
-    width: 64%;
-    height: 38%;
-  }
-
-  .top {
-    z-index: 2;
-    min-height: 0;
-    padding: 20px 24px 0;
-    background: #111;
+    bottom: 4%;
+    width: 60%;
+    height: 46%;
   }
 
   .copy {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    z-index: 3;
+    width: auto;
     max-width: none;
-    margin: 0;
-    padding-bottom: 16px;
+    padding: 16px 24px 28px;
+  }
+
+  .headings {
+    min-height: 64px;
+    padding: 16px 8px;
   }
 }
 
@@ -207,8 +230,8 @@
     border-radius: 20px;
   }
 
-  .top {
-    border-radius: 0;
+  .intro {
+    border-radius: 20px 20px 0 0;
   }
 
   .title,
@@ -224,7 +247,7 @@
     display: none;
   }
 
-  .table {
+  .tableBody {
     border-radius: 0 0 20px 20px;
   }
 

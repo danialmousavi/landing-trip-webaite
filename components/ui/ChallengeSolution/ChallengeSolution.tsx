@@ -42,7 +42,7 @@ const defaultRows: ChallengeRow[] = [
 ];
 
 export default function ChallengeSolution({
-  title,
+  title = "حمل‌ونقل سازمانی را ساده‌تر مدیریت کنید",
   description = "مدیریت جابه‌جایی کارکنان و برنامه‌های سازمانی، با افزایش تعداد مسیرها، خودروها و سرویس‌ها پیچیده‌تر می‌شود. دات‌وان تریپ با ارائه یک راهکار یکپارچه، بخشی از این پیچیدگی را از دوش سازمان برمی‌دارد.",
   challengeHeading = "چالش‌ها",
   solutionHeading = "راهکار دات‌وان",
@@ -59,56 +59,58 @@ export default function ChallengeSolution({
   return (
     <section className={styles.section} dir="rtl">
       <div className={styles.shell}>
-        <div className={styles.photos}>
-          <div className={styles.cabinFrame}>
-            <Image
-              src={cabin.src}
-              alt={cabin.alt}
-              fill
-              unoptimized
-              sizes="(max-width: 768px) 70vw, 360px"
-              className={styles.photo}
-            />
+        <div className={styles.intro}>
+          <div className={styles.photos}>
+            <div className={styles.cabinFrame}>
+              <Image
+                src={cabin.src}
+                alt={cabin.alt}
+                fill
+                unoptimized
+                sizes="(max-width: 900px) 68vw, 330px"
+                className={styles.photo}
+              />
+            </div>
+            <div className={styles.fleetFrame}>
+              <Image
+                src={fleet.src}
+                alt={fleet.alt}
+                fill
+                unoptimized
+                sizes="(max-width: 900px) 58vw, 285px"
+                className={styles.photo}
+              />
+            </div>
           </div>
-          <div className={styles.fleetFrame}>
-            <Image
-              src={fleet.src}
-              alt={fleet.alt}
-              fill
-              unoptimized
-              sizes="(max-width: 768px) 60vw, 280px"
-              className={styles.photo}
-            />
-          </div>
-        </div>
 
-        <div className={styles.top}>
           <div className={styles.copy}>
             {title && <h2 className={styles.title}>{title}</h2>}
             <p className={styles.description}>{description}</p>
           </div>
-
-          <div className={styles.headings}>
-            <h3>{challengeHeading}</h3>
-            <h3>{solutionHeading}</h3>
-          </div>
         </div>
 
         <div
-          className={styles.table}
+          className={styles.comparison}
           role="table"
           aria-label={`${challengeHeading} و ${solutionHeading}`}
         >
-          {rows.map((row, index) => (
-            <div className={styles.row} role="row" key={`${row.challenge}-${index}`}>
-              <div className={styles.cell} role="cell" data-label={challengeHeading}>
-                {row.challenge}
+          <div className={styles.headings} role="row">
+            <h3 role="columnheader">{challengeHeading}</h3>
+            <h3 role="columnheader">{solutionHeading}</h3>
+          </div>
+
+          <div className={styles.tableBody} role="rowgroup">
+            {rows.map((row, index) => (
+              <div className={styles.row} role="row" key={`${row.challenge}-${index}`}>
+                <div className={styles.cell} role="cell" data-label={challengeHeading}>
+                  {row.challenge}
+                </div>
+                <div className={styles.cell} role="cell" data-label={solutionHeading}>
+                  {row.solution}
+                </div>
               </div>
-              <div className={styles.cell} role="cell" data-label={solutionHeading}>
-                {row.solution}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
