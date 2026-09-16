@@ -75,7 +75,7 @@ const defaultCards: UseCaseCard[] = [
 ];
 
 export default function UseCaseGallery({
-  title,
+  title = "خدماتی متناسب با برنامه کاری شما",
   description,
   cards = defaultCards,
 }: UseCaseGalleryProps) {
