@@ -29,12 +29,14 @@
 
 .track {
   display: flex;
-  gap: var(--frame-gap);
 }
 
 .slide {
-  flex: 0 0 var(--slide-width);
+  /* پدینگ به‌جای gap: امبلا فاصله CSS gap را در اسنپ حساب نمی‌کند */
+  box-sizing: border-box;
+  flex: 0 0 calc(var(--slide-width) + var(--frame-gap));
   min-width: 0;
+  padding-inline: calc(var(--frame-gap) / 2);
 }
 
 /* --- فریم خودرو --- */
