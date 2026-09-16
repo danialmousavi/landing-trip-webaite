@@ -1,0 +1,137 @@
+/* کانتینر اصلی */
+.servicesSection {
+  width: 95%;           /* ← تغییر یافت */
+  max-width: 100%;      /* ← محدودیت برداشته شد */
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* --- استایل‌های هدر --- */
+.sectionHeader {
+  margin-bottom: 56px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 12px;
+}
+
+.sectionSubtitle {
+  font-size: 15px;
+  color: #666666;
+  margin: 0;
+}
+
+/* --- تنظیمات گرید کارت‌ها --- */
+.cardsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* --- استایل پایه کارت‌ها --- */
+.serviceCard {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 300px;     /* ← اجازه بزرگ‌تر شدن در عرض بیشتر */
+  border-radius: 16px;
+  border: 1px solid #f0f0f0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  text-align: right;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+/* --- shade (پترن راه‌راه) فقط در گوشه بالا-چپ --- */
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.03),
+    rgba(0, 0, 0, 0.03) 40px,
+    transparent 40px,
+    transparent 60px
+  );
+  -webkit-mask-image: radial-gradient(circle at top left, #000 40%, transparent 75%);
+  mask-image: radial-gradient(circle at top left, #000 40%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.serviceCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* --- کلاس‌های کنترل ارتفاع داینامیک --- */
+.cardShort {
+  height: 280px;
+}
+
+.cardTall {
+  height: 340px;
+}
+
+/* --- متن داخل کارت‌ها --- */
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 14px;
+  font-weight: 400;
+  color: #555555;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* --- ریسپانسیو (برای موبایل و تبلت) --- */
+@media (max-width: 850px) {
+  .cardsGrid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    flex-direction: column;
+  }
+
+  .serviceCard {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 180px;
+  }
+
+  .cardShort,
+  .cardTall {
+    height: auto;
+  }
+}
