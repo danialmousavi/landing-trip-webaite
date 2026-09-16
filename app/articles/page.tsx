@@ -16,6 +16,7 @@ import ChallengeSolution from "@/components/ui/ChallengeSolution/ChallengeSoluti
 import UseCaseGallery from "@/components/ui/UseCaseGallery/UseCaseGallery";
 import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
 import PopularArticles from "@/components/ui/PopularArticles/PopularArticles";
+import LatestArticles from "@/components/ui/LatestArticles/LatestArticles";
 // import Footer from "@/components/ui/Footer/Footer"
 export default function page() {
   return (
@@ -23,6 +24,7 @@ export default function page() {
       <Header variant="light" />
     
     <PopularArticles/>
+    <LatestArticles/>
  
     <FAQ/>
     {/* <Footer/> */}

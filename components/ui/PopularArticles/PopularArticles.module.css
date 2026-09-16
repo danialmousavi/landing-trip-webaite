@@ -91,6 +91,12 @@
   color: #171717;
 }
 
+.itemBadge {
+  background: none;
+  color: #171717;
+  border: 1px solid #171717;
+}
+
 .itemTitle {
   display: -webkit-box;
   overflow: hidden;
