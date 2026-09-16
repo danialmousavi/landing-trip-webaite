@@ -7,17 +7,18 @@ import logoDark from "@/public/figma/logo-footer.png";
 import ShakeHand from "@/public/figma/agreement.png";
 
 import { Download, Menu, X } from "lucide-react";
+import Link from "next/link";
 
 type HeaderProps = {
   variant?: "light" | "dark";
 };
 
 const navItems = [
-  { label: "صفحه اصلی", href: "#home" },
-  { label: "خدمات", href: "#services" },
-  { label: "ناوگان", href: "#fleet" },
-  { label: "اخبار", href: "#news" },
-  { label: "بلاگ", href: "#blog" },
+  { label: "صفحه اصلی", href: "/" },
+  { label: "خدمات", href: "/services" },
+  { label: "ناوگان", href: "/vehicles" },
+  { label: "اخبار", href: "/articles" },
+  { label: "بلاگ", href: "/b2b" },
   { label: "درباره ما", href: "#about" },
   { label: "تماس با ما", href: "#contact" },
 ];
@@ -30,7 +31,7 @@ export default function Header({ variant = "light" }: HeaderProps) {
       className={`nav-shell ${variant === "dark" ? "nav-dark" : "nav-light"}`}
     >
       {/* Logo */}
-      <a href="#home" aria-label="دات‌وان تریپ" className="brand">
+      <Link href="/" aria-label="دات‌وان تریپ" className="brand">
         <Image
           src={variant === "dark" ? logo : logoDark}
           alt="دات‌وان تریپ"
@@ -38,7 +39,7 @@ export default function Header({ variant = "light" }: HeaderProps) {
           height={50}
           priority
         />
-      </a>
+      </Link>
 
       {/* Desktop Navigation */}
       <nav
@@ -46,13 +47,13 @@ export default function Header({ variant = "light" }: HeaderProps) {
         aria-label="منوی اصلی"
       >
         {navItems.map((item) => (
-          <a
+          <Link
             key={item.href}
             href={item.href}
             onClick={() => setMenuOpen(false)}
           >
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
 
