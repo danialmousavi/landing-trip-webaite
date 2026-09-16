@@ -51,77 +51,75 @@ export default function page() {
           height: 600,
         }}
       />
-          <FeatureSection
-      imageSide="right"
-      title="برای هر مسیر شهری، یک تجربه بهتر"
-      description="دات‌وان تریپ با ترکیب خودروهای مدرن، رانندگان آموزش‌دیده و فناوری هوشمند، سفرهای شهری را مدیریت می‌کند."
-      image={{
-        src: driverImage,
-        alt: "راننده دات‌وان تریپ",
-        width: 720,
-        height: 480,
-      }}
-      featTitle="مزیت ها"
-      features={[
-        {
-          title: "راحتی",
-          description:
-            "خودروهای مناسب و محیطی آرام برای یک سفر راحت‌تر.",
-        },
-        {
-          title: "امنیت",
-          description:
-            "رانندگان احراز هویت‌شده و آموزش‌دیده، همراه با نظارت بر سفر.",
-        },
-        {
-          title: "شفافیت",
-          description:
-            "اطلاعات سفر و مسیر، از شروع تا پایان در اختیار شماست.",
-        },
-      ]}
-    />
-    <TripExperience/>
-              <FeatureSection
-      imageSide="left"
-      title="چرا سفر شهری با دات‌وان؟"
-      description=""
-      image={{
-        src: driverImage,
-        alt: "راننده دات‌وان تریپ",
-        width: 720,
-        height: 480,
-      }}
-      features={[
-        {
-          title: "راحتی بیشتر",
-          description:
-            "خودروهای مدرن و محیطی مناسب برای رفت‌وآمدهای روزمره.",
-        },
-        {
-          title: "رانندگان آموزش‌دیده",
-          description:
-            "رانندگانی که پیش از شروع همکاری، مراحل احراز هویت، ارزیابی و آموزش را پشت سر گذاشته‌اند.",
-        },
-        {
-          title: "امنیت در طول سفر",
-          description:
-            "پایش مسیر و موقعیت خودرو برای تجربه سفری مطمئن‌تر.",
-        },
-        {
-          title:"مدیریت هوشمند سفر",
-          description:"فناوری دات‌وان، اطلاعات و مراحل سفر را از درخواست تا پایان مدیریت می‌کند."
-        }
-      ]}
-    />
-    <VehicleShowcase/>
+      <FeatureSection
+        imageSide="right"
+        title="برای هر مسیر شهری، یک تجربه بهتر"
+        description="دات‌وان تریپ با ترکیب خودروهای مدرن، رانندگان آموزش‌دیده و فناوری هوشمند، سفرهای شهری را مدیریت می‌کند."
+        image={{
+          src: driverImage,
+          alt: "راننده دات‌وان تریپ",
+          width: 720,
+          height: 480,
+        }}
+        featTitle="مزیت ها"
+        features={[
+          {
+            title: "راحتی",
+            description: "خودروهای مناسب و محیطی آرام برای یک سفر راحت‌تر.",
+          },
+          {
+            title: "امنیت",
+            description:
+              "رانندگان احراز هویت‌شده و آموزش‌دیده، همراه با نظارت بر سفر.",
+          },
+          {
+            title: "شفافیت",
+            description:
+              "اطلاعات سفر و مسیر، از شروع تا پایان در اختیار شماست.",
+          },
+        ]}
+      />
+      <TripExperience />
+      <FeatureSection
+        imageSide="left"
+        title="چرا سفر شهری با دات‌وان؟"
+        description=""
+        image={{
+          src: driverImage,
+          alt: "راننده دات‌وان تریپ",
+          width: 720,
+          height: 480,
+        }}
+        features={[
+          {
+            title: "راحتی بیشتر",
+            description: "خودروهای مدرن و محیطی مناسب برای رفت‌وآمدهای روزمره.",
+          },
+          {
+            title: "رانندگان آموزش‌دیده",
+            description:
+              "رانندگانی که پیش از شروع همکاری، مراحل احراز هویت، ارزیابی و آموزش را پشت سر گذاشته‌اند.",
+          },
+          {
+            title: "امنیت در طول سفر",
+            description: "پایش مسیر و موقعیت خودرو برای تجربه سفری مطمئن‌تر.",
+          },
+          {
+            title: "مدیریت هوشمند سفر",
+            description:
+              "فناوری دات‌وان، اطلاعات و مراحل سفر را از درخواست تا پایان مدیریت می‌کند.",
+          },
+        ]}
+      />
+      {/* <VehicleShowcase/>
     <ChallengeSolution/>
     <UseCaseGallery/>
-    <ProcessSteps/>
-    <CoverageMap/>
-    <DownloadBanner/>
-    <FAQ/>
-    <FutureTransportBanner/>
-    <Footer/>
+    <ProcessSteps/> */}
+      <CoverageMap />
+      <DownloadBanner />
+      <FAQ />
+      <FutureTransportBanner />
+      <Footer />
     </>
   );
 }
