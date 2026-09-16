@@ -1,0 +1,297 @@
+.section {
+  /* ابعاد فریم مطابق فیگما */
+  --frame-width: 1320px;
+  --frame-gap: 24px;
+  --frame-min-height: 704px;
+  --frame-padding: 4.54vw;
+  --frame-inset: 48px;
+  --slide-width: min(
+    var(--frame-width),
+    calc(100% - var(--frame-inset) * 2)
+  );
+  /* ۲۴۸ از ۷۰۴ پیکسل ارتفاع فریم، تا نسبت فیگما در همه عرض‌ها حفظ شود */
+  --car-top: 35.43%;
+  --nav-size: 38px;
+
+  width: 100%;
+  margin: 80px 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.carouselArea {
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: var(--frame-gap);
+}
+
+.slide {
+  flex: 0 0 var(--slide-width);
+  min-width: 0;
+}
+
+/* --- فریم خودرو --- */
+.frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--frame-min-height);
+  padding: var(--frame-padding);
+  border: 2px solid #f2f2f2;
+  border-radius: 24px;
+  background: #eeeeee;
+  overflow: hidden;
+}
+
+/* تصویر خودرو به‌عنوان لایه پس‌زمینه */
+.carLayer {
+  position: absolute;
+  z-index: 0;
+  top: var(--car-top);
+  bottom: 0;
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.carImage {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* --- سرتیتر: متن معرفی سمت راست، مشخصات خودرو سمت چپ --- */
+.header {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 40px;
+}
+
+.intro {
+  max-width: 560px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #171717;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.description {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.modelInfo {
+  width: 300px;
+  text-align: center;
+}
+
+.vehicleName {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.specCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 276px;
+  border: 1px solid #e3e3e3;
+  border-radius: 16px;
+  padding: 24px 20px;
+  /* کارت به لبه‌ی پدینگ سمت چپ فریم چسبیده است */
+  margin: 0 auto 0 0;
+  text-align: right;
+}
+
+.specRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.specLabel {
+  color: #6b7280;
+  margin: 0;
+}
+
+.specValue {
+  color: #171717;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* --- دکمه جزییات --- */
+.footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.detailsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow:
+    inset 0 6px 7px rgba(255, 255, 255, 0.08),
+    0 4px 14px rgba(0, 183, 206, 0.18);
+  transition:
+    transform 0.2s,
+    filter 0.2s;
+}
+
+.detailsButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+/* --- فلش‌ها: مرکز عمودی لبه‌های فریم فعال --- */
+.navLayer {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: var(--slide-width);
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  width: var(--nav-size);
+  height: var(--nav-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  transition: transform 0.2s;
+}
+
+.navButton:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.navButton img {
+  width: 100%;
+  height: 100%;
+}
+
+.navRight {
+  right: calc(var(--nav-size) / -2);
+}
+
+.navLeft {
+  left: calc(var(--nav-size) / -2);
+}
+
+/* ==========================================
+   Responsive Design (واکنش‌گرایی)
+   ========================================== */
+
+/* زیر ۱۴۱۶ پیکسل، فریم از ۱۳۲۰ کوچک‌تر می‌شود و ارتفاع با همان نسبت کم می‌شود */
+@media (max-width: 1416px) {
+  .section {
+    --frame-min-height: calc((100vw - var(--frame-inset) * 2) / 1.875);
+  }
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    --frame-inset: 40px;
+  }
+
+  .header {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    /* در موبایل سرتیتر ستونی می‌شود، پس خودرو پایین‌تر می‌نشیند */
+    --frame-min-height: 560px;
+    --car-top: 52%;
+    --frame-inset: 28px;
+    --nav-size: 32px;
+
+    margin: 40px 0;
+  }
+
+  .frame {
+    border-radius: 20px;
+    padding: 24px 20px;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 24px;
+  }
+
+  .intro {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .modelInfo {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .specCard {
+    width: 100%;
+    margin-inline: auto;
+  }
+}
