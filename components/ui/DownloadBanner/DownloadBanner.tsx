@@ -11,7 +11,6 @@ export default function DownloadBanner() {
   return (
     <section className={styles.sectionContainer} dir="rtl">
       <div className={styles.banner}>
-        {/* تصویر گوشی‌ها */}
         <div className={styles.imageWrapper}>
           <Image
             src={DeviceImage}
@@ -22,7 +21,6 @@ export default function DownloadBanner() {
           />
         </div>
 
-        {/* محتوای متنی و دکمه‌ها */}
         <div className={styles.content}>
           <span className={styles.subtitle}>دانلود اپلیکیشن</span>
 
@@ -34,19 +32,16 @@ export default function DownloadBanner() {
           </p>
 
           <div className={styles.buttonsGroup}>
-            {/* مایکت */}
             <a href="#" className={styles.downloadBtn}>
               <Image src={myketIcon} alt="مایکت" width={24} height={24} />
               <span>مایکت</span>
             </a>
 
-            {/* کافه بازار */}
             <a href="#" className={styles.downloadBtn}>
               <Image src={bazarIcon} alt="کافه بازار" width={24} height={24} />
               <span>کافه بازار</span>
             </a>
 
-            {/* وب اپلیکیشن */}
             <a href="#" className={styles.downloadBtn}>
               <Image src={appleIcon} alt="وب اپلیکیشن" width={24} height={24} />
               <span>وب اپلیکیشن (کاربران ios)</span>

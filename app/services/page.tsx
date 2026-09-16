@@ -11,6 +11,7 @@ import TripExperience from "@/components/ui/TripExperience/TripExperience";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import FAQ from "@/components/ui/Faq/Faq";
 import CoverageMap from "@/components/ui/CoverageMap/CoverageMap";
+import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 export default function page() {
   return (
     <>
@@ -109,6 +110,7 @@ export default function page() {
     <CoverageMap/>
     <DownloadBanner/>
     <FAQ/>
+    <FutureTransportBanner/>
     </>
   );
 }
