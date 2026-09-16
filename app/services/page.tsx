@@ -17,6 +17,7 @@ import UseCaseGallery from "@/components/ui/UseCaseGallery/UseCaseGallery";
 import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
+// import PopularArticles from "@/components/ui/PopularArticles/PopularArticles";
 export default function page() {
   return (
     <>
