@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Calendar, Heart, MessageCircle } from "lucide-react";
 
 import styles from "./PopularArticles.module.css";
 
@@ -195,15 +194,33 @@ export default function PopularArticles({
               <div className={styles.meta}>
                 <span className={styles.metaDash} aria-hidden="true" />
                 <span>
-                  <Calendar size={16} strokeWidth={1.75} aria-hidden="true" />
+                  <Image
+                    src="/figma/svgs/small-icons/calendar.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
                   {featured.date}
                 </span>
                 <span>
-                  <MessageCircle size={16} strokeWidth={1.75} aria-hidden="true" />
+                  <Image
+                    src="/figma/svgs/small-icons/chat.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
                   {featured.comments}
                 </span>
                 <span>
-                  <Heart size={16} strokeWidth={1.75} aria-hidden="true" />
+                  <Image
+                    src="/figma/svgs/small-icons/heart.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
                   {featured.likes}
                 </span>
               </div>
