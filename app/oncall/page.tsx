@@ -13,6 +13,8 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import Header from '@/components/ui/Header/Header'
+
 
 const A = "/figma/";
 const faqItems = [
@@ -114,13 +116,16 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState(0);
   return (
     <main dir="rtl">
+      
       <section className="hero" id="home">
-        <img
+        <Header variant="dark" />
+        {/* <img
           className="hero-bg"
           src={`${A}hero-bg.png`}
           alt="خودروی دات‌وان تریپ"
-        />
-        <header className="nav-shell">
+        /> */}
+        
+        {/* <header className="nav-shell">
           <a className="brand" href="#home" aria-label="دات‌وان تریپ">
             <img src={`${A}logo.png`} alt="دات‌وان تریپ" />
           </a>
@@ -151,7 +156,7 @@ export default function Home() {
           >
             {menuOpen ? <X /> : <Menu />}
           </button>
-        </header>
+        </header> */}
         <div className="hero-content">
           <h1>
             نسل جدید حمل‌ونقل،
@@ -181,6 +186,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+          <section className="hero-test" id="hero-test">
+            
+            <span className="pill">درباره دات‌وان تریپ</span>
+
+          </section>
 
       <section className="about section" id="about">
         <div className="about-intro">
