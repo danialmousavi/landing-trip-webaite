@@ -42,7 +42,7 @@
   --brand: #00b7ce;
   --brand-dark: #0093a5;
   --ink: #171717;
-  --paper: #f6f6f6;
+  --paper: #f0f0f;
 }
 * {
   box-sizing: border-box;
@@ -110,9 +110,8 @@ main {
   backdrop-filter: blur(10px);
 }
 .button-dark {
-  color: #fff;
-  background: linear-gradient(165deg, #000, #4c4c4c);
-  border-bottom-color: #000;
+  color: #000000;
+  background: #0000000F;
   padding-inline: 24px;
 }
 .pill {
@@ -971,6 +970,13 @@ main {
     max-height: 470px;
   }
 }
+@media (min-width: 1440px) {
+  .hero {
+    width: calc(100% - 40px);
+    max-width: 1760px;
+    height: 840px;
+  }
+}
 @media (max-width: 700px) {
   .section {
     width: min(100% - 32px, 1320px);
@@ -1206,3 +1212,6 @@ main {
     grid-column: 1/-1;
   }
 }
+
+
+

@@ -4,12 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import logo from "@/public/figma/logo.png";
 import logoDark from "@/public/figma/logo-footer.png";
-import {
-  BriefcaseBusiness,
-  Download,
-  Menu,
-  X,
-} from "lucide-react";
+import ShakeHand from "@/public/figma/agreement.png";
+
+import { Download, Menu, X } from "lucide-react";
 
 type HeaderProps = {
   variant?: "light" | "dark";
@@ -25,26 +22,17 @@ const navItems = [
   { label: "تماس با ما", href: "#contact" },
 ];
 
-export default function Header({
-  variant = "light",
-}: HeaderProps) {
+export default function Header({ variant = "light" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header
-      className={`nav-shell ${
-        variant === "dark" ? "nav-dark" : "nav-light"
-      }`}
+      className={`nav-shell ${variant === "dark" ? "nav-dark" : "nav-light"}`}
     >
-        
       {/* Logo */}
-      <a
-        href="#home"
-        aria-label="دات‌وان تریپ"
-        className="brand"
-      >
+      <a href="#home" aria-label="دات‌وان تریپ" className="brand">
         <Image
-          src={variant === "dark" ? logoDark : logo}
+          src={variant === "dark" ? logo : logoDark}
           alt="دات‌وان تریپ"
           width={140}
           height={50}
@@ -70,12 +58,9 @@ export default function Header({
 
       {/* Actions */}
       <div className="nav-actions">
-        <button
-          type="button"
-          className="button button-brand"
-        >
-          <BriefcaseBusiness size={18} />
+        <button type="button" className="button button-brand">
           همکاری با تریپ
+          <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
         </button>
 
         <button
@@ -91,21 +76,11 @@ export default function Header({
       <button
         type="button"
         className="menu-button"
-        aria-label={
-          menuOpen
-            ? "بستن منو"
-            : "باز کردن منو"
-        }
+        aria-label={menuOpen ? "بستن منو" : "باز کردن منو"}
         aria-expanded={menuOpen}
-        onClick={() =>
-          setMenuOpen((prev) => !prev)
-        }
+        onClick={() => setMenuOpen((prev) => !prev)}
       >
-        {menuOpen ? (
-          <X size={22} />
-        ) : (
-          <Menu size={22} />
-        )}
+        {menuOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
     </header>
   );

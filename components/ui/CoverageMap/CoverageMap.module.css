@@ -1,0 +1,95 @@
+.section {
+  width: 95%;
+  max-width: 1280px;
+  margin: 80px auto;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* هم‌ترازی از بالا (جلوگیری از مرکزچین شدن عمودی) */
+  gap: 40px;
+}
+
+/* --- بخش متنی سمت راست --- */
+.textContent {
+  flex: 1;
+  max-width: 520px;
+  padding-top: 70px; /* تنظیم فاصله از بالا برای انطباق دقیق با تصویر */
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* --- بخش عکس نقشه سمت چپ --- */
+.imageWrapper {
+  flex: 1.2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mapImage {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==========================================
+   Responsive Design (واکنش‌گرایی)
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .textContent {
+    padding-top: 40px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    margin: 40px auto;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .textContent {
+    padding-top: 0;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    justify-content: center;
+  }
+}

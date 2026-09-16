@@ -1,0 +1,150 @@
+.sectionContainer {
+  width: 95%; 
+  margin: 0 auto;
+  padding: 0px 20px 80px 20px; 
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  /* گرادیانت تیره شبیه به UI */
+  background: linear-gradient(100deg, #121212 0%, #2a2a2a 50%, #121212 100%);
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  min-height: 300px;
+  padding: 48px 64px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.imageWrapper {
+  position: absolute;
+  right: 6%; 
+  top: -80px; 
+  bottom: -40px; 
+  width: 320px;
+  z-index: 2;
+  pointer-events: none; 
+}
+
+.phonesImage {
+  object-fit: contain;
+  object-position: center; 
+}
+
+.content {
+  margin-right: calc(6% + 340px); 
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.subtitle {
+  color: #9ca3af;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+}
+
+.description {
+  color: #9ca3af;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 0 32px 0;
+}
+
+/* --- دکمه‌های شیشه‌ای (Glassmorphism) --- */
+.buttonsGroup {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  background: rgba(255, 255, 255, 0.08); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+@media (max-width: 1024px) {
+  .imageWrapper {
+    width: 280px;
+    top: -60px;
+    bottom: -30px;
+    right: 4%;
+  }
+  .content {
+    margin-right: calc(4% + 300px);
+  }
+  .title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionContainer {
+    padding: 180px 16px 40px 16px; 
+    width: 100%; 
+  }
+
+  .banner {
+    flex-direction: column;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .imageWrapper {
+    right: 50%;
+    transform: translateX(50%);
+    top: -160px; /* بالا کشیدن عکس */
+    bottom: auto;
+    width: 240px;
+    height: 320px;
+  }
+
+  .content {
+    margin-right: 0;
+    margin-top: 140px; 
+    align-items: center;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .buttonsGroup {
+    justify-content: center;
+  }
+}

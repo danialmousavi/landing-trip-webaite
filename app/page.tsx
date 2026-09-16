@@ -114,7 +114,7 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState(0);
   return (
     <main dir="rtl">
-      <section className="hero" id="home">
+      <section className="hero" id="home" >
         <img
           className="hero-bg"
           src={`${A}hero-bg.png`}
