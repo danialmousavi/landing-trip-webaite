@@ -15,6 +15,7 @@ import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
 import ChallengeSolution from "@/components/ui/ChallengeSolution/ChallengeSolution";
 import UseCaseGallery from "@/components/ui/UseCaseGallery/UseCaseGallery";
 import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
+// import PopularArticles from "@/components/ui/PopularArticles/PopularArticles";
 export default function page() {
   return (
     <>
@@ -114,6 +115,7 @@ export default function page() {
     <ChallengeSolution/>
     <UseCaseGallery/>
     <ProcessSteps/>
+    {/* <PopularArticles/> */}
     <CoverageMap/>
     <DownloadBanner/>
     <FAQ/>
