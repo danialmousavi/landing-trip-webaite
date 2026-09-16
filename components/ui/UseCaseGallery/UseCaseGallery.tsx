@@ -76,13 +76,13 @@ const defaultCards: UseCaseCard[] = [
       height: 143,
     },
     imageLayout: "inset",
-    decoration: "wiggle",
   },
   {
     id: "multi-stop",
     number: 3,
     title: "تأمین خودرو و راننده",
     description: "تأمین خودرو و راننده برای بازه زمانی مشخص و برنامه‌های چندمقصدی.",
+    decoration: "wiggle",
   },
 ];
 
