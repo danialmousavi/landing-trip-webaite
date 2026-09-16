@@ -11,6 +11,7 @@ import TripExperience from "@/components/ui/TripExperience/TripExperience";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import FAQ from "@/components/ui/Faq/Faq";
 import CoverageMap from "@/components/ui/CoverageMap/CoverageMap";
+import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
 export default function page() {
@@ -109,6 +110,7 @@ export default function page() {
         }
       ]}
     />
+    <VehicleShowcase/>
     <CoverageMap/>
     <DownloadBanner/>
     <FAQ/>
