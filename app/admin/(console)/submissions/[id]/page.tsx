@@ -27,9 +27,19 @@ export default async function SubmissionDetailPage({
 
   return (
     <>
-      <p>
-        <Link href="/admin">بازگشت به صندوق</Link>
-      </p>
+      <Link href="/admin" className={styles.backButton}>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M14 5l7 7-7 7M21 12H3"
+          />
+        </svg>
+        بازگشت به فهرست درخواست‌ها
+      </Link>
       <h1>{submissionTypeLabels[item.type]}</h1>
       <p>
         وضعیت فعلی: {submissionStatusLabels[item.status]} ·{" "}
@@ -53,8 +63,7 @@ export default async function SubmissionDetailPage({
           <>
             <Item label="نام" value={`${detail.firstName} ${detail.lastName}`} />
             <Item label="موبایل" value={String(detail.phone)} />
-            <Item label="کد ملی" value={String(detail.nationalIdMasked)} />
-            <Item label="کد ملی کامل" value={String(detail.nationalId ?? "—")} />
+            <Item label="کد ملی" value={String(detail.nationalId ?? "—")} dir="ltr" />
             <Item label="استان" value={String(detail.province)} />
             <Item label="شهر" value={String(detail.city)} />
             <Item label="آدرس" value={String(detail.address)} />
@@ -95,11 +104,19 @@ export default async function SubmissionDetailPage({
   );
 }
 
-function Item({ label, value }: { label: string; value: string }) {
+function Item({
+  label,
+  value,
+  dir,
+}: {
+  label: string;
+  value: string;
+  dir?: "ltr" | "rtl";
+}) {
   return (
     <div>
       <dt>{label}</dt>
-      <dd>{safeDisplayText(value)}</dd>
+      <dd dir={dir}>{safeDisplayText(value)}</dd>
     </div>
   );
 }

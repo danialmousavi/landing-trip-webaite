@@ -50,6 +50,32 @@
   margin: 32px auto 64px;
 }
 
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-bottom: 20px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.backButton svg {
+  flex-shrink: 0;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  border-color: var(--brand);
+  color: var(--brand);
+  outline: none;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
