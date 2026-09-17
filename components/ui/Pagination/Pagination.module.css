@@ -1,0 +1,215 @@
+.pagination {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 30px;
+
+  direction: ltr;
+}
+
+/* =========================
+   Pages
+========================= */
+
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+}
+
+/* =========================
+   Page Button
+========================= */
+
+.pageButton {
+  min-width: 28px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 6px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #555;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.pageButton:hover {
+  background: #f4f4f4;
+
+  color: #111;
+}
+
+/* =========================
+   Active Page
+========================= */
+
+.activePage {
+  color: #111;
+
+  font-weight: 800;
+}
+
+.activePage:hover {
+  background: transparent;
+}
+
+/* =========================
+   Ellipsis
+========================= */
+
+.ellipsis {
+  min-width: 24px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+/* =========================
+   Arrows
+========================= */
+
+.arrowButton {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #f5f5f5;
+
+  color: #333;
+
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.arrowButton:hover:not(:disabled) {
+  background: #ededed;
+
+  transform: translateY(-1px);
+}
+
+.arrowButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.arrowButton:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 768px) {
+  .pagination {
+    gap: 6px;
+
+    margin-top: 28px;
+  }
+
+  .pages {
+    gap: 3px;
+  }
+
+  .pageButton {
+    min-width: 27px;
+    height: 31px;
+
+    font-size: 11px;
+  }
+
+  .arrowButton {
+    width: 32px;
+    height: 32px;
+
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 4px;
+
+    margin-top: 24px;
+  }
+
+  .pages {
+    gap: 1px;
+  }
+
+  .pageButton {
+    min-width: 25px;
+    height: 30px;
+
+    padding: 0 4px;
+
+    font-size: 11px;
+  }
+
+  .ellipsis {
+    min-width: 18px;
+    height: 30px;
+
+    font-size: 10px;
+  }
+
+  .arrowButton {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 7px;
+
+    font-size: 19px;
+  }
+}

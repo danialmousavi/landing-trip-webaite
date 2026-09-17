@@ -1,0 +1,339 @@
+.section {
+  width: 94%;
+  margin-inline: auto;
+
+  padding: 60px 0 80px;
+
+  box-sizing: border-box;
+
+  scroll-margin-top: 30px;
+}
+
+/* ========================================
+   Heading
+======================================== */
+
+.heading {
+  width: 100%;
+  max-width: 900px;
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+
+  color: #111;
+
+  font-size: clamp(21px, 1.6vw, 28px);
+  font-weight: 800;
+  line-height: 1.8;
+}
+
+.subtitle {
+  max-width: 820px;
+
+  margin: 8px auto 0;
+
+  color: #666;
+
+  font-size: clamp(10px, 0.75vw, 13px);
+  font-weight: 400;
+  line-height: 2;
+
+  text-align: center;
+}
+
+/* ========================================
+   Grid
+======================================== */
+
+.grid {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  align-items: stretch;
+
+  gap: 12px;
+
+  margin-top: 38px;
+}
+
+/* ========================================
+   Pagination
+======================================== */
+
+.pagination {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 30px;
+
+  direction: ltr;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+}
+
+/* ========================================
+   Page Number
+======================================== */
+
+.pageButton {
+  min-width: 28px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 6px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #555;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.pageButton:hover {
+  background: #f4f4f4;
+
+  color: #111;
+}
+
+/* active number */
+
+.activePage {
+  color: #111;
+
+  font-weight: 800;
+}
+
+.activePage:hover {
+  background: transparent;
+}
+
+/* ========================================
+   Ellipsis
+======================================== */
+
+.ellipsis {
+  min-width: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+/* ========================================
+   Previous / Next
+======================================== */
+
+.arrowButton {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #f5f5f5;
+
+  color: #333;
+
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.arrowButton:hover:not(:disabled) {
+  background: #ededed;
+
+  transform: translateY(-1px);
+}
+
+.arrowButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.arrowButton:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    width: 92%;
+
+    padding: 50px 0 65px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+    gap: 14px;
+
+    margin-top: 32px;
+  }
+
+  .pagination {
+    margin-top: 28px;
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 600px) {
+  .section {
+    width: 90%;
+
+    padding: 40px 0 55px;
+  }
+
+  .heading {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    max-width: 100%;
+
+    margin-top: 6px;
+
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-top: 26px;
+  }
+
+  .pagination {
+    gap: 5px;
+
+    margin-top: 24px;
+  }
+
+  .pages {
+    gap: 2px;
+  }
+
+  .pageButton {
+    min-width: 26px;
+    height: 30px;
+
+    padding: 0 4px;
+
+    font-size: 11px;
+  }
+
+  .ellipsis {
+    min-width: 18px;
+
+    font-size: 11px;
+  }
+
+  .arrowButton {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 7px;
+
+    font-size: 20px;
+  }
+}
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 380px) {
+  .section {
+    width: 92%;
+
+    padding: 34px 0 45px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+  }
+
+  .pagination {
+    gap: 3px;
+  }
+
+  .pageButton {
+    min-width: 23px;
+
+    padding: 0 3px;
+  }
+
+  .arrowButton {
+    width: 30px;
+    height: 30px;
+  }
+}
