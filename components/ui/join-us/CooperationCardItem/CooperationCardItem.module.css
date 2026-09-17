@@ -1,0 +1,317 @@
+.card {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  box-sizing: border-box;
+
+  background: #fff;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 22px;
+
+  overflow: hidden;
+}
+
+/* =========================
+   Position
+========================= */
+
+.imageTop {
+  flex-direction: column;
+}
+
+.imageBottom {
+  flex-direction: column-reverse;
+}
+
+/* =========================
+   Image
+========================= */
+
+.imageWrapper {
+  position: relative;
+
+  width: calc(100% - 28px);
+  aspect-ratio: 1.55 / 1;
+
+  margin-inline: 14px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: #eee;
+}
+
+/*
+  Image at TOP:
+  touches top border of card,
+  but keeps spacing on left/right
+*/
+.imageTop .imageWrapper {
+  margin-top: 0;
+
+  border-radius: 0 0 18px 18px;
+}
+
+/*
+  Image at BOTTOM:
+  touches bottom border of card,
+  but keeps spacing on left/right
+*/
+.imageBottom .imageWrapper {
+  margin-bottom: 0;
+
+  border-radius: 18px 18px 0 0;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =========================
+   Content
+========================= */
+
+.content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  padding-inline: 26px;
+
+  text-align: right;
+}
+
+/* image is above content */
+.imageTop .content {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* image is below content */
+.imageBottom .content {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* =========================
+   Title
+========================= */
+
+.title {
+  width: 100%;
+
+  margin: 0;
+
+  color: #111;
+
+  font-size: clamp(16px, 1.25vw, 21px);
+  font-weight: 800;
+  line-height: 1.8;
+
+  text-align: right;
+}
+
+/* =========================
+   Description
+========================= */
+
+.description {
+  width: 100%;
+
+  margin: 9px 0 0;
+
+  color: #555;
+
+  /*
+    کمی بزرگ‌تر از نسخه قبلی
+  */
+  font-size: clamp(12px, 0.9vw, 15px);
+  font-weight: 400;
+  line-height: 2;
+
+  text-align: right;
+}
+
+/* =========================
+   Button
+========================= */
+
+.button {
+  position: relative;
+
+  /*
+    در RTL با margin-right:auto
+    دکمه به سمت چپ می‌رود
+  */
+  margin-top: 18px;
+  margin-right: auto;
+
+  padding: 11px 20px;
+
+  overflow: hidden;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: linear-gradient(
+    180deg,
+    #2a2a2a 0%,
+    #171717 50%,
+    #0e0e0e 100%
+  );
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: clamp(10px, 0.75vw, 13px);
+  font-weight: 500;
+  line-height: 1.5;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* =========================
+   White light reflection
+========================= */
+
+.button::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+
+  width: 84%;
+  height: 45%;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0)
+  );
+
+  filter: blur(4px);
+
+  pointer-events: none;
+}
+
+.button:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 4px 9px rgba(0, 0, 0, 0.16);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1000px) {
+  .card {
+    border-radius: 20px;
+  }
+
+  .imageWrapper {
+    width: calc(100% - 24px);
+
+    margin-inline: 12px;
+  }
+
+  .imageTop .imageWrapper {
+    border-radius: 0 0 16px 16px;
+  }
+
+  .imageBottom .imageWrapper {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .content {
+    padding-inline: 20px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .button {
+    padding: 10px 18px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 650px) {
+  .card {
+    border-radius: 18px;
+  }
+
+  .imageWrapper {
+    width: calc(100% - 20px);
+    aspect-ratio: 1.6 / 1;
+
+    margin-inline: 10px;
+  }
+
+  .imageTop .imageWrapper {
+    border-radius: 0 0 15px 15px;
+  }
+
+  .imageBottom .imageWrapper {
+    border-radius: 15px 15px 0 0;
+  }
+
+  .content {
+    padding-inline: 18px;
+  }
+
+  .imageTop .content,
+  .imageBottom .content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .description {
+    margin-top: 7px;
+
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .button {
+    margin-top: 15px;
+
+    padding: 10px 17px;
+
+    font-size: 11px;
+  }
+}
