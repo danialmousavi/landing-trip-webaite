@@ -10,10 +10,11 @@ let client: ReturnType<typeof postgres> | undefined;
 let db: Db | undefined;
 
 function createDb() {
-  const { DATABASE_URL } = getEnv();
+  const { DATABASE_URL, DATABASE_SSL } = getEnv();
   client = postgres(DATABASE_URL, {
     max: 10,
     prepare: false,
+    ssl: DATABASE_SSL === "require" ? "require" : false,
   });
 
   return drizzle(client, { schema });

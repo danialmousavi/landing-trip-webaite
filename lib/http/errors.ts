@@ -1,5 +1,7 @@
 import { ZodError } from "zod";
 
+export { isTrustedOrigin as isSameOrigin } from "@/lib/http/origin";
+
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -21,15 +23,4 @@ export function fieldErrorsFromZod(error: ZodError) {
 
 export function jsonError(status: number, message: string, extra?: object) {
   return Response.json({ error: message, ...extra }, { status });
-}
-
-export function isSameOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  if (!origin) return request.method === "GET" || request.method === "HEAD";
-
-  try {
-    return new URL(origin).origin === new URL(request.url).origin;
-  } catch {
-    return false;
-  }
 }

@@ -2,6 +2,7 @@ import { ZodSchema } from "zod";
 
 import { fieldErrorsFromZod, HttpError, jsonError } from "@/lib/http/errors";
 import { readJsonBody } from "@/lib/http/body";
+import { isAllowedFormOrigin } from "@/lib/http/origin";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 
 const JSON_LIMIT = 32 * 1024;
@@ -12,6 +13,10 @@ export async function handlePublicJsonForm<T>(
   schema: ZodSchema<T>,
   persist: (values: T) => Promise<{ id: string; created: boolean }>,
 ) {
+  if (!isAllowedFormOrigin(request)) {
+    return jsonError(403, "درخواست نامعتبر است.");
+  }
+
   const limited = consumeRateLimit(`${routeKey}:${clientIp(request)}`);
   if (!limited.ok) {
     return jsonError(429, "تعداد درخواست‌ها بیش از حد مجاز است. کمی بعد دوباره تلاش کنید.");

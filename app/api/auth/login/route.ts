@@ -13,6 +13,7 @@ import {
 } from "@/lib/auth";
 import { verifyPassword } from "@/lib/auth/password";
 import { jsonError, HttpError } from "@/lib/http/errors";
+import { isAllowedFormOrigin } from "@/lib/http/origin";
 import { readJsonBody } from "@/lib/http/body";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 
@@ -22,6 +23,10 @@ const loginSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  if (!isAllowedFormOrigin(request)) {
+    return jsonError(403, "درخواست نامعتبر است.");
+  }
+
   const limited = consumeRateLimit(`login:${clientIp(request)}`);
   if (!limited.ok) {
     return jsonError(429, "تعداد تلاش‌ها بیش از حد مجاز است.");

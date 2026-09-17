@@ -26,11 +26,11 @@ export function hashSessionToken(token: string) {
 }
 
 export function cookieOptions() {
-  const { NODE_ENV } = getEnv();
+  const { APP_ORIGIN } = getEnv();
   return {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: NODE_ENV === "production",
+    secure: APP_ORIGIN.startsWith("https://"),
     path: "/",
     maxAge: IDLE_MS / 1000,
   };

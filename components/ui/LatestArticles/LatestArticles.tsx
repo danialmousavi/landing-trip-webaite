@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Search } from "lucide-react";
 
 import styles from "./LatestArticles.module.css";
@@ -213,7 +214,7 @@ export default function LatestArticles({
             <ul className={styles.featuredGrid}>
               {featured.map((article) => (
                 <li key={article.id}>
-                  <a className={styles.card} href={article.href ?? "#"}>
+                  <Link className={styles.card} href={article.href ?? `/articles/${article.id}`}>
                     <span className={styles.cardImageWrap}>
                       <Image
                         src={article.image.src}
@@ -235,7 +236,7 @@ export default function LatestArticles({
                       <span className={styles.cardDate}>{article.date}</span>
                     </span>
                     <h3 className={styles.cardTitle}>{article.title}</h3>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -245,7 +246,7 @@ export default function LatestArticles({
             <ul className={styles.list}>
               {rest.map((article) => (
                 <li key={article.id} className={styles.listItem}>
-                  <a className={styles.item} href={article.href ?? "#"}>
+                  <Link className={styles.item} href={article.href ?? `/articles/${article.id}`}>
                     <Image
                       src={article.image.src}
                       alt=""
@@ -258,7 +259,7 @@ export default function LatestArticles({
                       <span className={styles.badge}>{article.category}</span>
                       <span className={styles.itemTitle}>{article.title}</span>
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
