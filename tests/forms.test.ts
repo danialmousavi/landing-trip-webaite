@@ -129,4 +129,30 @@ describe("form schemas", () => {
     });
     expect(parsed.success).toBe(true);
   });
+
+  it("rejects XSS and markup in stored fields", () => {
+    const parsed = contactFormSchema.safeParse({
+      ...meta,
+      firstName: "علی",
+      lastName: "محمدی",
+      phone: "09121234567",
+      email: "ali@gmail.com",
+      category: "general",
+      message: "نیاز به پیگیری سفر سازمانی دارم onclick=alert(1)",
+    });
+    expect(parsed.success).toBe(false);
+
+    const injected = driverFormSchema.safeParse({
+      ...meta,
+      firstName: "<img src=x onerror=alert(1)>",
+      lastName: "کاظمی",
+      phone: "09121234567",
+      nationalId: "0011823589",
+      province: "تهران",
+      city: "تهران",
+      address: "خیابان آزادی پلاک ۱۲",
+      description: "سابقه پنج سال رانندگی شهری و بین‌شهری دارم.",
+    });
+    expect(injected.success).toBe(false);
+  });
 });

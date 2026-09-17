@@ -5,6 +5,7 @@ import StatusActions from "@/components/admin/StatusActions";
 import styles from "@/components/admin/Admin.module.css";
 import {
   contactCategoryLabels,
+  safeDisplayText,
   sponsorshipDomainLabels,
   submissionStatusLabels,
   submissionTypeLabels,
@@ -65,7 +66,7 @@ export default async function SubmissionDetailPage({
             <Item label="نام" value={`${detail.firstName} ${detail.lastName}`} />
             <Item label="موبایل" value={String(detail.phone)} />
             <Item label="ایمیل" value={String(detail.email)} />
-            <Item label="نام فایل" value={String(detail.resumeOriginalName)} />
+            <Item label="نام فایل" value={safeDisplayText(detail.resumeOriginalName)} />
             <div>
               <dt>رزومه</dt>
               <dd>
@@ -98,7 +99,7 @@ function Item({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <dt>{label}</dt>
-      <dd>{value}</dd>
+      <dd>{safeDisplayText(value)}</dd>
     </div>
   );
 }

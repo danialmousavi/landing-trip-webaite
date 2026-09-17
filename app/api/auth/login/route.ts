@@ -12,7 +12,8 @@ import {
   registerFailedLogin,
 } from "@/lib/auth";
 import { verifyPassword } from "@/lib/auth/password";
-import { jsonError } from "@/lib/http/errors";
+import { jsonError, HttpError } from "@/lib/http/errors";
+import { readJsonBody } from "@/lib/http/body";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 
 const loginSchema = z.object({
@@ -28,8 +29,11 @@ export async function POST(request: Request) {
 
   let payload: unknown;
   try {
-    payload = await request.json();
-  } catch {
+    payload = await readJsonBody(request, 8 * 1024);
+  } catch (error) {
+    if (error instanceof HttpError) {
+      return jsonError(error.status, error.message);
+    }
     return jsonError(400, "قالب درخواست نامعتبر است.");
   }
 

@@ -1,6 +1,7 @@
 import { ZodSchema } from "zod";
 
 import { fieldErrorsFromZod, HttpError, jsonError } from "@/lib/http/errors";
+import { readJsonBody } from "@/lib/http/body";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 
 const JSON_LIMIT = 32 * 1024;
@@ -16,15 +17,13 @@ export async function handlePublicJsonForm<T>(
     return jsonError(429, "تعداد درخواست‌ها بیش از حد مجاز است. کمی بعد دوباره تلاش کنید.");
   }
 
-  const contentLength = Number(request.headers.get("content-length") || 0);
-  if (contentLength > JSON_LIMIT) {
-    return jsonError(413, "درخواست بیش از حد بزرگ است.");
-  }
-
   let payload: unknown;
   try {
-    payload = await request.json();
-  } catch {
+    payload = await readJsonBody(request, JSON_LIMIT);
+  } catch (error) {
+    if (error instanceof HttpError) {
+      return jsonError(error.status, error.message);
+    }
     return jsonError(400, "قالب درخواست نامعتبر است.");
   }
 

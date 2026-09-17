@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { careerFieldsSchema, type CareerFormFields } from "@/lib/forms";
+import { careerFieldsSchema, isClientAllowedResume, RESUME_ACCEPT, RESUME_TYPE_ERROR, type CareerFormFields } from "@/lib/forms";
 import {
   Field,
   FormShell,
@@ -35,17 +35,9 @@ export default function CareerForm({ standalone = true }: { standalone?: boolean
 
   function onFile(file: File | undefined) {
     if (!file) return;
-    const allowed = [
-      "application/pdf",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ];
-    const okType =
-      allowed.includes(file.type) ||
-      file.name.toLowerCase().endsWith(".pdf") ||
-      file.name.toLowerCase().endsWith(".docx");
-    if (!okType || file.size > 5_242_880 || file.size <= 0) {
+    if (!isClientAllowedResume(file)) {
       setResume(null);
-      setResumeError("فقط فایل PDF یا DOCX تا سقف ۵ مگابایت پذیرفته می‌شود.");
+      setResumeError(RESUME_TYPE_ERROR);
       return;
     }
     setResumeError("");
@@ -112,11 +104,11 @@ export default function CareerForm({ standalone = true }: { standalone?: boolean
         />
       </Field>
       <div className={`${styles.field} ${styles.full}`}>
-        <span className={styles.label}>رزومه (PDF یا Word)</span>
+        <span className={styles.label}>رزومه (PDF، DOC یا DOCX)</span>
         <input
           ref={inputRef}
           type="file"
-          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept={RESUME_ACCEPT}
           hidden
           onChange={(event) => onFile(event.target.files?.[0])}
         />

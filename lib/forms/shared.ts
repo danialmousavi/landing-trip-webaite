@@ -78,7 +78,30 @@ export const submissionStatusLabels: Record<SubmissionStatus, string> = {
 };
 
 export function hasUnsafeMarkup(value: string) {
-  return /[<>]|javascript:|data:text\/html/i.test(value);
+  if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(value)) return true;
+  if (/[<>]|javascript:|vbscript:|data:text\/html|data:application\/javascript/i.test(value)) {
+    return true;
+  }
+  if (/\bon\w+\s*=/i.test(value)) return true;
+  if (/&#|\\x3c|\\u003c|%3c|%3e/i.test(value)) return true;
+  return false;
+}
+
+export function safeDisplayText(value: unknown, fallback = "—") {
+  if (value == null) return fallback;
+  const text = String(value)
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+    .replace(/[<>]/g, "");
+  const trimmed = text.trim();
+  return trimmed || fallback;
+}
+
+export function sanitizeSearchQuery(value: string) {
+  return value
+    .replace(/[%_\\]/g, "")
+    .replace(/[\u0000-\u001F\u007F]/g, "")
+    .trim()
+    .slice(0, 80);
 }
 
 export function normalizeIranianMobile(input: string) {

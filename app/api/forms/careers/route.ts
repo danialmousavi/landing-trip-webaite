@@ -1,9 +1,11 @@
 import { careerFormSchema } from "@/lib/forms/careers";
+import { getEnv } from "@/lib/env";
 import { fieldErrorsFromZod, jsonError } from "@/lib/http/errors";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 import { createCareerSubmission } from "@/lib/submissions/service";
 import {
   assertSafeResume,
+  RESUME_TYPE_ERROR,
   type AllowedResumeMime,
 } from "@/lib/storage/resumes";
 
@@ -48,6 +50,13 @@ export async function POST(request: Request) {
     });
   }
 
+  const maxBytes = getEnv().MAX_RESUME_BYTES;
+  if (file.size > maxBytes) {
+    return jsonError(422, "اطلاعات فرم ناقص یا نامعتبر است.", {
+      fields: { resume: RESUME_TYPE_ERROR },
+    });
+  }
+
   const buffer = Buffer.from(await file.arrayBuffer());
 
   let mimeType: AllowedResumeMime;
@@ -60,7 +69,7 @@ export async function POST(request: Request) {
     });
   } catch {
     return jsonError(422, "اطلاعات فرم ناقص یا نامعتبر است.", {
-      fields: { resume: "فقط فایل PDF یا DOCX تا سقف ۵ مگابایت پذیرفته می‌شود." },
+      fields: { resume: RESUME_TYPE_ERROR },
     });
   }
 

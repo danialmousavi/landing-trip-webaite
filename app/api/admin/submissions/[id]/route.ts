@@ -1,4 +1,5 @@
-import { jsonError, isSameOrigin } from "@/lib/http/errors";
+import { jsonError, HttpError, isSameOrigin } from "@/lib/http/errors";
+import { readJsonBody } from "@/lib/http/body";
 import { readSessionUser } from "@/lib/auth";
 import { updateSubmissionStatus } from "@/lib/submissions/service";
 import { submissionStatuses } from "@/lib/forms/shared";
@@ -24,8 +25,11 @@ export async function PATCH(
   const { id } = await context.params;
   let payload: unknown;
   try {
-    payload = await request.json();
-  } catch {
+    payload = await readJsonBody(request, 4 * 1024);
+  } catch (error) {
+    if (error instanceof HttpError) {
+      return jsonError(error.status, error.message);
+    }
     return jsonError(400, "قالب درخواست نامعتبر است.");
   }
 

@@ -11,11 +11,13 @@ import {
 } from "@/db/schema";
 import { encryptPii, maskNationalId, piiBlindIndex, decryptPii } from "@/lib/crypto/pii";
 import { HttpError } from "@/lib/http/errors";
+import { parseUuid } from "@/lib/http/body";
 import type { CareerFormValues } from "@/lib/forms/careers";
 import type { ContactFormValues } from "@/lib/forms/contact";
 import type { DriverFormValues } from "@/lib/forms/drivers";
 import type { SponsorshipFormValues } from "@/lib/forms/sponsorships";
 import type { SubmissionStatus, SubmissionType } from "@/lib/forms/shared";
+import { sanitizeSearchQuery } from "@/lib/forms/shared";
 import {
   deleteResume,
   resumeAttachmentKind,
@@ -204,25 +206,28 @@ export async function listSubmissions(filters: InboxFilters = {}) {
     conditions.push(isNull(jobApplications.resumeStorageKey));
   }
   if (filters.query?.trim()) {
-    const q = `%${filters.query.trim()}%`;
-    conditions.push(
-      or(
-        ilike(contactSubmissions.firstName, q),
-        ilike(contactSubmissions.lastName, q),
-        ilike(contactSubmissions.phone, q),
-        ilike(contactSubmissions.email, q),
-        ilike(driverApplications.firstName, q),
-        ilike(driverApplications.lastName, q),
-        ilike(driverApplications.phone, q),
-        ilike(jobApplications.firstName, q),
-        ilike(jobApplications.lastName, q),
-        ilike(jobApplications.phone, q),
-        ilike(jobApplications.email, q),
-        ilike(sponsorshipRequests.fullName, q),
-        ilike(sponsorshipRequests.phone, q),
-        ilike(sponsorshipRequests.brandName, q),
-      ),
-    );
+    const needle = sanitizeSearchQuery(filters.query);
+    if (needle) {
+      const q = `%${needle}%`;
+      conditions.push(
+        or(
+          ilike(contactSubmissions.firstName, q),
+          ilike(contactSubmissions.lastName, q),
+          ilike(contactSubmissions.phone, q),
+          ilike(contactSubmissions.email, q),
+          ilike(driverApplications.firstName, q),
+          ilike(driverApplications.lastName, q),
+          ilike(driverApplications.phone, q),
+          ilike(jobApplications.firstName, q),
+          ilike(jobApplications.lastName, q),
+          ilike(jobApplications.phone, q),
+          ilike(jobApplications.email, q),
+          ilike(sponsorshipRequests.fullName, q),
+          ilike(sponsorshipRequests.phone, q),
+          ilike(sponsorshipRequests.brandName, q),
+        ),
+      );
+    }
   }
 
   const where = conditions.length ? and(...conditions) : undefined;
@@ -337,11 +342,13 @@ export async function listSubmissions(filters: InboxFilters = {}) {
 }
 
 export async function getSubmissionDetail(id: string) {
+  const submissionId = parseUuid(id);
+  if (!submissionId) return null;
   const db = getDb();
   const [base] = await db
     .select()
     .from(submissions)
-    .where(eq(submissions.id, id))
+    .where(eq(submissions.id, submissionId))
     .limit(1);
   if (!base) return null;
 
@@ -349,7 +356,7 @@ export async function getSubmissionDetail(id: string) {
     const [detail] = await db
       .select()
       .from(contactSubmissions)
-      .where(eq(contactSubmissions.submissionId, id))
+      .where(eq(contactSubmissions.submissionId, submissionId))
       .limit(1);
     return { ...base, detail };
   }
@@ -358,7 +365,7 @@ export async function getSubmissionDetail(id: string) {
     const [detail] = await db
       .select()
       .from(driverApplications)
-      .where(eq(driverApplications.submissionId, id))
+      .where(eq(driverApplications.submissionId, submissionId))
       .limit(1);
     if (!detail) return { ...base, detail: null };
     let nationalIdMasked = "**********";
@@ -385,7 +392,7 @@ export async function getSubmissionDetail(id: string) {
     const [detail] = await db
       .select()
       .from(jobApplications)
-      .where(eq(jobApplications.submissionId, id))
+      .where(eq(jobApplications.submissionId, submissionId))
       .limit(1);
     return { ...base, detail };
   }
@@ -393,7 +400,7 @@ export async function getSubmissionDetail(id: string) {
   const [detail] = await db
     .select()
     .from(sponsorshipRequests)
-    .where(eq(sponsorshipRequests.submissionId, id))
+    .where(eq(sponsorshipRequests.submissionId, submissionId))
     .limit(1);
   return { ...base, detail };
 }
@@ -403,10 +410,12 @@ export async function updateSubmissionStatus(
   status: SubmissionStatus,
   actorUserId: string,
 ) {
+  const submissionId = parseUuid(id);
+  if (!submissionId) return null;
   const [updated] = await getDb()
     .update(submissions)
     .set({ status, updatedAt: new Date() })
-    .where(eq(submissions.id, id))
+    .where(eq(submissions.id, submissionId))
     .returning({ id: submissions.id, status: submissions.status });
 
   if (!updated) return null;
@@ -414,17 +423,19 @@ export async function updateSubmissionStatus(
   await getDb().insert(auditEvents).values({
     actorUserId,
     action: `status:${status}`,
-    submissionId: id,
+    submissionId,
   });
 
   return updated;
 }
 
 export async function getCareerResume(id: string) {
+  const submissionId = parseUuid(id);
+  if (!submissionId) return null;
   const [row] = await getDb()
     .select()
     .from(jobApplications)
-    .where(eq(jobApplications.submissionId, id))
+    .where(eq(jobApplications.submissionId, submissionId))
     .limit(1);
   return row ?? null;
 }

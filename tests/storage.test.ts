@@ -61,4 +61,35 @@ describe("resume storage", () => {
     expect(stored.mimeType).toBe("application/pdf");
     expect(stored.originalName).toBe("sample-pdf.pdf");
   });
+
+  it("accepts a classic .doc ole file and rejects disguised files", async () => {
+    process.env.UPLOAD_ROOT = dir;
+    resetEnvCache();
+    mkdirSync(dir, { recursive: true });
+    const ole = Buffer.from([
+      0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1, 0x00, 0x00,
+    ]);
+    const stored = await saveResume({
+      buffer: ole,
+      mimeType: "application/msword",
+      originalName: "cv.doc",
+    });
+    expect(stored.mimeType).toBe("application/msword");
+    expect(stored.storageKey.endsWith(".doc")).toBe(true);
+
+    expect(() =>
+      assertSafeResume({
+        buffer: Buffer.from("%PDF-1.4"),
+        mimeType: "application/msword",
+        originalName: "cv.doc",
+      }),
+    ).toThrow();
+    expect(() =>
+      assertSafeResume({
+        buffer: Buffer.from([0x50, 0x4b, 0x03, 0x04, 0x00]),
+        mimeType: "",
+        originalName: "cv.doc",
+      }),
+    ).toThrow();
+  });
 });

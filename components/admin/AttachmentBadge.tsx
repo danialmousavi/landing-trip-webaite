@@ -4,19 +4,19 @@ export function AttachmentBadge({
   kind,
   fileName,
 }: {
-  kind: "pdf" | "docx" | null;
+  kind: "pdf" | "doc" | "docx" | null;
   fileName?: string | null;
 }) {
   if (!kind) {
     return <span className={styles.attachmentEmpty}>—</span>;
   }
 
-  const label = kind === "pdf" ? "PDF" : "DOCX";
+  const label = kind === "pdf" ? "PDF" : kind === "doc" ? "DOC" : "DOCX";
   const title = fileName ? `${fileName} (${label})` : label;
 
   return (
     <span className={styles.attachmentBadge} title={title} data-kind={kind}>
-      {kind === "pdf" ? <PdfIcon /> : <WordIcon />}
+      {kind === "pdf" ? <PdfIcon /> : <WordIcon label={kind === "doc" ? "DOC" : "W"} />}
       <span className={styles.attachmentText}>
         {label}
         {fileName ? <small>{extensionLabel(fileName)}</small> : null}
@@ -54,7 +54,7 @@ function PdfIcon() {
   );
 }
 
-function WordIcon() {
+function WordIcon({ label }: { label: string }) {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
       <path
@@ -66,12 +66,12 @@ function WordIcon() {
         x="12"
         y="17.5"
         textAnchor="middle"
-        fontSize="5.5"
+        fontSize={label === "DOC" ? "5" : "5.5"}
         fontWeight="800"
         fill="#fff"
         fontFamily="Tahoma, sans-serif"
       >
-        W
+        {label}
       </text>
     </svg>
   );

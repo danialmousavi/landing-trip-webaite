@@ -7,6 +7,7 @@ import {
   submissionTypeLabels,
   submissionStatuses,
   submissionTypes,
+  safeDisplayText,
 } from "@/lib/forms";
 import { listSubmissions } from "@/lib/submissions/service";
 
@@ -49,7 +50,7 @@ export default async function AdminInboxPage({
     query,
     hasAttachment,
     sort,
-    page: pageParam ? Number(pageParam) : 1,
+    page: pageParam && Number.isFinite(Number(pageParam)) ? Number(pageParam) : 1,
   });
 
   const from = total === 0 ? 0 : (page - 1) * pageSize + 1;
@@ -125,19 +126,23 @@ export default async function AdminInboxPage({
                   <td>
                     <AttachmentBadge
                       kind={item.attachmentKind}
-                      fileName={item.attachmentName}
+                      fileName={safeDisplayText(item.attachmentName, "")}
                     />
                   </td>
                   <td>{submissionTypeLabels[item.type]}</td>
                   <td>
-                    <Link href={`/admin/submissions/${item.id}`}>{item.name}</Link>
+                    <Link href={`/admin/submissions/${item.id}`}>
+                      {safeDisplayText(item.name)}
+                    </Link>
                     {item.brand ? (
-                      <div className={styles.subline}>{item.brand}</div>
+                      <div className={styles.subline}>{safeDisplayText(item.brand)}</div>
                     ) : null}
                   </td>
                   <td>
-                    <div>{item.phone}</div>
-                    {item.email ? <div className={styles.subline}>{item.email}</div> : null}
+                    <div>{safeDisplayText(item.phone)}</div>
+                    {item.email ? (
+                      <div className={styles.subline}>{safeDisplayText(item.email)}</div>
+                    ) : null}
                   </td>
                   <td>
                     <span className={styles.badge}>
