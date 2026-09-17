@@ -11,9 +11,46 @@ import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
 import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import driverImage from "@/public/figma/b2bDriver.png";
-import FAQ from "@/components/ui/Faq/Faq";
+import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
+export const tripFaqItems: FAQItem[] = [
+  {
+    question: "خدمات حمل‌ونقل سازمانی برای چه نوع سازمان‌هایی مناسب است؟",
+    answer:
+      "برای سازمان‌ها و شرکت‌هایی که به سفر منظم کارکنان، مدیران، مهمانان یا تیم‌های کاری نیاز دارند.",
+  },
+  {
+    question: "آیا سرویس بر اساس نیاز سازمان قابل تنظیم است؟",
+    answer:
+      "بله. ساختار سرویس می‌تواند متناسب با نیاز هر سازمان، تعداد کاربران، نوع درخواست، زمان‌بندی، مسیرها و مدل همکاری تنظیم شود.",
+  },
+  {
+    question: "آیا می‌توان برای چند مسیر مختلف سرویس تعریف کرد؟",
+    answer:
+      "بله. امکان تعریف چند مسیر و برنامه سرویس مختلف متناسب با نیاز سازمان وجود دارد و هر مسیر می‌تواند بر اساس شرایط عملیاتی مجموعه مدیریت شود.",
+  },
+  {
+    question: "آیا امکان استفاده از خودرو در اختیار وجود دارد؟",
+    answer:
+      "بله. سازمان‌ها می‌توانند متناسب با نیاز خود از سرویس خودرو در اختیار استفاده کنند و خودرو و راننده را برای بازه زمانی مشخص در اختیار داشته باشند.",
+  },
+  {
+    question: "هزینه خدمات سازمانی چگونه محاسبه می‌شود؟",
+    answer:
+      "هزینه خدمات سازمانی متناسب با نوع سرویس، حجم درخواست، مدت‌زمان استفاده و مسیرها تعیین می‌شود و بر اساس مدل همکاری هر مجموعه تعریف خواهد شد.",
+  },
+
+  {
+    question:"برای شروع همکاری چه اطلاعاتی لازم است؟",
+    answer:"در مرحله نخست، کافی است سازمان اطلاعات مربوط به نوع خدمات موردنیاز، حجم تقریبی سرویس، مسیرها، زمان‌بندی و شرایط مورد انتظار را ارائه کند تا راهکار مناسب بررسی و پیشنهاد شود."
+  },
+  
+  {
+    question:"چگونه می‌توانم درخواست همکاری سازمانی ثبت کنم؟",
+    answer:"برای شروع همکاری، به بخش درخواست مشاوره مراجعه کنید تا با تیم دات‌وان تریپ ارتباط بگیرید."
+  },
+];
 export default function page() {
   return (
     <>
@@ -86,13 +123,17 @@ export default function page() {
           },
         ]}
       />
-      <div style={{marginTop:"200px"}}>
+      <div style={{ marginTop: "200px" }}>
         <DownloadBanner />
-
       </div>
-      <FAQ/>
-      <FutureTransportBanner/>
-      <Footer/>
+      <FAQ
+        subtitle="آشنایی با دات‌وان تریپ"
+        title="سؤالات متداول"
+        description="پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود."
+        items={tripFaqItems}
+      />
+      <FutureTransportBanner />
+      <Footer />
     </>
   );
 }

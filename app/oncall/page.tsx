@@ -7,17 +7,37 @@ import heroImage from "@/public/figma/oncallhero.png";
 import driverImage from "@/public/figma/drivers.png";
 import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
-import FAQ from "@/components/ui/Faq/Faq";
+import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
 import Header from "@/components/ui/Header/Header";
 import FlexibleTravel from "@/components/ui/FlexibleTravel/FlexibleTravel";
-
+export const tripFaqItems: FAQItem[] = [
+  {
+    question: "خودرو در اختیار چه تفاوتی با سفر معمولی دارد؟",
+    answer: "در سفر معمولی، سرویس برای سفر از یک مبدأ به یک مقصد درخواست می‌شود. در خودرو در اختیار، خودرو و راننده برای یک بازه زمانی مشخص در اختیار شما قرار می‌گیرند.",
+  },
+  {
+    question: "خودرو در اختیار برای چند ساعت قابل درخواست است؟",
+    answer: "سرویس در اختیار را می‌توانید متناسب با نیاز خود، تا سقف ۸ ساعت درخواست کنید.",
+  },
+  {
+    question: "آیا می‌توانم چند مقصد داشته باشم؟",
+    answer: "در سرویس در اختیار، مقصد مشخصی هنگام ثبت درخواست تعیین نمی‌شود. خودرو در بازه زمانی انتخاب‌شده در اختیار شماست و می‌توانید جابه‌جایی‌های موردنیاز خود را در طول مدت سرویس انجام دهید.",
+  },
+  {
+    question: "آیا راننده در تمام مدت سرویس همراه من است؟",
+    answer: "بله. راننده در تمام بازه زمانی ثبت‌شده همراه شماست و خودرو تا پایان مدت سرویس در اختیار شما قرار دارد.",
+  },
+  {
+    question: "هزینه خودرو در اختیار چگونه محاسبه می‌شود؟",
+    answer: "هزینه سرویس بر اساس مدت‌زمانی که هنگام ثبت درخواست انتخاب می‌کنید و مطابق با تعرفه سرویس در اختیار محاسبه و نمایش داده می‌شود.",
+  },
+];
 export default function page() {
   return (
     <>
-
-    <Header/>
+      <Header />
       <Hero
         badge={{
           text: "در اختیار",
@@ -139,9 +159,14 @@ export default function page() {
           },
         ]}
       />
-      <FlexibleTravel/>
+      <FlexibleTravel />
       <DownloadBanner />
-      <FAQ />
+      <FAQ
+        subtitle="آشنایی با دات‌وان تریپ"
+        title="سؤالات متداول"
+        description="پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود."
+        items={tripFaqItems}
+      />
       <FutureTransportBanner />
       <Footer />
     </>

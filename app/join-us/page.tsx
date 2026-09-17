@@ -17,6 +17,7 @@ import CorporateJobsSection from "@/components/ui/join-us/CorporateJobsSection/C
 import PartnershipSection from "@/components/ui/join-us/PartnershipSection/PartnershipSection";
 import partnershipCarImage from "@/public/figma/driver-Highway.png";
 import Footer from "@/components/ui/footer/Footer";
+import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 const cooperationCards: CooperationCard[] = [
   {
     title: "همکاری به عنوان راننده",
@@ -159,6 +160,34 @@ export const corporateJobs: CorporateJobCardProps[] = [
     buttonText: "ثبت‌نام",
   },
 ];
+
+export const tripFaqItems: FAQItem[] = [
+  {
+    question: "از چه راه‌هایی می‌تونم رزومه‌ی خودم رو برای موقعیت",
+    answer:
+      "تبلیغات شما روی نمایشگر داخل خودرو و در طول سفر مسافر نمایش داده می‌شود. کمپین‌ها قابلیت زمان‌بندی، هدف‌گیری منطقه‌ای و دریافت گزارش عملکرد را دارند.",
+  },
+  {
+    question: "آیا می‌توانم موقعیت خودرو را در طول سفر ببینم؟",
+    answer:
+      "بله، پس از تأیید سفر توسط راننده، می‌توانید موقعیت لحظه‌ای خودرو را روی نقشه اپلیکیشن مشاهده کنید.",
+  },
+  {
+    question: "رانندگان دات‌وان چگونه انتخاب می‌شوند؟",
+    answer:
+      "رانندگان پس از احراز هویت، ارزیابی سوابق، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند.",
+  },
+  {
+    question: "خودروهای دات‌وان چه ویژگی‌هایی دارند؟",
+    answer:
+      "بخش بزرگی از ناوگان دات‌وان تریپ از خودروهای برقی و هیبریدی کم‌آلاینده تشکیل شده است.",
+  },
+  {
+    question: "دات‌وان در چه شهرهایی فعال است؟",
+    answer:
+      "دات‌وان تریپ خدمات خود را به‌صورت مرحله‌ای توسعه می‌دهد. برای مشاهده شهرهای فعال، فهرست به‌روز را بررسی کنید.",
+  },
+];
 export default function page() {
   return (
     <>
@@ -199,7 +228,12 @@ export default function page() {
         showAllText="مشاهده فرصت‌های شغلی"
         showAllHref="/jobs"
       />
-      <Footer/>
+      <FAQ
+        description="تبلیغات روی نمایشگرهای دات‌وان چگونه نمایش داده می‌شود؟"
+        title="سؤالات متداول"
+        items={tripFaqItems}
+      />
+      <Footer />
     </>
   );
 }

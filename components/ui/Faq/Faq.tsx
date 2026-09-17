@@ -2,58 +2,93 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+
 import styles from "./FAQ.module.css";
 
-const faqItems = [
-  [
-    "چطور می‌توانم با دات‌وان سفر کنم؟",
-    "از طریق اپلیکیشن دات‌وان، مبدأ و مقصد خود را مشخص و درخواست سفر را ثبت کنید.",
-  ],
-  [
-    "آیا می‌توانم موقعیت خودرو را در طول سفر ببینم؟",
-    "بله، پس از تأیید سفر توسط راننده، می‌توانید موقعیت لحظه‌ای خودرو را روی نقشه اپلیکیشن مشاهده کنید.",
-  ],
-  [
-    "رانندگان دات‌وان چگونه انتخاب می‌شوند؟",
-    "رانندگان پس از احراز هویت، ارزیابی سوابق، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند.",
-  ],
-  [
-    "خودروهای دات‌وان چه ویژگی‌هایی دارند؟",
-    "بخش بزرگی از ناوگان دات‌وان تریپ از خودروهای برقی و هیبریدی کم‌آلاینده تشکیل شده است.",
-  ],
-  [
-    "دات‌وان در چه شهرهایی فعال است؟",
-    "دات‌وان تریپ خدمات خود را به‌صورت مرحله‌ای توسعه می‌دهد. برای مشاهده شهرهای فعال، فهرست به‌روز را بررسی کنید.",
-  ],
-];
+export type FAQItem = {
+  question: string;
+  answer: string;
+};
 
-export default function FAQ() {
-  const [openFaq, setOpenFaq] = useState(0);
+type FAQProps = {
+  items: FAQItem[];
+
+  subtitle?: string;
+  title?: string;
+  description?: string;
+
+  defaultOpenIndex?: number;
+
+  moreButtonText?: string;
+  onMoreClick?: () => void;
+
+  showMoreButton?: boolean;
+};
+
+export default function FAQ({
+  items,
+  subtitle = "",
+  title = "سؤالات متداول",
+  description,
+  defaultOpenIndex = 0,
+  moreButtonText = "مشاهده سوالات بیشتر",
+  onMoreClick,
+  showMoreButton = true,
+}: FAQProps) {
+  const [openFaq, setOpenFaq] = useState<number>(defaultOpenIndex);
+
+  const handleToggle = (index: number) => {
+    setOpenFaq((currentIndex) =>
+      currentIndex === index ? -1 : index
+    );
+  };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} dir="rtl">
       <div className={styles.header}>
-        <span className={styles.subtitle}>آشنایی با دات‌وان تریپ</span>
-        <h2 className={styles.title}>سؤالات متداول</h2>
-        <p className={styles.intro}>
-          پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود.
-        </p>
+        {subtitle && (
+          <span className={styles.subtitle}>
+            {subtitle}
+          </span>
+        )}
+
+        {title && (
+          <h2 className={styles.title}>
+            {title}
+          </h2>
+        )}
+
+        {description && (
+          <p className={styles.intro}>
+            {description}
+          </p>
+        )}
       </div>
 
       <div className={styles.faqList}>
-        {faqItems.map(([question, answer], index) => {
+        {items.map((item, index) => {
           const isOpen = openFaq === index;
 
           return (
-            <div key={index} className={styles.faqItem}>
+            <div
+              key={`${item.question}-${index}`}
+              className={styles.faqItem}
+            >
               <button
+                type="button"
                 className={styles.question}
-                onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                onClick={() => handleToggle(index)}
                 aria-expanded={isOpen}
               >
-                <span className={styles.questionText}>{question}</span>
+                <span className={styles.questionText}>
+                  {item.question}
+                </span>
+
                 <ChevronDown
-                  className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
+                  className={`${styles.chevron} ${
+                    isOpen ? styles.chevronOpen : ""
+                  }`}
+                  aria-hidden="true"
                 />
               </button>
 
@@ -63,7 +98,9 @@ export default function FAQ() {
                 }`}
               >
                 <div className={styles.answerInner}>
-                  <p className={styles.answerText}>{answer}</p>
+                  <p className={styles.answerText}>
+                    {item.answer}
+                  </p>
                 </div>
               </div>
             </div>
@@ -71,9 +108,17 @@ export default function FAQ() {
         })}
       </div>
 
-      <div className={styles.moreBtnWrapper}>
-        <button className={styles.moreBtn}>مشاهده سوالات بیشتر</button>
-      </div>
+      {showMoreButton && (
+        <div className={styles.moreBtnWrapper}>
+          <button
+            type="button"
+            className={styles.moreBtn}
+            onClick={onMoreClick}
+          >
+            {moreButtonText}
+          </button>
+        </div>
+      )}
     </section>
   );
 }
