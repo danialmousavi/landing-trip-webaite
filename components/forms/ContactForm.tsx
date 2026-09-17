@@ -1,0 +1,159 @@
+"use client";
+
+import { useState } from "react";
+
+import type { FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  contactCategoryLabels,
+  contactFieldsSchema,
+  type ContactFormFields,
+} from "@/lib/forms";
+import {
+  Field,
+  FormShell,
+  Honeypot,
+  SuccessState,
+  formStyles as styles,
+  useIdempotencyKey,
+} from "./FormShell";
+
+async function submitJson(url: string, body: unknown) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const data = (await response.json().catch(() => ({}))) as {
+    error?: string;
+    fields?: Record<string, string>;
+  };
+  return { ok: response.ok, status: response.status, data };
+}
+
+export function applyServerFieldErrors<T extends Record<string, unknown>>(
+  fields: Record<string, string> | undefined,
+  setError: (name: keyof T, error: { type: string; message: string }) => void,
+) {
+  if (!fields) return;
+  for (const [name, message] of Object.entries(fields)) {
+    setError(name as keyof T, { type: "server", message });
+  }
+}
+
+export function firstError(errors: FieldErrors) {
+  const first = Object.values(errors)[0];
+  if (!first) return "";
+  if (typeof first.message === "string") return first.message;
+  return "";
+}
+
+export default function ContactForm() {
+  const { ensure } = useIdempotencyKey("contact");
+  const [done, setDone] = useState(false);
+  const [formError, setFormError] = useState("");
+  const form = useForm<ContactFormFields>({
+    resolver: zodResolver(contactFieldsSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      category: undefined,
+      message: "",
+    },
+  });
+
+  return (
+    <FormShell
+      id="contact"
+      eyebrow="ارتباط با ما"
+      title="فرم تماس با دات‌وان تریپ"
+      description="نام، شماره تماس و شرح درخواست خود را وارد کنید تا تیم پشتیبانی با شما ارتباط بگیرد."
+    >
+      {done ? (
+        <SuccessState
+          title="درخواست شما ثبت شد"
+          body="همکاران ما در اولین فرصت با شما تماس می‌گیرند."
+        />
+      ) : (
+        <form
+          className={styles.grid}
+          onSubmit={form.handleSubmit(
+            async (values) => {
+              setFormError("");
+              const result = await submitJson("/api/forms/contact", {
+                ...values,
+                idempotencyKey: ensure(),
+                website: "",
+              });
+              if (result.ok) {
+                setDone(true);
+                return;
+              }
+              applyServerFieldErrors(result.data.fields, form.setError);
+              setFormError(result.data.error || "ارسال نشد، دوباره تلاش کنید.");
+            },
+            (errors) => {
+              const first = Object.values(errors)[0];
+              const message =
+                first && typeof first === "object" && "message" in first
+                  ? String(first.message)
+                  : "اطلاعات فرم را کامل کنید.";
+              setFormError(message);
+            },
+          )}
+          noValidate
+        >
+          <Honeypot />
+          <Field label="نام" error={form.formState.errors.firstName?.message}>
+            <input className={styles.control} {...form.register("firstName")} />
+          </Field>
+          <Field
+            label="نام خانوادگی"
+            error={form.formState.errors.lastName?.message}
+          >
+            <input className={styles.control} {...form.register("lastName")} />
+          </Field>
+          <Field label="شماره موبایل" error={form.formState.errors.phone?.message}>
+            <input className={styles.control} {...form.register("phone")} />
+          </Field>
+          <Field label="ایمیل" error={form.formState.errors.email?.message}>
+            <input className={styles.control} type="email" {...form.register("email")} />
+          </Field>
+          <Field
+            label="نوع درخواست"
+            error={form.formState.errors.category?.message}
+            className={styles.full}
+          >
+            <select className={styles.control} {...form.register("category")}>
+              <option value="">انتخاب کنید</option>
+              {Object.entries(contactCategoryLabels).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Field
+            label="شرح درخواست"
+            error={form.formState.errors.message?.message}
+            className={styles.full}
+          >
+            <textarea className={`${styles.control} ${styles.textarea}`} {...form.register("message")} />
+          </Field>
+          {formError ? <p className={`${styles.formError} ${styles.full}`}>{formError}</p> : null}
+          <div className={`${styles.actions} ${styles.full}`}>
+            <button className="button button-brand" type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? "در حال ارسال..." : "ارسال درخواست"}
+            </button>
+          </div>
+        </form>
+      )}
+    </FormShell>
+  );
+}
+
+export { submitJson };

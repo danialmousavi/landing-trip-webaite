@@ -15,27 +15,58 @@ import logoImage from "@/public/figma/DotOneTrip-Logo.png"; // ایمپورت ل
 const footerLinks = [
   {
     title: "خدمات",
-    links: ["سفر شهری", "سفر بین‌شهری", "حمل‌ونقل سازمانی", "سرویس اختصاصی", "دانلود اپلیکیشن"],
+    links: [
+      { label: "سفر شهری", href: "/services" },
+      { label: "سفر بین‌شهری", href: "/vehicles" },
+      { label: "حمل‌ونقل سازمانی", href: "/b2b" },
+      { label: "سرویس اختصاصی", href: "/oncall" },
+      { label: "دانلود اپلیکیشن", href: "/#cta" },
+    ],
   },
   {
     title: "درباره دات‌وان تریپ",
-    links: ["درباره ما", "تماس با ما", "پرسش‌های متداول", "حریم خصوصی", "قوانین و مقررات"],
+    links: [
+      { label: "درباره ما", href: "/#about" },
+      { label: "تماس با ما", href: "/#contact" },
+      { label: "پرسش‌های متداول", href: "/#faq" },
+      { label: "حریم خصوصی", href: "/#contact" },
+      { label: "قوانین و مقررات", href: "/#contact" },
+    ],
   },
   {
-    title: "", // این ستون هدر ندارد (برای بخش تبلیغات در طرح)
-    links: ["تبلیغات در اپلیکیشن", "تبلیغات در خودروها", "همکاری در تبلیغات"],
+    title: "",
+    links: [
+      { label: "تبلیغات در اپلیکیشن", href: "/b2b#sponsorship" },
+      { label: "تبلیغات در خودروها", href: "/b2b#sponsorship" },
+      { label: "همکاری در تبلیغات", href: "/b2b#sponsorship" },
+    ],
   },
   {
     title: "اخبار و مجله",
-    links: ["آخرین اخبار", "رویدادها", "توسعه ناوگان", "مقالات", "راهنمای سفر"],
+    links: [
+      { label: "آخرین اخبار", href: "/articles" },
+      { label: "رویدادها", href: "/articles" },
+      { label: "توسعه ناوگان", href: "/vehicles" },
+      { label: "مقالات", href: "/articles" },
+      { label: "راهنمای سفر", href: "/articles" },
+    ],
   },
   {
     title: "همکاری با دات‌وان تریپ",
-    links: ["استخدام رانندگان", "طرح‌های لیزینگ", "فرصت‌های همکاری", "شرایط همکاری", "ثبت درخواست"],
+    links: [
+      { label: "استخدام رانندگان", href: "/#join-drivers" },
+      { label: "طرح‌های لیزینگ", href: "/#join" },
+      { label: "فرصت‌های همکاری", href: "/#join-office" },
+      { label: "شرایط همکاری", href: "/#join" },
+      { label: "ثبت درخواست", href: "/#join" },
+    ],
   },
   {
     title: "دانلود اپلیکیشن",
-    links: ["دانلود برای Android", "دانلود برای iOS"],
+    links: [
+      { label: "دانلود برای Android", href: "/#cta" },
+      { label: "دانلود برای iOS", href: "/#cta" },
+    ],
   },
 ];
 
@@ -91,10 +122,10 @@ export default function Footer() {
             <div key={index} className={styles.linkColumn}>
               <h4 className={styles.columnTitle}>{column.title}</h4>
               <ul className={styles.linkList}>
-                {column.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <Link href="#" className={styles.linkItem}>
-                      {link}
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <Link href={link.href} className={styles.linkItem}>
+                      {link.label}
                     </Link>
                   </li>
                 ))}

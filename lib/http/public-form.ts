@@ -1,0 +1,50 @@
+import { ZodSchema } from "zod";
+
+import { fieldErrorsFromZod, jsonError } from "@/lib/http/errors";
+import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
+
+const JSON_LIMIT = 32 * 1024;
+
+export async function handlePublicJsonForm<T>(
+  request: Request,
+  routeKey: string,
+  schema: ZodSchema<T>,
+  persist: (values: T) => Promise<{ id: string; created: boolean }>,
+) {
+  const limited = consumeRateLimit(`${routeKey}:${clientIp(request)}`);
+  if (!limited.ok) {
+    return jsonError(429, "تعداد درخواست‌ها بیش از حد مجاز است. کمی بعد دوباره تلاش کنید.");
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > JSON_LIMIT) {
+    return jsonError(413, "درخواست بیش از حد بزرگ است.");
+  }
+
+  let payload: unknown;
+  try {
+    payload = await request.json();
+  } catch {
+    return jsonError(400, "قالب درخواست نامعتبر است.");
+  }
+
+  const parsed = schema.safeParse(payload);
+  if (!parsed.success) {
+    return jsonError(422, "اطلاعات فرم ناقص یا نامعتبر است.", {
+      fields: fieldErrorsFromZod(parsed.error),
+    });
+  }
+
+  const values = parsed.data as T & { website?: string };
+  if (values.website) {
+    return jsonError(400, "ارسال نامعتبر است.");
+  }
+
+  try {
+    const result = await persist(parsed.data);
+    return Response.json({ id: result.id, received: true }, { status: 201 });
+  } catch (error) {
+    console.error("form_submit_failed", routeKey);
+    return jsonError(500, "ارسال نشد، دوباره تلاش کنید.");
+  }
+}

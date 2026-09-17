@@ -14,6 +14,7 @@ import driverImage from "@/public/figma/b2bDriver.png";
 import FAQ from "@/components/ui/Faq/Faq";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
+import SponsorshipForm from "@/components/forms/SponsorshipForm";
 export default function page() {
   return (
     <>
@@ -50,6 +51,7 @@ export default function page() {
       <ChallengeSolution />
       <UseCaseGallery />
       <ProcessSteps />
+      <SponsorshipForm />
       <FeatureSection
         imageSide="right"
         title="اگر جابه‌جایی بخشی از عملیات شماست، این سرویس برای شماست"
