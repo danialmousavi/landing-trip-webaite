@@ -1,0 +1,83 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: inherit;
+  user-select: none; /* جلوگیری از انتخاب متن هنگام درگ */
+}
+
+.instruction {
+  font-size: 0.9rem;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+}
+
+/* 
+  این بخش جادوی CSS است! 
+  چون عکس شما ۲ ستون و ۳ سطر دارد، سایز بک‌گراند را 200% عرض و 300% ارتفاع می‌دهیم
+  تا در هر لحظه دقیقاً فقط یک ششم تصویر در کادر جا بگیرد.
+*/
+.viewerContainer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-repeat: no-repeat;
+  background-size: 200% 300%; 
+  border-radius: 16px;
+  /* در اینجا رنگ مشکی را حذف و به جای آن سفید یا شفاف قرار می‌دهیم */
+  background-color: transparent; 
+  /* یک سایه ملایم برای زیبایی بیشتر روی پس‌زمینه روشن */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  touch-action: pan-y; 
+}
+/* دکمه‌های کنترلی پایین */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.controlBtn {
+  background-color: #ffffff;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.controlBtn:hover {
+  background-color: #f9fafb;
+}
+
+.activeBtn {
+  background-color: #00b7d4;
+  color: #ffffff;
+  border-color: #00b7d4;
+}
+
+.activeBtn:hover {
+  background-color: #009cb5;
+}
+
+/* ریسپانسیو برای موبایل */
+@media (max-width: 600px) {
+  .controls {
+    gap: 0.5rem;
+  }
+  
+  .controlBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

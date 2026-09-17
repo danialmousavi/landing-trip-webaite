@@ -1,5 +1,7 @@
+import AdvertisingGrid from "@/components/ui/campain/AdvertisingSection/AdvertisingGrid/AdvertisingGrid";
 import CampaignFeatureSection from "@/components/ui/campain/CampaignFeatureSection/CampaignFeatureSection";
 import { CampaignHero } from "@/components/ui/campain/CampaignHero";
+import TripCounterHero from "@/components/ui/campain/CounterBanner/TripCounterHero";
 import Header from "@/components/ui/Header/Header";
 import React from "react";
 
@@ -14,6 +16,11 @@ export default function page() {
         />
       </div>
       <CampaignFeatureSection/>
+<TripCounterHero
+  count={46519}
+  backgroundImage="/figma/sky.png"
+/>
+  <AdvertisingGrid />
     </>
   );
 }
