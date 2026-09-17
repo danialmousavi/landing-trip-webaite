@@ -1,10 +1,11 @@
+import AdvertisingRequest from "@/components/ui/campain/AdvertisingRequest/AdvertisingRequest";
 import AdvertisingGrid from "@/components/ui/campain/AdvertisingSection/AdvertisingGrid/AdvertisingGrid";
 import CampaignFeatureSection from "@/components/ui/campain/CampaignFeatureSection/CampaignFeatureSection";
 import { CampaignHero } from "@/components/ui/campain/CampaignHero";
 import TripCounterHero from "@/components/ui/campain/CounterBanner/TripCounterHero";
 import Header from "@/components/ui/Header/Header";
 import React from "react";
-
+import advertisingCarImage from "@/public/figma/car3.png"
 export default function page() {
   return (
     <>
@@ -21,6 +22,9 @@ export default function page() {
   backgroundImage="/figma/sky.png"
 />
   <AdvertisingGrid />
+  <AdvertisingRequest
+  image={advertisingCarImage}
+/>
     </>
   );
 }
