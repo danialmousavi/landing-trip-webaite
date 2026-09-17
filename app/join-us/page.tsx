@@ -6,9 +6,17 @@ import driverImage from "@/public/figma/femailDrivers.png";
 import partnershipImage from "@/public/figma/partenrShip.png";
 import careerImage from "@/public/figma/parkedCars.png";
 import CareerHero from "@/components/ui/join-us/CareerHero/CareerHero";
-import CorporateJobCard from "@/components/ui/join-us/CorporateJobCard/CorporateJobCard";
-import DriverHiringCard from "@/components/ui/join-us/DriverHiringCard/DriverHiringCard";
-
+import CorporateJobCard, {
+  CorporateJobCardProps,
+} from "@/components/ui/join-us/CorporateJobCard/CorporateJobCard";
+import DriverHiringCard, {
+  DriverHiringCardProps,
+} from "@/components/ui/join-us/DriverHiringCard/DriverHiringCard";
+import DriverHiringSection from "@/components/ui/join-us/DriverHiringSection/DriverHiringSection";
+import CorporateJobsSection from "@/components/ui/join-us/CorporateJobsSection/CorporateJobsSection";
+import PartnershipSection from "@/components/ui/join-us/PartnershipSection/PartnershipSection";
+import partnershipCarImage from "@/public/figma/driver-Highway.png";
+import Footer from "@/components/ui/footer/Footer";
 const cooperationCards: CooperationCard[] = [
   {
     title: "همکاری به عنوان راننده",
@@ -39,6 +47,118 @@ const cooperationCards: CooperationCard[] = [
     position: "bottom",
   },
 ];
+export const driverJobs: DriverHiringCardProps[] = [
+  {
+    city: "مشهد",
+    driverCount: 20,
+    title: "فراخوان استخدام",
+    description:
+      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
+  },
+  {
+    city: "مشهد",
+    driverCount: 20,
+    title: "فراخوان استخدام",
+    description:
+      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
+  },
+  {
+    city: "مشهد",
+    driverCount: 20,
+    title: "فراخوان استخدام",
+    description:
+      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
+  },
+  {
+    city: "مشهد",
+    driverCount: 20,
+    title: "فراخوان استخدام",
+    description:
+      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
+  },
+];
+
+export const corporateJobs: CorporateJobCardProps[] = [
+  {
+    title: "نوع پوزیشن کاری",
+
+    employmentType: "تمام وقت",
+    employmentIcon: "/figma/svgs/clock.svg",
+
+    locations: [
+      {
+        label: "تبریز",
+        icon: "/figma/svgs/building.svg",
+      },
+      {
+        label: "تهران",
+        icon: "/figma/svgs/location.svg",
+      },
+    ],
+
+    buttonText: "ثبت‌نام",
+  },
+
+  {
+    title: "نوع پوزیشن کاری",
+
+    employmentType: "تمام وقت",
+    employmentIcon: "/figma/svgs/clock.svg",
+
+    locations: [
+      {
+        label: "تبریز",
+        icon: "/figma/svgs/building.svg",
+      },
+      {
+        label: "تهران",
+        icon: "/figma/svgs/location.svg",
+      },
+    ],
+
+    buttonText: "ثبت‌نام",
+  },
+
+  {
+    title: "نوع پوزیشن کاری",
+
+    employmentType: "تمام وقت",
+    employmentIcon: "/figma/svgs/clock.svg",
+
+    locations: [
+      {
+        label: "تبریز",
+        icon: "/figma/svgs/building.svg",
+      },
+      {
+        label: "تهران",
+        icon: "/figma/svgs/location.svg",
+      },
+    ],
+
+    buttonText: "ثبت‌نام",
+  },
+
+  {
+    title: "نوع پوزیشن کاری",
+
+    employmentType: "تمام وقت",
+    employmentIcon: "/figma/svgs/clock.svg",
+
+    locations: [
+      {
+        label: "تبریز",
+        icon: "/figma/svgs/building.svg",
+      },
+      {
+        label: "تهران",
+        icon: "/figma/svgs/location.svg",
+      },
+    ],
+
+    buttonText: "ثبت‌نام",
+  },
+];
 export default function page() {
   return (
     <>
@@ -56,32 +176,30 @@ export default function page() {
         subtitle="متناسب با هدف و شرایط خود، مسیر همکاری مناسب را انتخاب کنید."
         cards={cooperationCards}
       />
-    <DriverHiringCard
-        city="مشهد"
-        driverCount={20}
-        title="فراخوان استخدام"
-        description="دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد."
-        buttonText="ثبت‌نام"
-     
+
+      <DriverHiringSection
+        title="به عنوان راننده با ما همکاری کنید"
+        subtitle="فرصت‌های همکاری رانندگان در شهرهای مختلف را ببینید و بر اساس وضعیت شهر خود، برای استخدام یا پیش‌ثبت‌نام اقدام کنید."
+        jobs={driverJobs}
+        showAllText="مشاهده همه"
+        showAllHref="/hiring"
       />
-            <CorporateJobCard
-        title="نوع پوزیشن کاری"
-        employmentType="تمام وقت"
-        employmentIcon="/figma/svgs/clock.svg"
-        locations={[
-          {
-            label: "تریپ",
-            icon: "/figma/svgs/building.svg",
-          },
-          {
-            label: "تهران",
-            icon: "/figma/svgs/location.svg",
-          },
-        ]}
-        buttonText="ثبت‌نام"
-   
+      <PartnershipSection
+        title="با ما به‌صورت مشارکتی همکاری کنید"
+        description="با سرمایه‌گذاری روی خودروهای مدرن و به‌روز ناوگان دات‌وان تریپ، وارد مدل همکاری مشارکتی شوید."
+        image={partnershipCarImage}
+        imageAlt="خودروی ناوگان دات‌وان تریپ"
+        buttonText="مشاهده فرصت‌های شغلی"
+        buttonHref="/jobs"
       />
-  
+      <CorporateJobsSection
+        title="فرصت‌های شغلی سازمانی"
+        subtitle="اگر به‌دنبال یک فرصت شغلی در تیم‌های سازمانی هستید، موقعیت‌های باز را ببینید و برای جایگاه مناسب خود درخواست دهید."
+        jobs={corporateJobs}
+        showAllText="مشاهده فرصت‌های شغلی"
+        showAllHref="/jobs"
+      />
+      <Footer/>
     </>
   );
 }

@@ -6,7 +6,6 @@ export type DriverHiringCardProps = {
   driverCount: number | string;
   title: string;
   description: string;
-  buttonText?: string;
   onButtonClick?: () => void;
 };
 
@@ -15,7 +14,6 @@ export default function DriverHiringCard({
   driverCount,
   title,
   description,
-  buttonText = "ثبت‌نام",
   onButtonClick,
 }: DriverHiringCardProps) {
   return (
@@ -35,7 +33,7 @@ export default function DriverHiringCard({
         className={styles.button}
         onClick={onButtonClick}
       >
-        {buttonText}
+        ثبت نام
       </button>
     </article>
   );
