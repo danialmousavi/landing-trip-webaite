@@ -9,7 +9,7 @@ import FeatureSection from "@/components/ui/FeatureSection/FeatureSection";
 import driverImage from "@/public/figma/drivers.png";
 import TripExperience from "@/components/ui/TripExperience/TripExperience";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
-import FAQ from "@/components/ui/Faq/Faq";
+import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 import CoverageMap from "@/components/ui/CoverageMap/CoverageMap";
 import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
 import ChallengeSolution from "@/components/ui/ChallengeSolution/ChallengeSolution";
@@ -18,6 +18,33 @@ import ProcessSteps from "@/components/ui/ProcessSteps/ProcessSteps";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
 // import PopularArticles from "@/components/ui/PopularArticles/PopularArticles";
+export const tripFaqItems: FAQItem[] = [
+  {
+    question: "چطور می‌توانم با دات‌وان سفر کنم؟",
+    answer:
+      " از طریق اپلیکیشن دات‌وان، مبدأ و مقصد خود را مشخص و درخواست سفر را ثبت کنید.",
+  },
+  {
+    question: "آیا می‌توانم موقعیت خودرو را در طول سفر ببینم؟",
+    answer:
+      "بله. پس از تخصیص خودرو، می‌توانید موقعیت خودرو و روند سفر را از طریق اپلیکیشن دات‌وان تریپ دنبال کنید.",
+  },
+  {
+    question: "رانندگان دات‌وان تریپ چگونه انتخاب می‌شوند؟",
+    answer:
+      "رانندگان دات‌وان پیش از شروع فعالیت، طی فرآیند مشخصی شامل بررسی مدارک، ارزیابی، احراز صلاحیت و آموزش انتخاب می‌شوند. عملکرد رانندگان نیز در طول فعالیت به‌صورت مستمر پایش می‌شود.",
+  },
+  {
+    question: "خودروهای دات‌وان چه ویژگی‌هایی دارند؟",
+    answer:
+      "ناوگان دات‌وان تریپ شامل خودروهای مدرن برقی و هیبریدی است که با تمرکز بر کیفیت، ایمنی و تجربه بهتر سفر انتخاب شده‌اند. بخشی از خودروها به دوربین داخل کابین و نمایشگرهای دیجیتال برای ارائه محتوای سرگرمی، اطلاع‌رسانی و تبلیغات مجهز هستند.",
+  },
+  {
+    question: "دات‌وان در چه شهرهایی فعال است؟",
+    answer:
+      "دات‌وان تریپ در حال حاضر در کرج، اروند و چابهار فعالیت دارد و توسعه خدمات در تهران و سایر شهرها نیز در برنامه توسعه مجموعه قرار گرفته است.",
+  },
+];
 export default function page() {
   return (
     <>
@@ -118,7 +145,12 @@ export default function page() {
     <ProcessSteps/> */}
       <CoverageMap />
       <DownloadBanner />
-      <FAQ />
+      <FAQ
+        subtitle="آشنایی با دات‌وان تریپ"
+        title="سؤالات متداول"
+        description="پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود."
+        items={tripFaqItems}
+      />
       <FutureTransportBanner />
       <Footer />
     </>
