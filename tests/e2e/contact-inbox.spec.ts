@@ -8,7 +8,7 @@ test("contact form appears in the admin inbox", async ({ page }) => {
 
   const stamp = Date.now();
   const lastName = "کاربرآزمایشی";
-  await page.goto("/");
+  await page.goto("/forms");
   await page.locator("#contact").scrollIntoViewIfNeeded();
   await page.locator('#contact input[name="firstName"]').fill("آزمایش");
   await page.locator('#contact input[name="lastName"]').fill(lastName);

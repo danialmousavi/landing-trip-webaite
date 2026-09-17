@@ -63,7 +63,7 @@ export default async function SubmissionDetailPage({
           <>
             <Item label="نام" value={`${detail.firstName} ${detail.lastName}`} />
             <Item label="موبایل" value={String(detail.phone)} />
-            <Item label="کد ملی" value={String(detail.nationalId ?? "—")} dir="ltr" />
+            <Item label="کد ملی" value={String(detail.nationalId ?? "—")} />
             <Item label="استان" value={String(detail.province)} />
             <Item label="شهر" value={String(detail.city)} />
             <Item label="آدرس" value={String(detail.address)} />
@@ -107,16 +107,14 @@ export default async function SubmissionDetailPage({
 function Item({
   label,
   value,
-  dir,
 }: {
   label: string;
   value: string;
-  dir?: "ltr" | "rtl";
 }) {
   return (
     <div>
       <dt>{label}</dt>
-      <dd dir={dir}>{safeDisplayText(value)}</dd>
+      <dd>{safeDisplayText(value)}</dd>
     </div>
   );
 }

@@ -27,18 +27,18 @@ const footerLinks = [
     title: "درباره دات‌وان تریپ",
     links: [
       { label: "درباره ما", href: "/#about" },
-      { label: "تماس با ما", href: "/#contact" },
+      { label: "تماس با ما", href: "/forms#contact" },
       { label: "پرسش‌های متداول", href: "/#faq" },
-      { label: "حریم خصوصی", href: "/#contact" },
-      { label: "قوانین و مقررات", href: "/#contact" },
+      { label: "حریم خصوصی", href: "/forms#contact" },
+      { label: "قوانین و مقررات", href: "/forms#contact" },
     ],
   },
   {
     title: "",
     links: [
-      { label: "تبلیغات در اپلیکیشن", href: "/b2b#sponsorship" },
-      { label: "تبلیغات در خودروها", href: "/b2b#sponsorship" },
-      { label: "همکاری در تبلیغات", href: "/b2b#sponsorship" },
+      { label: "تبلیغات در اپلیکیشن", href: "/forms#sponsorship" },
+      { label: "تبلیغات در خودروها", href: "/forms#sponsorship" },
+      { label: "همکاری در تبلیغات", href: "/forms#sponsorship" },
     ],
   },
   {
@@ -54,11 +54,11 @@ const footerLinks = [
   {
     title: "همکاری با دات‌وان تریپ",
     links: [
-      { label: "استخدام رانندگان", href: "/#join-drivers" },
-      { label: "طرح‌های لیزینگ", href: "/#join" },
-      { label: "فرصت‌های همکاری", href: "/#join-office" },
-      { label: "شرایط همکاری", href: "/#join" },
-      { label: "ثبت درخواست", href: "/#join" },
+      { label: "استخدام رانندگان", href: "/forms#join-drivers" },
+      { label: "طرح‌های لیزینگ", href: "/forms#join-drivers" },
+      { label: "فرصت‌های همکاری", href: "/forms#join-office" },
+      { label: "شرایط همکاری", href: "/forms#join-office" },
+      { label: "ثبت درخواست", href: "/forms#join-drivers" },
     ],
   },
   {

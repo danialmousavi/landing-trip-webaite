@@ -22,7 +22,7 @@ const navItems = [
   { label: "اخبار", href: "/articles" },
   { label: "بلاگ", href: "/b2b" },
   { label: "درباره ما", href: "/#about" },
-  { label: "تماس با ما", href: "/#contact" },
+  { label: "تماس با ما", href: "/forms#contact" },
 ];
 
 export default function Header({ variant = "light" }: HeaderProps) {
@@ -71,7 +71,7 @@ export default function Header({ variant = "light" }: HeaderProps) {
 
       {/* Actions */}
       <div className={styles.navActions}>
-        <Link href="/#join-drivers" className="button button-brand">
+        <Link href="/forms#join-drivers" className="button button-brand">
           همکاری با تریپ
           <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
         </Link>
