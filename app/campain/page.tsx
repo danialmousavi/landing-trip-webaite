@@ -1,3 +1,4 @@
+import CampaignFeatureSection from "@/components/ui/campain/CampaignFeatureSection/CampaignFeatureSection";
 import { CampaignHero } from "@/components/ui/campain/CampaignHero";
 import Header from "@/components/ui/Header/Header";
 import React from "react";
@@ -11,8 +12,8 @@ export default function page() {
           posterSrc="/videos/campainVideoPoster.png"
           videoSrc="/videos/campainHero.mp4"
         />
-        ;
       </div>
+      <CampaignFeatureSection/>
     </>
   );
 }
