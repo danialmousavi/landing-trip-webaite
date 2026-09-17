@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import {
   contactFormSchema,
   driverFormSchema,
+  isTrustedEmailAddress,
   isValidIranianNationalId,
+  nationalIdSchema,
   normalizeIranianMobile,
   sponsorshipFormSchema,
 } from "@/lib/forms";
@@ -21,11 +23,29 @@ describe("phone and national id", () => {
     expect(normalizeIranianMobile("02112345678")).toBeNull();
   });
 
-  it("validates national ids", () => {
-    expect(isValidIranianNationalId("0000000000")).toBe(false);
-    expect(isValidIranianNationalId("0499370901")).toBe(false);
-    const valid = findValidNationalId();
-    expect(isValidIranianNationalId(valid)).toBe(true);
+  it("accepts real 10-digit national ids including leading zeros", () => {
+    expect(isValidIranianNationalId("0011823589")).toBe(true);
+    expect(isValidIranianNationalId("۰۰۱۱۸۲۳۵۸۹")).toBe(true);
+    expect(nationalIdSchema.parse("0011823589")).toBe("0011823589");
+    expect(nationalIdSchema.parse("001-182-3589")).toBe("0011823589");
+    expect(isValidIranianNationalId("001182358")).toBe(false);
+    expect(isValidIranianNationalId("00118235890")).toBe(false);
+    expect(isValidIranianNationalId("abcdefghij")).toBe(false);
+  });
+});
+
+describe("trusted emails", () => {
+  it("accepts personal and organizational providers", () => {
+    expect(isTrustedEmailAddress("ali@gmail.com")).toBe(true);
+    expect(isTrustedEmailAddress("ops@dotone.ir")).toBe(true);
+    expect(isTrustedEmailAddress("nima@example.com")).toBe(true);
+  });
+
+  it("rejects disposable and untrusted providers", () => {
+    expect(isTrustedEmailAddress("bot@mailinator.com")).toBe(false);
+    expect(isTrustedEmailAddress("bot@yopmail.com")).toBe(false);
+    expect(isTrustedEmailAddress("bot@tempmail.com")).toBe(false);
+    expect(isTrustedEmailAddress("bot@guerrillamail.com")).toBe(false);
   });
 });
 
@@ -36,11 +56,24 @@ describe("form schemas", () => {
       firstName: "علی",
       lastName: "محمدی",
       phone: "09121234567",
-      email: "ali@example.com",
+      email: "ali@gmail.com",
       category: "general",
       message: "نیاز به پیگیری سفر سازمانی برای هفته آینده دارم.",
     });
     expect(parsed.success).toBe(true);
+  });
+
+  it("rejects disposable emails", () => {
+    const parsed = contactFormSchema.safeParse({
+      ...meta,
+      firstName: "علی",
+      lastName: "محمدی",
+      phone: "09121234567",
+      email: "temp@mailinator.com",
+      category: "general",
+      message: "نیاز به پیگیری سفر سازمانی برای هفته آینده دارم.",
+    });
+    expect(parsed.success).toBe(false);
   });
 
   it("rejects markup in messages", () => {
@@ -49,20 +82,35 @@ describe("form schemas", () => {
       firstName: "Ali",
       lastName: "Mohammadi",
       phone: "09121234567",
-      email: "ali@example.com",
+      email: "ali@gmail.com",
       category: "urgent",
       message: "<script>alert(1)</script> this is a long enough message",
     });
     expect(parsed.success).toBe(false);
   });
 
-  it("rejects an invalid driver national id", () => {
+  it("accepts a driver payload with a 10-digit national id", () => {
     const parsed = driverFormSchema.safeParse({
       ...meta,
       firstName: "رضا",
       lastName: "کاظمی",
       phone: "09121234567",
-      nationalId: "1234567890",
+      nationalId: "0011823589",
+      province: "تهران",
+      city: "تهران",
+      address: "خیابان آزادی پلاک ۱۲",
+      description: "سابقه پنج سال رانندگی شهری و بین‌شهری دارم.",
+    });
+    expect(parsed.success).toBe(true);
+  });
+
+  it("rejects a national id that is not exactly 10 digits", () => {
+    const parsed = driverFormSchema.safeParse({
+      ...meta,
+      firstName: "رضا",
+      lastName: "کاظمی",
+      phone: "09121234567",
+      nationalId: "123456789",
       province: "تهران",
       city: "تهران",
       address: "خیابان آزادی پلاک ۱۲",
@@ -82,18 +130,3 @@ describe("form schemas", () => {
     expect(parsed.success).toBe(true);
   });
 });
-
-function findValidNationalId() {
-  for (let i = 0; i < 100000000; i += 1) {
-    const base = String(i).padStart(9, "0");
-    if (/^(\d)\1{8}$/.test(base)) continue;
-    const sum = base
-      .split("")
-      .reduce((total, digit, index) => total + Number(digit) * (10 - index), 0);
-    const remainder = sum % 11;
-    const check = remainder < 2 ? remainder : 11 - remainder;
-    const candidate = `${base}${check}`;
-    if (isValidIranianNationalId(candidate)) return candidate;
-  }
-  throw new Error("Could not find a valid national id");
-}

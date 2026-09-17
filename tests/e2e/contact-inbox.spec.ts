@@ -13,7 +13,7 @@ test("contact form appears in the admin inbox", async ({ page }) => {
   await page.locator('#contact input[name="firstName"]').fill("آزمایش");
   await page.locator('#contact input[name="lastName"]').fill(lastName);
   await page.locator('#contact input[name="phone"]').fill("09121234567");
-  await page.locator('#contact input[name="email"]').fill(`e2e${stamp}@example.com`);
+  await page.locator('#contact input[name="email"]').fill(`e2e${stamp}@gmail.com`);
   await page.locator('#contact select[name="category"]').selectOption("general");
   await page
     .locator('#contact textarea[name="message"]')
@@ -34,7 +34,7 @@ test("contact form appears in the admin inbox", async ({ page }) => {
   await page.getByLabel("رمز عبور").fill(adminPassword!);
   await page.getByRole("button", { name: "ورود" }).click();
   await expect(page.getByRole("heading", { name: "درخواست‌های دریافتی" })).toBeVisible();
-  await page.locator('input[name="q"]').fill(`e2e${stamp}@example.com`);
+  await page.locator('input[name="q"]').fill(`e2e${stamp}@gmail.com`);
   await page.getByRole("button", { name: "فیلتر" }).click();
   await expect(page.getByText(lastName)).toBeVisible();
 });

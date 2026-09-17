@@ -7,7 +7,7 @@ import { useState } from "react";
 import {
   sponsorshipDomainLabels,
   sponsorshipFieldsSchema,
-  type SponsorshipFormInput,
+  type SponsorshipFormFields,
 } from "@/lib/forms";
 import {
   Field,
@@ -23,7 +23,7 @@ export default function SponsorshipForm() {
   const { ensure } = useIdempotencyKey("sponsorships");
   const [done, setDone] = useState(false);
   const [formError, setFormError] = useState("");
-  const form = useForm<SponsorshipFormInput>({
+  const form = useForm<SponsorshipFormFields>({
     resolver: zodResolver(sponsorshipFieldsSchema),
     defaultValues: {
       fullName: "",

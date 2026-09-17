@@ -1,4 +1,4 @@
-import { and, desc, eq, ilike, or } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, isNotNull, isNull, or } from "drizzle-orm";
 
 import { getDb } from "@/db";
 import {
@@ -10,6 +10,7 @@ import {
   auditEvents,
 } from "@/db/schema";
 import { encryptPii, maskNationalId, piiBlindIndex, decryptPii } from "@/lib/crypto/pii";
+import { HttpError } from "@/lib/http/errors";
 import type { CareerFormValues } from "@/lib/forms/careers";
 import type { ContactFormValues } from "@/lib/forms/contact";
 import type { DriverFormValues } from "@/lib/forms/drivers";
@@ -17,6 +18,7 @@ import type { SponsorshipFormValues } from "@/lib/forms/sponsorships";
 import type { SubmissionStatus, SubmissionType } from "@/lib/forms/shared";
 import {
   deleteResume,
+  resumeAttachmentKind,
   saveResume,
   type AllowedResumeMime,
   type StoredResume,
@@ -87,6 +89,13 @@ export async function createDriverSubmission(input: DriverFormValues) {
     });
 
     return [created];
+  }).catch((error) => {
+    if (isUniqueViolation(error, "driver_applications_national_id_blind_index")) {
+      throw new HttpError(409, "این کد ملی قبلاً ثبت شده است.", {
+        fields: { nationalId: "این کد ملی قبلاً ثبت شده است." },
+      });
+    }
+    throw error;
   });
 
   return { id: row.id, created: true as const };
@@ -161,21 +170,39 @@ export async function createSponsorshipSubmission(input: SponsorshipFormValues) 
   return { id: row.id, created: true as const };
 }
 
+export type InboxSort = "newest" | "oldest";
+
 export type InboxFilters = {
   type?: SubmissionType;
   status?: SubmissionStatus;
   query?: string;
-  cursor?: string;
-  limit?: number;
+  hasAttachment?: boolean;
+  sort?: InboxSort;
+  page?: number;
+  pageSize?: number;
 };
 
+const DEFAULT_PAGE_SIZE = 20;
+const MAX_PAGE_SIZE = 50;
+
 export async function listSubmissions(filters: InboxFilters = {}) {
-  const limit = Math.min(filters.limit ?? 20, 50);
+  const pageSize = Math.min(
+    Math.max(filters.pageSize ?? DEFAULT_PAGE_SIZE, 1),
+    MAX_PAGE_SIZE,
+  );
+  const page = Math.max(filters.page ?? 1, 1);
+  const sort: InboxSort = filters.sort === "oldest" ? "oldest" : "newest";
   const db = getDb();
 
   const conditions = [];
   if (filters.type) conditions.push(eq(submissions.type, filters.type));
   if (filters.status) conditions.push(eq(submissions.status, filters.status));
+  if (filters.hasAttachment === true) {
+    conditions.push(isNotNull(jobApplications.resumeStorageKey));
+  }
+  if (filters.hasAttachment === false) {
+    conditions.push(isNull(jobApplications.resumeStorageKey));
+  }
   if (filters.query?.trim()) {
     const q = `%${filters.query.trim()}%`;
     conditions.push(
@@ -199,6 +226,33 @@ export async function listSubmissions(filters: InboxFilters = {}) {
   }
 
   const where = conditions.length ? and(...conditions) : undefined;
+  const orderBy =
+    sort === "oldest"
+      ? [asc(submissions.createdAt), asc(submissions.id)]
+      : [desc(submissions.createdAt), desc(submissions.id)];
+
+  const [{ total }] = await db
+    .select({ total: count() })
+    .from(submissions)
+    .leftJoin(
+      contactSubmissions,
+      eq(contactSubmissions.submissionId, submissions.id),
+    )
+    .leftJoin(
+      driverApplications,
+      eq(driverApplications.submissionId, submissions.id),
+    )
+    .leftJoin(jobApplications, eq(jobApplications.submissionId, submissions.id))
+    .leftJoin(
+      sponsorshipRequests,
+      eq(sponsorshipRequests.submissionId, submissions.id),
+    )
+    .where(where);
+
+  const totalCount = Number(total ?? 0);
+  const totalPages = Math.max(1, Math.ceil(totalCount / pageSize) || 1);
+  const currentPage = Math.min(page, totalPages);
+  const offset = (currentPage - 1) * pageSize;
 
   const rows = await db
     .select({
@@ -217,6 +271,9 @@ export async function listSubmissions(filters: InboxFilters = {}) {
       jobLastName: jobApplications.lastName,
       jobPhone: jobApplications.phone,
       jobEmail: jobApplications.email,
+      jobResumeMime: jobApplications.resumeMimeType,
+      jobResumeName: jobApplications.resumeOriginalName,
+      jobResumeKey: jobApplications.resumeStorageKey,
       sponsorshipName: sponsorshipRequests.fullName,
       sponsorshipPhone: sponsorshipRequests.phone,
       sponsorshipBrand: sponsorshipRequests.brandName,
@@ -236,33 +293,46 @@ export async function listSubmissions(filters: InboxFilters = {}) {
       eq(sponsorshipRequests.submissionId, submissions.id),
     )
     .where(where)
-    .orderBy(desc(submissions.createdAt))
-    .limit(limit + 1);
-
-  const hasMore = rows.length > limit;
-  const page = hasMore ? rows.slice(0, limit) : rows;
+    .orderBy(...orderBy)
+    .limit(pageSize)
+    .offset(offset);
 
   return {
-    items: page.map((row) => ({
-      id: row.id,
-      type: row.type,
-      status: row.status,
-      createdAt: row.createdAt,
-      name:
-        [row.contactFirstName, row.contactLastName].filter(Boolean).join(" ") ||
-        [row.driverFirstName, row.driverLastName].filter(Boolean).join(" ") ||
-        [row.jobFirstName, row.jobLastName].filter(Boolean).join(" ") ||
-        row.sponsorshipName ||
-        "—",
-      phone:
-        row.contactPhone ||
-        row.driverPhone ||
-        row.jobPhone ||
-        row.sponsorshipPhone ||
-        "—",
-      email: row.contactEmail || row.jobEmail || row.sponsorshipBrand || "—",
-    })),
-    hasMore,
+    items: rows.map((row) => {
+      const attachmentKind = resumeAttachmentKind(
+        row.jobResumeMime,
+        row.jobResumeName,
+      );
+      return {
+        id: row.id,
+        type: row.type,
+        status: row.status,
+        createdAt: row.createdAt,
+        name:
+          [row.contactFirstName, row.contactLastName].filter(Boolean).join(" ") ||
+          [row.driverFirstName, row.driverLastName].filter(Boolean).join(" ") ||
+          [row.jobFirstName, row.jobLastName].filter(Boolean).join(" ") ||
+          row.sponsorshipName ||
+          "—",
+        phone:
+          row.contactPhone ||
+          row.driverPhone ||
+          row.jobPhone ||
+          row.sponsorshipPhone ||
+          "—",
+        email: row.contactEmail || row.jobEmail || null,
+        brand: row.sponsorshipBrand || null,
+        hasAttachment: Boolean(row.jobResumeKey),
+        attachmentKind,
+        attachmentName: row.jobResumeName || null,
+      };
+    }),
+    page: currentPage,
+    pageSize,
+    total: totalCount,
+    totalPages,
+    sort,
+    hasMore: currentPage < totalPages,
   };
 }
 
@@ -357,4 +427,23 @@ export async function getCareerResume(id: string) {
     .where(eq(jobApplications.submissionId, id))
     .limit(1);
   return row ?? null;
+}
+
+function isUniqueViolation(error: unknown, constraint: string) {
+  let current: unknown = error;
+  for (let depth = 0; depth < 5 && current; depth += 1) {
+    if (typeof current !== "object") break;
+    const record = current as {
+      code?: string;
+      constraint?: string;
+      constraint_name?: string;
+      message?: string;
+      cause?: unknown;
+    };
+    const haystack = `${record.constraint_name ?? ""} ${record.constraint ?? ""} ${record.message ?? ""}`;
+    if (record.code === "23505" && haystack.includes(constraint)) return true;
+    if (haystack.includes(constraint) && /duplicate|unique/i.test(haystack)) return true;
+    current = record.cause;
+  }
+  return false;
 }

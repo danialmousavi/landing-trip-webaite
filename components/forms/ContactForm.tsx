@@ -121,7 +121,13 @@ export default function ContactForm() {
             <input className={styles.control} {...form.register("phone")} />
           </Field>
           <Field label="ایمیل" error={form.formState.errors.email?.message}>
-            <input className={styles.control} type="email" {...form.register("email")} />
+            <input
+              className={styles.control}
+              type="email"
+              dir="ltr"
+              placeholder="name@gmail.com"
+              {...form.register("email")}
+            />
           </Field>
           <Field
             label="نوع درخواست"

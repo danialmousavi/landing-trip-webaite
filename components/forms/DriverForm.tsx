@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
-import { driverFieldsSchema, type DriverFormInput } from "@/lib/forms";
+import { driverFieldsSchema, type DriverFormFields } from "@/lib/forms";
 import {
   Field,
   FormShell,
@@ -19,7 +19,7 @@ export default function DriverForm({ standalone = true }: { standalone?: boolean
   const { ensure } = useIdempotencyKey("drivers");
   const [done, setDone] = useState(false);
   const [formError, setFormError] = useState("");
-  const form = useForm<DriverFormInput>({
+  const form = useForm<DriverFormFields>({
     resolver: zodResolver(driverFieldsSchema),
     defaultValues: {
       firstName: "",
@@ -67,7 +67,15 @@ export default function DriverForm({ standalone = true }: { standalone?: boolean
         <input className={styles.control} {...form.register("phone")} />
       </Field>
       <Field label="کد ملی" error={form.formState.errors.nationalId?.message}>
-        <input className={styles.control} {...form.register("nationalId")} />
+        <input
+          className={styles.control}
+          inputMode="numeric"
+          autoComplete="off"
+          maxLength={15}
+          dir="ltr"
+          placeholder="۱۰ رقم، مثل 0011823589"
+          {...form.register("nationalId")}
+        />
       </Field>
       <Field label="استان محل سکونت" error={form.formState.errors.province?.message}>
         <input className={styles.control} {...form.register("province")} />

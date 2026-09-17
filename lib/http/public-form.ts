@@ -1,6 +1,6 @@
 import { ZodSchema } from "zod";
 
-import { fieldErrorsFromZod, jsonError } from "@/lib/http/errors";
+import { fieldErrorsFromZod, HttpError, jsonError } from "@/lib/http/errors";
 import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 
 const JSON_LIMIT = 32 * 1024;
@@ -44,6 +44,9 @@ export async function handlePublicJsonForm<T>(
     const result = await persist(parsed.data);
     return Response.json({ id: result.id, received: true }, { status: 201 });
   } catch (error) {
+    if (error instanceof HttpError) {
+      return jsonError(error.status, error.message, error.payload);
+    }
     console.error("form_submit_failed", routeKey);
     return jsonError(500, "ارسال نشد، دوباره تلاش کنید.");
   }

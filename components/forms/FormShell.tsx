@@ -1,43 +1,20 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
 import styles from "./Forms.module.css";
 
-const STORAGE_PREFIX = "trip-form-id:";
-
-export function useIdempotencyKey(formId: string) {
-  const [key, setKey] = useState("");
-
-  useEffect(() => {
-    const storageKey = `${STORAGE_PREFIX}${formId}`;
-    try {
-      const existing = sessionStorage.getItem(storageKey);
-      if (existing) {
-        setKey(existing);
-        return;
-      }
-      const next = crypto.randomUUID();
-      sessionStorage.setItem(storageKey, next);
-      setKey(next);
-    } catch {
-      setKey(crypto.randomUUID());
-    }
-  }, [formId]);
+export function useIdempotencyKey(_formId?: string) {
+  const keyRef = useRef("");
 
   const ensure = () => {
-    if (key) return key;
-    const next = crypto.randomUUID();
-    setKey(next);
-    try {
-      sessionStorage.setItem(`${STORAGE_PREFIX}${formId}`, next);
-    } catch {
-      // ignore storage failures; in-memory key still prevents double-clicks
+    if (!keyRef.current) {
+      keyRef.current = crypto.randomUUID();
     }
-    return next;
+    return keyRef.current;
   };
 
-  return { key, ensure };
+  return { ensure };
 }
 
 type FormShellProps = {

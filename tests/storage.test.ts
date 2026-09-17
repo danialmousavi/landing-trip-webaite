@@ -48,4 +48,17 @@ describe("resume storage", () => {
     expect(stored.originalName).toBe("passwd.pdf");
     expect(stored.storageKey.includes("..")).toBe(false);
   });
+
+  it("accepts a pdf when the browser leaves mime type empty", async () => {
+    process.env.UPLOAD_ROOT = dir;
+    resetEnvCache();
+    mkdirSync(dir, { recursive: true });
+    const stored = await saveResume({
+      buffer: Buffer.from("%PDF-1.7 sample-pdf"),
+      mimeType: "",
+      originalName: "sample-pdf.pdf",
+    });
+    expect(stored.mimeType).toBe("application/pdf");
+    expect(stored.originalName).toBe("sample-pdf.pdf");
+  });
 });

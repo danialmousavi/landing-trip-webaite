@@ -18,3 +18,7 @@ export const careerFieldsSchema = careerFormSchema.omit({
   website: true,
   idempotencyKey: true,
 });
+
+export type CareerFormInput = z.input<typeof careerFormSchema>;
+export type CareerFormValues = z.output<typeof careerFormSchema>;
+export type CareerFormFields = z.input<typeof careerFieldsSchema>;

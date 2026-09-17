@@ -4,7 +4,7 @@ import { clientIp, consumeRateLimit } from "@/lib/http/rate-limit";
 import { createCareerSubmission } from "@/lib/submissions/service";
 import {
   assertSafeResume,
-  isAllowedResumeMime,
+  type AllowedResumeMime,
 } from "@/lib/storage/resumes";
 
 export const runtime = "nodejs";
@@ -49,24 +49,18 @@ export async function POST(request: Request) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const mimeType = file.type;
 
+  let mimeType: AllowedResumeMime;
   try {
-    assertSafeResume({
+    mimeType = assertSafeResume({
       buffer,
-      mimeType,
+      mimeType: file.type,
       originalName: file.name,
-      size: file.size,
+      size: file.size || buffer.byteLength,
     });
   } catch {
     return jsonError(422, "اطلاعات فرم ناقص یا نامعتبر است.", {
       fields: { resume: "فقط فایل PDF یا DOCX تا سقف ۵ مگابایت پذیرفته می‌شود." },
-    });
-  }
-
-  if (!isAllowedResumeMime(mimeType)) {
-    return jsonError(422, "اطلاعات فرم ناقص یا نامعتبر است.", {
-      fields: { resume: "فقط فایل PDF یا DOCX پذیرفته می‌شود." },
     });
   }
 

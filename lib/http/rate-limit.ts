@@ -1,5 +1,5 @@
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_REQUESTS = 8;
+const MAX_REQUESTS = 30;
 
 type Bucket = { count: number; resetAt: number };
 

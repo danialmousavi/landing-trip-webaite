@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { careerFieldsSchema, type CareerFormInput } from "@/lib/forms";
+import { careerFieldsSchema, type CareerFormFields } from "@/lib/forms";
 import {
   Field,
   FormShell,
@@ -23,7 +23,7 @@ export default function CareerForm({ standalone = true }: { standalone?: boolean
   const [dragOver, setDragOver] = useState(false);
   const [done, setDone] = useState(false);
   const [formError, setFormError] = useState("");
-  const form = useForm<CareerFormInput>({
+  const form = useForm<CareerFormFields>({
     resolver: zodResolver(careerFieldsSchema),
     defaultValues: {
       firstName: "",
@@ -103,7 +103,13 @@ export default function CareerForm({ standalone = true }: { standalone?: boolean
         <input className={styles.control} {...form.register("phone")} />
       </Field>
       <Field label="ایمیل" error={form.formState.errors.email?.message}>
-        <input className={styles.control} type="email" {...form.register("email")} />
+        <input
+          className={styles.control}
+          type="email"
+          dir="ltr"
+          placeholder="name@gmail.com"
+          {...form.register("email")}
+        />
       </Field>
       <div className={`${styles.field} ${styles.full}`}>
         <span className={styles.label}>رزومه (PDF یا Word)</span>

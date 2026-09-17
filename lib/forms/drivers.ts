@@ -36,3 +36,7 @@ export const driverFieldsSchema = driverFormSchema.omit({
   website: true,
   idempotencyKey: true,
 });
+
+export type DriverFormInput = z.input<typeof driverFormSchema>;
+export type DriverFormValues = z.output<typeof driverFormSchema>;
+export type DriverFormFields = z.input<typeof driverFieldsSchema>;

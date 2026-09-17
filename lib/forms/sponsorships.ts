@@ -26,3 +26,7 @@ export const sponsorshipFieldsSchema = sponsorshipFormSchema.omit({
   website: true,
   idempotencyKey: true,
 });
+
+export type SponsorshipFormInput = z.input<typeof sponsorshipFormSchema>;
+export type SponsorshipFormValues = z.output<typeof sponsorshipFormSchema>;
+export type SponsorshipFormFields = z.input<typeof sponsorshipFieldsSchema>;

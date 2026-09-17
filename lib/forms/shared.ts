@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+import {
+  isTrustedEmailAddress,
+  UNTRUSTED_EMAIL_MESSAGE,
+} from "./email-providers";
+
 export const NAME_PATTERN =
   /^[\u0600-\u06FF\u0750-\u077Fa-zA-Z\u200c\u200d .'-]{2,50}$/;
 
@@ -86,17 +91,19 @@ export function normalizeIranianMobile(input: string) {
   return local;
 }
 
-export function isValidIranianNationalId(input: string) {
-  if (!/^\d{10}$/.test(input)) return false;
-  if (/^(\d)\1{9}$/.test(input)) return false;
+export function toAsciiDigits(input: string) {
+  return input
+    .replace(/[\u06F0-\u06F9]/g, (digit) =>
+      String(digit.charCodeAt(0) - "۰".charCodeAt(0)),
+    )
+    .replace(/[\u0660-\u0669]/g, (digit) =>
+      String(digit.charCodeAt(0) - "٠".charCodeAt(0)),
+    );
+}
 
-  const check = Number(input[9]);
-  const sum = input
-    .slice(0, 9)
-    .split("")
-    .reduce((total, digit, index) => total + Number(digit) * (10 - index), 0);
-  const remainder = sum % 11;
-  return remainder < 2 ? check === remainder : check === 11 - remainder;
+export function isValidIranianNationalId(input: string) {
+  const digits = toAsciiDigits(input).replace(/[^\d]/g, "");
+  return /^\d{10}$/.test(digits);
 }
 
 export const honeypotSchema = z
@@ -138,7 +145,8 @@ export const emailSchema = z
   .toLowerCase()
   .max(254, "ایمیل بیش از حد طولانی است.")
   .email("ایمیل معتبر وارد کنید.")
-  .refine((value) => !hasUnsafeMarkup(value), "ایمیل نامعتبر است.");
+  .refine((value) => !hasUnsafeMarkup(value), "ایمیل نامعتبر است.")
+  .refine((value) => isTrustedEmailAddress(value), UNTRUSTED_EMAIL_MESSAGE);
 
 export const longTextSchema = (label: string) =>
   z
@@ -152,11 +160,11 @@ export const nationalIdSchema = z
   .string()
   .trim()
   .transform((value, ctx) => {
-    const digits = value.replace(/[^\d]/g, "");
+    const digits = toAsciiDigits(value).replace(/[^\d]/g, "");
     if (!isValidIranianNationalId(digits)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "کد ملی معتبر وارد کنید.",
+        message: "کد ملی باید دقیقاً ۱۰ رقم باشد.",
       });
       return z.NEVER;
     }

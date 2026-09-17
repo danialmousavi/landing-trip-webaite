@@ -30,6 +30,51 @@ export async function ensureResumeRoot() {
   await mkdir(getResumeRoot(), { recursive: true });
 }
 
+export function resumeAttachmentKind(
+  mimeType?: string | null,
+  originalName?: string | null,
+): "pdf" | "docx" | null {
+  const mime = (mimeType ?? "").toLowerCase();
+  const name = (originalName ?? "").toLowerCase();
+  if (mime === "application/pdf" || name.endsWith(".pdf")) return "pdf";
+  if (
+    mime ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+    name.endsWith(".docx")
+  ) {
+    return "docx";
+  }
+  return null;
+}
+
+function hasPdfSignature(buffer: Buffer) {
+  return buffer.subarray(0, 4).equals(PDF_SIGNATURE);
+}
+
+function hasDocxSignature(buffer: Buffer) {
+  return buffer.subarray(0, 4).equals(ZIP_SIGNATURE);
+}
+
+export function resolveResumeMime(input: {
+  buffer: Buffer;
+  mimeType?: string | null;
+  originalName: string;
+}): AllowedResumeMime {
+  if (input.mimeType && isAllowedResumeMime(input.mimeType)) {
+    return input.mimeType;
+  }
+
+  const extension = extensionFromName(input.originalName);
+  if (hasPdfSignature(input.buffer) && extension === "pdf") {
+    return "application/pdf";
+  }
+  if (hasDocxSignature(input.buffer) && extension === "docx") {
+    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  }
+
+  throw new Error("Only PDF and DOCX resumes are accepted.");
+}
+
 export function isAllowedResumeMime(
   mimeType: string,
 ): mimeType is AllowedResumeMime {
@@ -38,7 +83,7 @@ export function isAllowedResumeMime(
 
 export function assertSafeResume(input: {
   buffer: Buffer;
-  mimeType: string;
+  mimeType?: string | null;
   originalName: string;
   size?: number;
 }) {
@@ -57,31 +102,31 @@ export function assertSafeResume(input: {
     throw new Error("Resume size does not match the uploaded bytes.");
   }
 
-  if (!isAllowedResumeMime(input.mimeType)) {
-    throw new Error("Only PDF and DOCX resumes are accepted.");
-  }
+  const mimeType = resolveResumeMime(input);
 
   const extension = extensionFromName(input.originalName);
-  const expectedExtension = ALLOWED_RESUME_TYPES[input.mimeType];
+  const expectedExtension = ALLOWED_RESUME_TYPES[mimeType];
   if (extension !== expectedExtension) {
     throw new Error("Resume file extension does not match its type.");
   }
 
-  if (!hasExpectedSignature(input.buffer, input.mimeType)) {
+  if (!hasExpectedSignature(input.buffer, mimeType)) {
     throw new Error("Resume contents do not match the declared file type.");
   }
+
+  return mimeType;
 }
 
 export async function saveResume(input: {
   buffer: Buffer;
-  mimeType: AllowedResumeMime;
+  mimeType?: string | null;
   originalName: string;
 }): Promise<StoredResume> {
-  assertSafeResume(input);
+  const mimeType = assertSafeResume(input);
   await ensureResumeRoot();
 
   const year = String(new Date().getUTCFullYear());
-  const extension = ALLOWED_RESUME_TYPES[input.mimeType];
+  const extension = ALLOWED_RESUME_TYPES[mimeType];
   const storageKey = path.posix.join(year, `${randomUUID()}.${extension}`);
   const destination = resolveStoragePath(storageKey);
 
@@ -91,7 +136,7 @@ export async function saveResume(input: {
   return {
     storageKey,
     originalName: sanitizeOriginalName(input.originalName),
-    mimeType: input.mimeType,
+    mimeType,
     size: input.buffer.byteLength,
   };
 }
