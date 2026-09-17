@@ -21,7 +21,7 @@ const navItems = [
   { label: "ناوگان", href: "/vehicles" },
   { label: "اخبار", href: "/articles" },
   { label: "بلاگ", href: "/b2b" },
-  { label: "درباره ما", href: "#about" },
+  { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "#contact" },
 ];
 

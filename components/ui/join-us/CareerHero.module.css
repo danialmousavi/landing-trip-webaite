@@ -1,0 +1,266 @@
+.hero {
+  width: 92%;
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 5%;
+
+  padding: 70px 0;
+    margin-top: 100px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Content
+========================= */
+
+.content {
+  width: 43%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: right;
+}
+
+/* =========================
+   Badge
+========================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 6px 10px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+
+  background: #fff;
+
+  color: #333;
+
+  font-size: clamp(9px, 0.7vw, 12px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.badgeDot {
+  width: 5px;
+  height: 5px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #111;
+}
+
+/* =========================
+   Title
+========================= */
+
+.title {
+  width: 100%;
+
+  margin: 22px 0 0;
+
+  color: #111;
+
+  font-size: clamp(26px, 2.7vw, 44px);
+  font-weight: 800;
+  line-height: 1.45;
+
+  letter-spacing: -0.5px;
+}
+
+.highlight {
+  color: #00b8d4;
+}
+
+/* =========================
+   Description
+========================= */
+
+.description {
+  width: 100%;
+  max-width: 650px;
+
+  margin: 15px 0 0;
+
+  color: #555;
+
+  font-size: clamp(10px, 0.8vw, 14px);
+  font-weight: 400;
+  line-height: 2;
+
+  text-align: right;
+}
+
+/* =========================
+   Image
+========================= */
+
+.imageWrapper {
+  position: relative;
+
+  width: 52%;
+
+  /*
+    Keeps the same general image proportion
+    as the screenshot.
+  */
+  aspect-ratio: 1.75 / 1;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: #eee;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =========================
+   Large screens
+========================= */
+
+@media (min-width: 1500px) {
+  .hero {
+    width: 92%;
+    max-width: 1700px;
+
+    gap: 6%;
+  }
+
+  .content {
+    width: 42%;
+  }
+
+  .imageWrapper {
+    width: 52%;
+  }
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1000px) {
+  .hero {
+    width: 92%;
+
+    gap: 4%;
+
+    padding: 55px 0;
+  }
+
+  .content {
+    width: 45%;
+  }
+
+  .imageWrapper {
+    width: 51%;
+
+    border-radius: 20px;
+  }
+
+  .title {
+    margin-top: 18px;
+  }
+
+  .description {
+    margin-top: 10px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 768px) {
+  .hero {
+    width: 92%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 30px;
+
+    padding: 40px 0;
+  }
+
+  .content {
+    width: 100%;
+
+    align-items: flex-start;
+  }
+
+  .badge {
+    padding: 5px 9px;
+
+    font-size: 10px;
+  }
+
+  .title {
+    margin-top: 16px;
+
+    font-size: clamp(25px, 7vw, 34px);
+    line-height: 1.5;
+  }
+
+  .description {
+    width: 100%;
+    max-width: none;
+
+    margin-top: 10px;
+
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .imageWrapper {
+    width: 100%;
+
+    aspect-ratio: 1.55 / 1;
+
+    border-radius: 18px;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 480px) {
+  .hero {
+    width: 90%;
+
+    gap: 24px;
+
+    padding: 32px 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 11px;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 1.4 / 1;
+
+    border-radius: 16px;
+  }
+}
