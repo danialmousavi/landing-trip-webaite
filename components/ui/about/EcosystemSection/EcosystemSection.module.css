@@ -1,0 +1,362 @@
+.section {
+  width: 100%;
+  margin-inline: auto;
+  padding: 70px 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Heading
+========================= */
+
+.heading {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+
+  color: #111;
+
+  font-size: clamp(20px, 1.7vw, 27px);
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+
+  color: #666;
+
+  font-size: clamp(11px, 0.85vw, 14px);
+  font-weight: 400;
+  line-height: 2;
+}
+
+/* =========================
+   List
+========================= */
+
+.list {
+  /*
+    مشابه تصویر:
+    جدول از دو طرف صفحه فاصله دارد
+    و کاملاً وسط قرار گرفته
+  */
+  width: 65%;
+  margin: 45px auto 0;
+}
+
+/* =========================
+   Each Row
+========================= */
+
+.item {
+  width: 100%;
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/*
+  آخرین ردیف در تصویر خط ندارد
+*/
+.item:last-child {
+  border-bottom: none;
+}
+
+/* =========================
+   Right Side
+   Number + Title
+========================= */
+
+.itemHeading {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 14px;
+}
+
+/* number */
+
+.number {
+  order: -1;
+
+  min-width: 42px;
+
+  flex-shrink: 0;
+
+  color: #e5e5e5;
+
+  font-size: clamp(28px, 2.4vw, 38px);
+  font-weight: 700;
+  line-height: 1;
+
+  text-align: right;
+}
+
+/* title */
+
+.itemTitle {
+  margin: 0;
+
+  color: #111;
+
+  font-size: clamp(14px, 1.1vw, 18px);
+  font-weight: 700;
+  line-height: 1.7;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   Left Description
+========================= */
+
+.description {
+  /*
+    این auto margin فضای خالی بزرگ وسط
+    تصویر را ایجاد می‌کند.
+  */
+  margin: 0;
+  margin-right: auto;
+
+  /*
+    متن سمت چپ فضای کافی دارد
+    تا دیرتر wrap شود.
+  */
+  width: 42%;
+  max-width: 42%;
+
+  box-sizing: border-box;
+
+  /*
+    کمی از لبه چپ فاصله
+  */
+  padding-left: 5%;
+
+  color: #444;
+
+  font-size: clamp(10px, 0.8vw, 13px);
+  font-weight: 400;
+  line-height: 2;
+
+  text-align: right;
+}
+
+/* =========================
+   Large Desktop
+========================= */
+
+@media (min-width: 1500px) {
+  .list {
+    width: 62%;
+  }
+}
+
+/* =========================
+   Smaller Desktop
+========================= */
+
+@media (max-width: 1200px) {
+  .list {
+    width: 70%;
+  }
+
+  .description {
+    width: 43%;
+    max-width: 43%;
+
+    padding-left: 4%;
+  }
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1000px) {
+  .section {
+    padding: 55px 0;
+  }
+
+  .list {
+    width: 82%;
+    margin-top: 38px;
+  }
+
+  .item {
+    min-height: 68px;
+  }
+
+  .description {
+    width: 45%;
+    max-width: 45%;
+
+    padding-left: 2%;
+  }
+}
+
+/* =========================
+   Small Tablet
+========================= */
+
+@media (max-width: 800px) {
+  .list {
+    width: 90%;
+  }
+
+  .itemHeading {
+    gap: 10px;
+  }
+
+  .number {
+    min-width: 36px;
+
+    font-size: 28px;
+  }
+
+  .itemTitle {
+    font-size: 14px;
+  }
+
+  .description {
+    width: 45%;
+    max-width: 45%;
+
+    font-size: 10px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .heading {
+    width: 90%;
+    margin-inline: auto;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    margin-top: 6px;
+
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .list {
+    width: 90%;
+
+    margin-top: 28px;
+  }
+
+  .item {
+    min-height: 0;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 8px;
+
+    padding: 17px 0;
+  }
+
+  .itemHeading {
+    width: 100%;
+
+    gap: 9px;
+  }
+
+  .number {
+    order: -1;
+
+    min-width: 32px;
+
+    font-size: 25px;
+  }
+
+  .itemTitle {
+    font-size: 14px;
+
+    white-space: normal;
+  }
+
+  .description {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+
+    padding: 0 41px 0 0;
+
+    font-size: 11px;
+    line-height: 2;
+
+    text-align: right;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 400px) {
+  .section {
+    padding: 32px 0;
+  }
+
+  .heading {
+    width: 92%;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+  }
+
+  .list {
+    width: 92%;
+
+    margin-top: 24px;
+  }
+
+  .item {
+    padding: 15px 0;
+  }
+
+  .number {
+    min-width: 30px;
+
+    font-size: 23px;
+  }
+
+  .itemTitle {
+    font-size: 13px;
+  }
+
+  .description {
+    padding-right: 39px;
+
+    font-size: 10px;
+  }
+}
