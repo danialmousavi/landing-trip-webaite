@@ -21,6 +21,7 @@ type FeatureSectionProps = {
   imageSide?: "left" | "right";
   featTitle?: string;
   features?: Feature[];
+  subTitle?:string
 };
 
 export default function FeatureSection({
@@ -30,6 +31,7 @@ export default function FeatureSection({
   imageSide = "right",
   featTitle,
   features = [],
+  subTitle
 }: FeatureSectionProps) {
   return (
     <section
@@ -39,7 +41,7 @@ export default function FeatureSection({
     >
       <div className={styles.content}>
         <h2>{title}</h2>
-
+        <h3 className={styles.subtitle}>{subTitle}</h3>
         <p className={styles.description}>{description}</p>
 
         {features.length > 0 && (

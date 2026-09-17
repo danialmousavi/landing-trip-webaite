@@ -26,7 +26,11 @@
   line-height: 1.6;
   font-weight: 700;
 }
-
+.subtitle{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
 .description {
   margin: 0;
 
