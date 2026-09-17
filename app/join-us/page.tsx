@@ -2,10 +2,12 @@ import Header from "@/components/ui/Header/Header";
 import { CooperationCard } from "@/components/ui/join-us/CooperationCardItem/CooperationCardItem";
 import CooperationSection from "@/components/ui/join-us/CooperationSection/CooperationSection";
 import careerHeroImage from "@/public/figma/careerHeroImage.png";
-import driverImage from "@/public/figma/femailDrivers.png"
-import partnershipImage from "@/public/figma/partenrShip.png"
-import careerImage from "@/public/figma/parkedCars.png"
+import driverImage from "@/public/figma/femailDrivers.png";
+import partnershipImage from "@/public/figma/partenrShip.png";
+import careerImage from "@/public/figma/parkedCars.png";
 import CareerHero from "@/components/ui/join-us/CareerHero/CareerHero";
+import CorporateJobCard from "@/components/ui/join-us/CorporateJobCard/CorporateJobCard";
+import DriverHiringCard from "@/components/ui/join-us/DriverHiringCard/DriverHiringCard";
 
 const cooperationCards: CooperationCard[] = [
   {
@@ -17,7 +19,7 @@ const cooperationCards: CooperationCard[] = [
     imageAlt: "همکاری به عنوان راننده",
     position: "bottom",
   },
- 
+
   {
     title: "فرصت‌های شغلی سازمانی",
     description:
@@ -27,7 +29,7 @@ const cooperationCards: CooperationCard[] = [
     imageAlt: "فرصت‌های شغلی",
     position: "top",
   },
-   {
+  {
     title: "همکاری به‌صورت مشارکتی",
     description:
       "با سرمایه‌گذاری روی توسعه ناوگان و بهره‌برداری از آن در شبکه ما، از طریق مدل مشارکتی با ما همکاری کنید.",
@@ -41,7 +43,7 @@ export default function page() {
   return (
     <>
       <Header />
-      <CareerHero   
+      <CareerHero
         badge="فرصت‌های همکاری"
         highlightedText="مسیر همکاری"
         title="خود را انتخاب کنید"
@@ -54,6 +56,32 @@ export default function page() {
         subtitle="متناسب با هدف و شرایط خود، مسیر همکاری مناسب را انتخاب کنید."
         cards={cooperationCards}
       />
+    <DriverHiringCard
+        city="مشهد"
+        driverCount={20}
+        title="فراخوان استخدام"
+        description="دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد."
+        buttonText="ثبت‌نام"
+     
+      />
+            <CorporateJobCard
+        title="نوع پوزیشن کاری"
+        employmentType="تمام وقت"
+        employmentIcon="/figma/svgs/clock.svg"
+        locations={[
+          {
+            label: "تریپ",
+            icon: "/figma/svgs/building.svg",
+          },
+          {
+            label: "تهران",
+            icon: "/figma/svgs/location.svg",
+          },
+        ]}
+        buttonText="ثبت‌نام"
+   
+      />
+  
     </>
   );
 }
