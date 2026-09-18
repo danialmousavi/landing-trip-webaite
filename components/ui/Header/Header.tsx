@@ -71,10 +71,10 @@ export default function Header({ variant = "light" }: HeaderProps) {
 
       {/* Actions */}
       <div className={styles.navActions}>
-        <button type="button" className="button button-brand">
+        <Link href="/forms#join-drivers" className="button button-brand">
           همکاری با تریپ
           <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
-        </button>
+        </Link>
 
         <button
           type="button"

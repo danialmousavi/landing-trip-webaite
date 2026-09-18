@@ -1,0 +1,77 @@
+# Production overlay. Requires Docker Compose v2.24+ (`!reset`).
+# Usage:
+#   docker compose -f compose.yaml -f compose.prod.yaml --profile full up -d --build
+
+services:
+  postgres:
+    ports: !reset []
+    security_opt:
+      - no-new-privileges:true
+    logging: &default-logging
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  migrate:
+    security_opt:
+      - no-new-privileges:true
+
+  seed:
+    security_opt:
+      - no-new-privileges:true
+
+  app:
+    ports: !reset []
+    expose:
+      - "3000"
+    environment:
+      TRUST_PROXY: "true"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:uid=1000,gid=1000,mode=01777
+      - /app/.next/cache:uid=1000,gid=1000
+    logging: *default-logging
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  proxy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      APP_HOST: ${APP_HOST:?APP_HOST is the public hostname, e.g. trip.example.com}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - edge
+    security_opt:
+      - no-new-privileges:true
+    logging: *default-logging
+    profiles:
+      - full
+
+volumes:
+  caddy_data:
+    name: dotone-trip-caddy-data
+  caddy_config:
+    name: dotone-trip-caddy-config
+
+networks:
+  backend:
+    internal: true

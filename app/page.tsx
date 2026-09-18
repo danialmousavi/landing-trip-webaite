@@ -356,8 +356,12 @@ export default function Home() {
             مختلفی برای همکاری در اختیار شما قرار می‌دهد.
           </p>
           <div>
-            <BrandButton>مشارکت در دات‌وان تریپ</BrandButton>
-            <BrandButton subtle>فرصت‌های استخدام</BrandButton>
+            <a href="/forms#join-drivers" className="button button-brand">
+              مشارکت در دات‌وان تریپ
+            </a>
+            <a href="/forms#join-office" className="button button-subtle">
+              فرصت‌های استخدام
+            </a>
           </div>
         </div>
         <img src={`${A}recruiting.png`} alt="تیم رانندگان دات‌وان تریپ" />
@@ -445,7 +449,7 @@ export default function Home() {
         </button>
       </section>
 
-      <section className="faq section">
+      <section className="faq section" id="faq">
         <SectionHeading
           eyebrow="آشنایی با دات‌وان تریپ"
           title="سؤالات متداول"
@@ -467,7 +471,7 @@ export default function Home() {
         </div>
         <button className="button button-dark">مشاهده سوالات بیشتر</button>
       </section>
-      <section className="bottom-cta section" id="contact">
+      <section className="bottom-cta section" id="cta">
         <img src={`${A}cta-car.png`} alt="خودروی دات‌وان تریپ" />
         <div>
           <span>آینده حمل‌ونقل را تجربه کنید</span>
@@ -514,7 +518,7 @@ export default function Home() {
           <div>
             <h3>درباره دات‌وان تریپ</h3>
             <a>درباره ما</a>
-            <a>تماس با ما</a>
+            <a href="/forms#contact">تماس با ما</a>
             <a>پرسش‌های متداول</a>
             <a>حریم خصوصی</a>
             <a>قوانین و مقررات</a>
@@ -529,11 +533,11 @@ export default function Home() {
           </div>
           <div>
             <h3>همکاری با دات‌وان تریپ</h3>
-            <a>استخدام رانندگان</a>
+            <a href="/forms#join-drivers">استخدام رانندگان</a>
             <a>طرح‌های لیزینگ</a>
-            <a>فرصت‌های همکاری</a>
+            <a href="/forms#join-office">فرصت‌های همکاری</a>
             <a>شرایط همکاری</a>
-            <a>ثبت درخواست</a>
+            <a href="/forms#join-drivers">ثبت درخواست</a>
           </div>
           <div>
             <h3>دانلود اپلیکیشن</h3>

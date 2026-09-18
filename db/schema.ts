@@ -1,4 +1,235 @@
-// Intentionally empty by default.
-// Add Drizzle tables here when the site actually needs a database.
-// See examples/d1/db/schema.ts for an opt-in example.
-export {};
+import { relations, sql } from "drizzle-orm";
+import {
+  boolean,
+  index,
+  integer,
+  pgEnum,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+} from "drizzle-orm/pg-core";
+
+export const userRoleEnum = pgEnum("user_role", ["admin", "operator"]);
+export const submissionTypeEnum = pgEnum("submission_type", [
+  "contact",
+  "driver",
+  "career",
+  "sponsorship",
+]);
+export const submissionStatusEnum = pgEnum("submission_status", [
+  "new",
+  "in_review",
+  "contacted",
+  "closed",
+]);
+export const contactCategoryEnum = pgEnum("contact_category", [
+  "general",
+  "urgent",
+  "enterprise",
+  "car_ride",
+  "other",
+]);
+export const sponsorshipDomainEnum = pgEnum("sponsorship_domain", [
+  "tech",
+  "real_estate",
+  "finance",
+  "retail",
+  "transport",
+  "media",
+  "other",
+]);
+
+const timestamps = {
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+};
+
+export const users = pgTable("users", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  username: text("username").notNull(),
+  passwordHash: text("password_hash").notNull(),
+  role: userRoleEnum("role").notNull(),
+  isActive: boolean("is_active").notNull().default(true),
+  failedLoginCount: integer("failed_login_count").notNull().default(0),
+  lockedUntil: timestamp("locked_until", { withTimezone: true }),
+  ...timestamps,
+}, (table) => [
+  uniqueIndex("users_username_unique").on(table.username),
+]);
+
+export const sessions = pgTable("sessions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  absoluteExpiresAt: timestamp("absolute_expires_at", { withTimezone: true }).notNull(),
+  revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("sessions_token_hash_unique").on(table.tokenHash),
+  index("sessions_user_id_idx").on(table.userId),
+  index("sessions_expires_at_idx").on(table.expiresAt),
+]);
+
+export const submissions = pgTable("submissions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  type: submissionTypeEnum("type").notNull(),
+  status: submissionStatusEnum("status").notNull().default("new"),
+  idempotencyKey: text("idempotency_key").notNull(),
+  ...timestamps,
+}, (table) => [
+  uniqueIndex("submissions_idempotency_key_unique").on(table.idempotencyKey),
+  index("submissions_type_created_at_idx").on(table.type, sql`${table.createdAt} DESC`),
+  index("submissions_status_idx").on(table.status),
+]);
+
+export const contactSubmissions = pgTable("contact_submissions", {
+  submissionId: uuid("submission_id")
+    .primaryKey()
+    .references(() => submissions.id, { onDelete: "cascade" }),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  phone: text("phone").notNull(),
+  email: text("email").notNull(),
+  category: contactCategoryEnum("category").notNull(),
+  message: text("message").notNull(),
+});
+
+export const driverApplications = pgTable("driver_applications", {
+  submissionId: uuid("submission_id")
+    .primaryKey()
+    .references(() => submissions.id, { onDelete: "cascade" }),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  phone: text("phone").notNull(),
+  nationalIdCipher: text("national_id_cipher").notNull(),
+  nationalIdBlindIndex: text("national_id_blind_index").notNull(),
+  province: text("province").notNull(),
+  city: text("city").notNull(),
+  address: text("address").notNull(),
+  description: text("description").notNull(),
+}, (table) => [
+  uniqueIndex("driver_applications_national_id_blind_index_unique").on(
+    table.nationalIdBlindIndex,
+  ),
+]);
+
+export const jobApplications = pgTable("job_applications", {
+  submissionId: uuid("submission_id")
+    .primaryKey()
+    .references(() => submissions.id, { onDelete: "cascade" }),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  phone: text("phone").notNull(),
+  email: text("email").notNull(),
+  resumeStorageKey: text("resume_storage_key").notNull(),
+  resumeOriginalName: text("resume_original_name").notNull(),
+  resumeMimeType: text("resume_mime_type").notNull(),
+  resumeSize: integer("resume_size").notNull(),
+});
+
+export const sponsorshipRequests = pgTable("sponsorship_requests", {
+  submissionId: uuid("submission_id")
+    .primaryKey()
+    .references(() => submissions.id, { onDelete: "cascade" }),
+  fullName: text("full_name").notNull(),
+  phone: text("phone").notNull(),
+  brandName: text("brand_name").notNull(),
+  activityDomain: sponsorshipDomainEnum("activity_domain").notNull(),
+});
+
+export const auditEvents = pgTable("audit_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  actorUserId: uuid("actor_user_id").references(() => users.id, {
+    onDelete: "set null",
+  }),
+  action: text("action").notNull(),
+  submissionId: uuid("submission_id").references(() => submissions.id, {
+    onDelete: "set null",
+  }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  index("audit_events_submission_id_idx").on(table.submissionId),
+  index("audit_events_created_at_idx").on(table.createdAt),
+]);
+
+export const usersRelations = relations(users, ({ many }) => ({
+  sessions: many(sessions),
+  auditEvents: many(auditEvents),
+}));
+
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const submissionsRelations = relations(submissions, ({ one, many }) => ({
+  contact: one(contactSubmissions, {
+    fields: [submissions.id],
+    references: [contactSubmissions.submissionId],
+  }),
+  driver: one(driverApplications, {
+    fields: [submissions.id],
+    references: [driverApplications.submissionId],
+  }),
+  career: one(jobApplications, {
+    fields: [submissions.id],
+    references: [jobApplications.submissionId],
+  }),
+  sponsorship: one(sponsorshipRequests, {
+    fields: [submissions.id],
+    references: [sponsorshipRequests.submissionId],
+  }),
+  auditEvents: many(auditEvents),
+}));
+
+export const contactSubmissionsRelations = relations(
+  contactSubmissions,
+  ({ one }) => ({
+    submission: one(submissions, {
+      fields: [contactSubmissions.submissionId],
+      references: [submissions.id],
+    }),
+  }),
+);
+
+export const driverApplicationsRelations = relations(
+  driverApplications,
+  ({ one }) => ({
+    submission: one(submissions, {
+      fields: [driverApplications.submissionId],
+      references: [submissions.id],
+    }),
+  }),
+);
+
+export const jobApplicationsRelations = relations(
+  jobApplications,
+  ({ one }) => ({
+    submission: one(submissions, {
+      fields: [jobApplications.submissionId],
+      references: [submissions.id],
+    }),
+  }),
+);
+
+export const sponsorshipRequestsRelations = relations(
+  sponsorshipRequests,
+  ({ one }) => ({
+    submission: one(submissions, {
+      fields: [sponsorshipRequests.submissionId],
+      references: [submissions.id],
+    }),
+  }),
+);

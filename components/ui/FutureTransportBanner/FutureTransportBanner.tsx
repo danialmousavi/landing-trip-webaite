@@ -24,7 +24,7 @@ export default function FutureTransportBanner() {
                 <Image src={taxiIcon} width={20} height={20} alt="درخواست سفر"/>
             </a>
 
-            <a href="#" className={styles.secondaryBtn}>
+            <a href="/forms#contact" className={styles.secondaryBtn}>
               تماس با ما
             </a>
           </div>

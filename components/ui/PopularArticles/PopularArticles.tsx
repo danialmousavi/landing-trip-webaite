@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./PopularArticles.module.css";
 
@@ -172,7 +173,7 @@ export default function PopularArticles({
             </button>
           </div>
 
-          <a className={styles.featured} href={featured.href ?? "#"}>
+          <Link className={styles.featured} href={featured.href ?? `/articles/${featured.id}`}>
             <Image
               src={featured.image.src}
               alt={featured.image.alt}
@@ -225,7 +226,7 @@ export default function PopularArticles({
                 </span>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
