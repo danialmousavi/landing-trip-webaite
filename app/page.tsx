@@ -1,36 +1,29 @@
-"use client";
-
 import Header from "@/components/ui/Header/Header";
 import AboutIntro from "@/components/ui/index/AboutIntro/AboutIntro";
 import FleetFeature from "@/components/ui/index/FleetFeature/FleetFeature";
-import modernFleetImage from "@/public/figma/car3.png"
-import trainedDriversImage from "@/public/figma/trainedDriversImage.png"
-import securiyImage from "@/public/figma/security.png"
-import tripStartImage from "@/public/figma/journey.png"
-import cityTransportImage from "@/public/figma/solutionImage1.png"
-import intercityImage from "@/public/figma/solutionImage2.png"
-import corporateImage from "@/public/figma/solutionImage3.png"
-import specialServicesImage from "@/public/figma/solutionImage4.png"
-import driversImage from "@/public/figma/recruiting.png"
-import {
-  Apple,
-  BriefcaseBusiness,
-  CarFront,
-  ChevronDown,
-  Download,
-  Menu,
-  Play,
-  Send,
-  Smartphone,
-  X,
-} from "lucide-react";
-import { useState } from "react";
+import modernFleetImage from "@/public/figma/car3.png";
+import trainedDriversImage from "@/public/figma/trainedDriversImage.png";
+import securiyImage from "@/public/figma/security.png";
+import tripStartImage from "@/public/figma/journey.png";
+import cityTransportImage from "@/public/figma/solutionImage1.png";
+import intercityImage from "@/public/figma/solutionImage2.png";
+import corporateImage from "@/public/figma/solutionImage3.png";
+import specialServicesImage from "@/public/figma/solutionImage4.png";
+import driversImage from "@/public/figma/recruiting.png";
+import carSideView from "@/public/figma/vehicles/Car-SideView.svg";
+
 import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
-import IranCoverage, { CoverageItem } from "@/components/ui/index/IranCoverage/IranCoverage";
-import iranMap from "@/public/figma/iran-map.png"
+import IranCoverage, {
+  CoverageItem,
+} from "@/components/ui/index/IranCoverage/IranCoverage";
+import iranMap from "@/public/figma/iran-map.png";
 import { TravelSolutionCardProps } from "@/components/ui/index/TravelSolutions/TravelSolutionCard/TravelSolutionCard";
 import TravelSolutions from "@/components/ui/index/TravelSolutions/TravelSolutions";
 import JoinBanner from "@/components/ui/index/JoinBanner/JoinBanner";
+import { CarFront } from "lucide-react";
+import Footer from "@/components/ui/footer/Footer";
+import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
+import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 const A = "/figma/";
 // faq data
 const faqItems = [
@@ -241,44 +234,19 @@ function SectionHeading({
     </div>
   );
 }
-function FeatureCopy({
-  title,
-  children,
-  bullets,
-  button,
-}: {
-  title: string;
-  children: React.ReactNode;
-  bullets: string[];
-  button?: string;
-}) {
-  return (
-    <div className="feature-copy">
-      <h3>{title}</h3>
-      <p>{children}</p>
-      <ul>
-        {bullets.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-      {button && <button className="button button-dark">{button}</button>}
-    </div>
-  );
-}
+
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState(0);
   return (
     <main dir="rtl">
-      <section className="hero" id="home" >
+      <section className="hero" id="home">
         <img
           className="hero-bg"
           src={`${A}hero-bg.png`}
           alt="خودروی دات‌وان تریپ"
         />
 
-        <Header variant="dark"/>
+        <Header variant="dark" />
         <div className="hero-content">
           <h1>
             نسل جدید حمل‌ونقل،
@@ -308,151 +276,155 @@ export default function Home() {
           </div>
         </div>
       </section>
-<AboutIntro
-  badge="درباره دات‌وان تریپ"
-  title={`دات‌وان تریپ؛
+      <AboutIntro
+        badge="درباره دات‌وان تریپ"
+        title={`دات‌وان تریپ؛
 تجربه‌ای تازه در حمل‌ونقل`}
-  description={
-    <>
+        description={
+          <>
+            <strong>دات‌وان تریپ</strong> یک پلتفرم حمل‌ونقل مدرن است که با
+            ترکیب <strong>ناوگان برقی، فناوری و نیروی</strong>
+            <br />
+            <strong>انسانی آموزش‌دیده،</strong> تجربه‌ای متفاوت از سفر را برای
+            مسافران و سازمان‌ها ایجاد می‌کند.
+            <br />
+            ما در تریپ تلاش می‌کنیم حمل‌ونقل را از یک سفر ساده، به{" "}
+            <strong>تجربه‌ای ایمن، راحت، سریع و</strong>
+            <br />
+            <strong>قابل اعتماد تبدیل کنیم.</strong> از انتخاب خودرو و مدیریت
+            سفر تا پشتیبانی و کنترل کیفیت، همه
+            <br />
+            چیز با هدف ایجاد یک تجربه بهتر طراحی شده است.
+          </>
+        }
+      />
+      <FleetFeature
+        imageSide="right"
+        image={modernFleetImage}
+        imageAlt="خودروی ناوگان دات‌وان تریپ"
+        title="ناوگان مدرن"
+        description="خودروهای دات‌وان از نسل جدید خودروهای برقی و هیبریدی انتخاب شده‌اند تا تجربه‌ای آرام، ایمن و سازگار با محیط‌زیست را برای مسافران فراهم کنند. تمام خودروها به‌صورت یکپارچه تحت مدیریت ناوگان نگهداری و سرویس می‌شوند."
+        items={modernFleetItems}
+        buttonText="مشاهده ناوگان"
+        buttonHref="/fleet"
+      />
+      <FleetFeature
+        imageSide="left"
+        image={trainedDriversImage}
+        imageAlt="رانندگان آموزش‌دیده دات‌وان تریپ"
+        title="رانندگان آموزش‌دیده"
+        description="رانندگان دات‌وان تنها بر اساس داشتن گواهینامه انتخاب نمی‌شوند؛ آن‌ها پس از ارزیابی، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند تا کیفیت خدمات در همه سفرها حفظ شود."
+        items={trainedDriverItems}
+        buttonText="مشاهده شرایط همکاری"
+        buttonHref="/hiring"
+      />
+      <FleetFeature
+        imageSide="right"
+        image={securiyImage}
+        imageAlt="امنیت کامل و فناوری هوشمند"
+        title="رانندگان آموزش‌دیده"
+        description="زیرساخت نرم‌افزاری دات‌وان تمام مراحل سفر را از درخواست تا پایان مسیر به‌صورت هوشمند مدیریت می‌کند تا تجربه‌ای سریع، شفاف و قابل اعتماد برای مسافر و راننده ایجاد شود."
+        items={securiyItems}
+        buttonText="مشاهده شرایط همکاری"
+        buttonHref="/hiring"
+      />
+      <TripStartHero
+        image={tripStartImage}
+        imageAlt="شروع سفر با دات‌وان تریپ"
+        eyebrow="تجربه سفر با دات‌وان"
+        title="سفر، از لحظه درخواست شروع می‌شود"
+        description="دات‌وان تریپ تلاش می‌کند تمام مسیر سفر، از درخواست تا رسیدن به مقصد، ساده، شفاف و قابل اعتماد باشد."
+      />
+      <IranCoverage
+        title="دات‌وان تریپ در سراسر ایران"
+        subtitle="آمار ثبت‌نام راننده‌ها در استان‌های کشور"
+        mapImage={iranMap}
+        mapAlt="نقشه ایران"
+        items={coverageItems}
+        description={
+          <>
+            <strong>دات‌وان تریپ با توسعه ناوگان و زیرساخت حمل‌ونقل،</strong>{" "}
+            خدمات خود را به‌صورت مرحله‌ای
+            <br />
+            در <strong>استان‌های مختلف ایران</strong> ارائه می‌دهد.
+          </>
+        }
+      />
+      <TravelSolutions
+        badge="همه‌جا دات‌وان تریپ"
+        title="هر سفر، یک راه‌حل متناسب"
+        description="دات‌وان تریپ، مجموعه‌ای از خدمات حمل‌ونقل را برای نیازهای مختلف مسافران، سازمان‌ها و مجموعه‌ها ارائه می‌دهد."
+        cards={solutionCards}
+      />
+      <div className="md:mt-20">
+        <JoinBanner
+          eyebrow="به دات‌وان تریپ بپیوندید"
+          title="دات‌وان تریپ فقط یک سفر نیست؛"
+          highlightedText="یک فرصت برای ساختن آینده است."
+          description="اگر می‌خواهید بخشی از مسیر جدید حمل‌ونقل باشید، دات‌وان تریپ مسیرهای مختلفی برای همکاری در اختیار شما قرار می‌دهد."
+          image={driversImage}
+          imageAlt="رانندگان دات‌وان تریپ"
+          primaryAction={{
+            text: "مشارکت در دات‌وان تریپ",
+            href: "/join-us",
+          }}
+          secondaryAction={{
+            text: "فرصت‌های استخدام",
+            href: "/hiring",
+          }}
+        />
+      </div>
+         <VehicleShowcase
+  title="ناوگان دات‌وان تریپ را بشناسید"
+  badgeText="درباره دات‌وان تریپ"
+  vehicles={[
+    {
+      id: "byd-seal-about",
 
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
 
-  
-      <strong>دات‌وان تریپ</strong> یک پلتفرم حمل‌ونقل مدرن است که با ترکیب{" "}
-      <strong>ناوگان برقی، فناوری و نیروی</strong>
-      <br />
-      <strong>انسانی آموزش‌دیده،</strong> تجربه‌ای متفاوت از سفر را برای مسافران و
-      سازمان‌ها ایجاد می‌کند.
-      <br />
-      ما در تریپ تلاش می‌کنیم حمل‌ونقل را از یک سفر ساده، به{" "}
-      <strong>تجربه‌ای ایمن، راحت، سریع و</strong>
-      <br />
-      <strong>قابل اعتماد تبدیل کنیم.</strong> از انتخاب خودرو و مدیریت سفر تا
-      پشتیبانی و کنترل کیفیت، همه
-      <br />
-      چیز با هدف ایجاد یک تجربه بهتر طراحی شده است.
-    </>
-  }
-/>
-  <FleetFeature
-  imageSide="right"
-  image={modernFleetImage}
-  imageAlt="خودروی ناوگان دات‌وان تریپ"
-  title="ناوگان مدرن"
-  description="خودروهای دات‌وان از نسل جدید خودروهای برقی و هیبریدی انتخاب شده‌اند تا تجربه‌ای آرام، ایمن و سازگار با محیط‌زیست را برای مسافران فراهم کنند. تمام خودروها به‌صورت یکپارچه تحت مدیریت ناوگان نگهداری و سرویس می‌شوند."
-  items={modernFleetItems}
-  buttonText="مشاهده ناوگان"
-  buttonHref="/fleet"
-/>
-<FleetFeature
-  imageSide="left"
-  image={trainedDriversImage}
-  imageAlt="رانندگان آموزش‌دیده دات‌وان تریپ"
-  title="رانندگان آموزش‌دیده"
-  description="رانندگان دات‌وان تنها بر اساس داشتن گواهینامه انتخاب نمی‌شوند؛ آن‌ها پس از ارزیابی، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند تا کیفیت خدمات در همه سفرها حفظ شود."
-  items={trainedDriverItems}
-  buttonText="مشاهده شرایط همکاری"
-  buttonHref="/hiring"
-/>
-<FleetFeature
-  imageSide="right"
-  image={securiyImage}
-  imageAlt="امنیت کامل و فناوری هوشمند"
-  title="رانندگان آموزش‌دیده"
-  description="زیرساخت نرم‌افزاری دات‌وان تمام مراحل سفر را از درخواست تا پایان مسیر به‌صورت هوشمند مدیریت می‌کند تا تجربه‌ای سریع، شفاف و قابل اعتماد برای مسافر و راننده ایجاد شود."
-  items={securiyItems}
-  buttonText="مشاهده شرایط همکاری"
-  buttonHref="/hiring"
-/>
-<TripStartHero
-  image={tripStartImage}
-  imageAlt="شروع سفر با دات‌وان تریپ"
-  eyebrow="تجربه سفر با دات‌وان"
-  title="سفر، از لحظه درخواست شروع می‌شود"
-  description="دات‌وان تریپ تلاش می‌کند تمام مسیر سفر، از درخواست تا رسیدن به مقصد، ساده، شفاف و قابل اعتماد باشد."
-/>
-<IranCoverage
-  title="دات‌وان تریپ در سراسر ایران"
-  subtitle="آمار ثبت‌نام راننده‌ها در استان‌های کشور"
-  mapImage={iranMap}
-  mapAlt="نقشه ایران"
-  items={coverageItems}
-  description={
-    <>
-      <strong>
-        دات‌وان تریپ با توسعه ناوگان و زیرساخت حمل‌ونقل،
-      </strong>{" "}
-      خدمات خود را به‌صورت مرحله‌ای
-      <br />
-      در <strong>استان‌های مختلف ایران</strong> ارائه می‌دهد.
-    </>
-  }
-/>
-<TravelSolutions
-  badge="همه‌جا دات‌وان تریپ"
-  title="هر سفر، یک راه‌حل متناسب"
-  description="دات‌وان تریپ، مجموعه‌ای از خدمات حمل‌ونقل را برای نیازهای مختلف مسافران، سازمان‌ها و مجموعه‌ها ارائه می‌دهد."
-  cards={solutionCards}
-/>
-  <div className="md:mt-20">
-      <JoinBanner
-  eyebrow="به دات‌وان تریپ بپیوندید"
-  title="دات‌وان تریپ فقط یک سفر نیست؛"
-  highlightedText="یک فرصت برای ساختن آینده است."
-  description="اگر می‌خواهید بخشی از مسیر جدید حمل‌ونقل باشید، دات‌وان تریپ مسیرهای مختلفی برای همکاری در اختیار شما قرار می‌دهد."
-  image={driversImage}
-  imageAlt="رانندگان دات‌وان تریپ"
-  primaryAction={{
-    text: "مشارکت در دات‌وان تریپ",
-    href: "/join-us",
-  }}
-  secondaryAction={{
-    text: "فرصت‌های استخدام",
-    href: "/hiring",
-  }}
-/>
-  </div>
+      sideDescription:
+        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
 
-      <section className="vehicle section">
-        <div className="vehicle-copy">
-          <span className="pill">درباره دات‌وان تریپ</span>
-          <h2>ناوگان دات‌وان تریپ را بشناسید</h2>
-          <p>
-            در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از
-            تجربه سفر است. ناوگان دات‌وان با تمرکز بر ایمنی، راحتی، عملکرد و
-            فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ
-            شود.
-          </p>
-        </div>
-        <div className="vehicle-visual">
-          <img
-            src={`${A}vehicle-slide.png`}
-            alt="خودروی بی‌وای‌دی سیل ۰۶ دی‌ام-آی هیبریدی"
-          />
-        </div>
-      </section>
-      <section className="download section">
-        <div>
-          <span>دانلود اپلیکیشن</span>
-          <h2>دات‌وان تریپ همیشه همراه شماست</h2>
-          <p>
-            اپلیکیشن دات‌وان تریپ را دانلود کنید و درخواست سفر، مدیریت مسیر و
-            پرداخت را سریع‌تر و ساده‌تر از همیشه تجربه کنید.
-          </p>
-          <div className="store-buttons">
-            <button>
-              <Smartphone /> مایکت
-            </button>
-            <button>
-              <Play /> کافه بازار
-            </button>
-            <button>
-              <Apple /> وب اپلیکیشن کاربران iOS
-            </button>
-          </div>
-        </div>
-        <img src={`${A}phones.png`} alt="اپلیکیشن دات‌وان تریپ" />
-      </section>
+      footerText:
+        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+    },
+      {
+      id: "byd-seal-about2",
 
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
+
+      sideDescription:
+        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
+
+      footerText:
+        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+    },
+      {
+      id: "byd-seal-about3",
+
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
+
+      sideDescription:
+        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
+
+      footerText:
+        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+    },
+  ]}
+/>
+         <div className="md:mt-50">
+           <DownloadBanner/>
+         </div>
       <section className="news section" id="news">
         <SectionHeading
           eyebrow="اخبار و رویدادها"
@@ -495,28 +467,6 @@ export default function Home() {
         </button>
       </section>
 
-      <section className="faq section" id="faq">
-        <SectionHeading
-          eyebrow="آشنایی با دات‌وان تریپ"
-          title="سؤالات متداول"
-          description="پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود."
-        />
-        <div className="faq-list">
-          {faqItems.map(([question, answer], index) => (
-            <button
-              className={openFaq === index ? "faq-item active" : "faq-item"}
-              key={question}
-              onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
-              aria-expanded={openFaq === index}
-            >
-              <span>{question}</span>
-              <ChevronDown />
-              <p>{answer}</p>
-            </button>
-          ))}
-        </div>
-        <button className="button button-dark">مشاهده سوالات بیشتر</button>
-      </section>
       <section className="bottom-cta section" id="cta">
         <img src={`${A}cta-car.png`} alt="خودروی دات‌وان تریپ" />
         <div>
@@ -534,67 +484,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className="footer">
-        <div className="footer-brand">
-          <img src={`${A}logo-footer.png`} alt="دات‌وان تریپ" />
-          <h2>
-            دات‌وان تریپ<span>!</span>
-          </h2>
-          <p>
-            <b>مجموعه آوان سفر</b> با رویکرد ارائه خدمات سفرهای درون‌شهری و
-            برون‌شهری، حفظ محیط زیست و استفاده از ناوگان برقی، برترین کیفیت
-            خدمات سفر را به مسافران ارائه می‌کند.
-          </p>
-          <div className="socials">
-            <b>in</b>
-            <Send />
-            <Play />
-            <b>◎</b>
-          </div>
-        </div>
-        <div className="footer-links">
-          <div>
-            <h3>خدمات</h3>
-            <a>سفر شهری</a>
-            <a>سفر بین‌شهری</a>
-            <a>حمل‌ونقل سازمانی</a>
-            <a>سرویس اختصاصی</a>
-            <a>دانلود اپلیکیشن</a>
-          </div>
-          <div>
-            <h3>درباره دات‌وان تریپ</h3>
-            <a>درباره ما</a>
-            <a href="/forms#contact">تماس با ما</a>
-            <a>پرسش‌های متداول</a>
-            <a>حریم خصوصی</a>
-            <a>قوانین و مقررات</a>
-          </div>
-          <div>
-            <h3>اخبار و مجله</h3>
-            <a>آخرین اخبار</a>
-            <a>رویدادها</a>
-            <a>توسعه ناوگان</a>
-            <a>مقالات</a>
-            <a>راهنمای سفر</a>
-          </div>
-          <div>
-            <h3>همکاری با دات‌وان تریپ</h3>
-            <a href="/forms#join-drivers">استخدام رانندگان</a>
-            <a>طرح‌های لیزینگ</a>
-            <a href="/forms#join-office">فرصت‌های همکاری</a>
-            <a>شرایط همکاری</a>
-            <a href="/forms#join-drivers">ثبت درخواست</a>
-          </div>
-          <div>
-            <h3>دانلود اپلیکیشن</h3>
-            <a>دانلود برای Android</a>
-            <a>دانلود برای iOS</a>
-          </div>
-        </div>
-        <p className="copyright">
-          تمامی حقوق این سایت متعلق به شرکت دات وان تریپ می‌باشد
-        </p>
-      </footer>
+      <Footer />
     </main>
   );
 }

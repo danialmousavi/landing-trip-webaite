@@ -11,6 +11,8 @@ import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
 import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
 import Footer from "@/components/ui/footer/Footer";
+import carSideView from "@/public/figma/vehicles/Car-SideView.svg";
+
 export const tripFaqItems: FAQItem[] = [
   {
     question: "خودرو در اختیار چه تفاوتی با سفر معمولی دارد؟",
@@ -40,7 +42,90 @@ export default function page() {
       <Header />
       <FleetShowcase />
       <VehicleFlexibleServices />
-      <VehicleShowcase />
+     <VehicleShowcase
+  title="خودروی موردنظر خود را دقیق‌تر بشناسید"
+  description="در هر مدل، اطلاعاتی را که برای انتخاب خودرو اهمیت دارد بررسی کنید."
+  vehicles={[
+    {
+      id: "byd-seal",
+
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
+
+      specs: [
+        {
+          label: "نوع خودرو",
+          value: "سواری",
+        },
+        {
+          label: "ظرفیت",
+          value: "۴ مسافر",
+        },
+        {
+          label: "نوع کاربری",
+          value: "شهری",
+        },
+      ],
+
+      detailsHref: "/vehicles/byd-seal",
+      detailsLabel: "مشاهده جزییات",
+    },
+      {
+      id: "byd-seal2",
+
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
+
+      specs: [
+        {
+          label: "نوع خودرو",
+          value: "سواری",
+        },
+        {
+          label: "ظرفیت",
+          value: "۴ مسافر",
+        },
+        {
+          label: "نوع کاربری",
+          value: "شهری",
+        },
+      ],
+
+      detailsHref: "/vehicles/byd-seal",
+      detailsLabel: "مشاهده جزییات",
+    },
+      {
+      id: "byd-seal3",
+
+      image: {
+        src: carSideView,
+        alt: "BYD Seal",
+      },
+
+      specs: [
+        {
+          label: "نوع خودرو",
+          value: "سواری",
+        },
+        {
+          label: "ظرفیت",
+          value: "۴ مسافر",
+        },
+        {
+          label: "نوع کاربری",
+          value: "شهری",
+        },
+      ],
+
+      detailsHref: "/vehicles/byd-seal",
+      detailsLabel: "مشاهده جزییات",
+    },
+  ]}
+/>
       <FeatureSection
         imageSide="right"
         title="ناوگان، بخشی از کیفیت سفر است"

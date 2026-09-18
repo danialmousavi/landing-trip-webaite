@@ -344,3 +344,152 @@
     padding-top: 4px;
   }
 }
+/* ==========================================
+   Dynamic Variants
+   ========================================== */
+
+/* badge بالای title */
+.badge {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 14px;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  background: #dddddd;
+  color: #171717;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 1.7;
+}
+
+.badgeDot {
+  width: 5px;
+  height: 5px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #171717;
+}
+
+
+/* متن بلند سمت چپ */
+.sideDescription {
+  width: 100%;
+
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 2.1;
+
+  text-align: right;
+}
+
+
+/* متن پایین به جای button */
+.footerText {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  line-height: 1.8;
+
+  text-align: center;
+}
+
+
+/* فقط تنظیم کلاس‌های جدید در موبایل */
+@media (max-width: 768px) {
+  .badge {
+    margin-inline: auto;
+    margin-bottom: 10px;
+
+    padding: 6px 12px;
+
+    font-size: 11px;
+  }
+
+  .sideDescription {
+    max-width: 100%;
+
+    font-size: 12px;
+
+    line-height: 2;
+  }
+
+  .footerText {
+    font-size: 17px;
+  }
+}
+/* ==========================================
+   Long description variant
+   فقط حالت دوم
+========================================== */
+
+.modelInfoWide {
+  width: min(48vw, 700px);
+  max-width: 700px;
+}
+
+.sideDescription {
+  width: 100%;
+
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 2;
+
+  text-align: right;
+}
+
+
+/* Desktop */
+@media (min-width: 769px) {
+  .modelInfoWide {
+    width: min(48vw, 700px);
+  }
+
+  .sideDescription {
+    font-size: 16px;
+    line-height: 2;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .modelInfoWide {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sideDescription {
+    width: 100%;
+
+    font-size: 12px;
+    line-height: 2;
+
+    text-align: center;
+  }
+}
