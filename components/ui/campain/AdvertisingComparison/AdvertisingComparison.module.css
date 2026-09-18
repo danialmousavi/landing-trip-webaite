@@ -1,0 +1,452 @@
+/* ========================================
+   Section
+======================================== */
+
+.section {
+  width: 92%;
+  max-width: 1270px;
+
+  margin-inline: auto;
+  padding: 70px 0 90px;
+
+  box-sizing: border-box;
+
+  font-family: inherit;
+}
+
+.section * {
+  font-family: inherit;
+}
+
+/* ========================================
+   Heading
+======================================== */
+
+.heading {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #777;
+
+  font-size: clamp(11px, 0.8vw, 13px);
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.title {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: clamp(23px, 1.8vw, 30px);
+  font-weight: 800;
+  line-height: 1.7;
+
+  text-align: center;
+}
+
+/* ========================================
+   Table Scroll Wrapper
+======================================== */
+
+.tableScroll {
+  width: 100%;
+
+  margin-top: 38px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  border-radius: 9px;
+
+  scrollbar-width: thin;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
+
+/* ========================================
+   Table
+======================================== */
+
+.table {
+  width: 100%;
+  min-width: 760px;
+
+  overflow: hidden;
+
+  border: 1px solid #dedede;
+  border-radius: 9px;
+
+  background: #fff;
+}
+
+/* ========================================
+   Header Row
+======================================== */
+
+.headerRow {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    1.05fr
+    1fr
+    1fr
+    1fr;
+
+  min-height: 62px;
+
+  align-items: center;
+
+  background: #171717;
+
+  color: #fff;
+}
+
+/* ========================================
+   General Cell
+======================================== */
+
+.cell {
+  min-width: 0;
+
+  padding: 0 22px;
+
+  box-sizing: border-box;
+}
+
+/* ========================================
+   Header Cells
+======================================== */
+
+.featureHeader {
+  color: #fff;
+
+  font-size: clamp(11px, 0.85vw, 14px);
+  font-weight: 600;
+  line-height: 1.8;
+
+  text-align: right;
+}
+
+.columnHeader {
+  color: #fff;
+
+  font-size: clamp(11px, 0.85vw, 14px);
+  font-weight: 500;
+  line-height: 1.8;
+
+  text-align: center;
+}
+
+/* ========================================
+   Table Body
+======================================== */
+
+.body {
+  width: 100%;
+}
+
+/* ========================================
+   Row
+======================================== */
+
+.row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    1.05fr
+    1fr
+    1fr
+    1fr;
+
+  min-height: 62px;
+
+  align-items: center;
+
+  background: #fff;
+
+  border-bottom: 1px solid #dedede;
+}
+
+/* Alternating row */
+
+.row:nth-child(odd) {
+  background: #f7f7f7;
+}
+
+.row:nth-child(even) {
+  background: #fff;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+/* ========================================
+   Feature Column
+======================================== */
+
+.featureCell {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #333;
+
+  font-size: clamp(10px, 0.78vw, 13px);
+  font-weight: 500;
+  line-height: 1.9;
+
+  text-align: right;
+}
+
+.rowNumber {
+  flex-shrink: 0;
+
+  color: #858585;
+
+  font-size: clamp(9px, 0.7vw, 12px);
+  font-weight: 400;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+/* ========================================
+   Value Cells
+======================================== */
+
+.valueCell {
+  color: #242424;
+
+  font-size: clamp(10px, 0.78vw, 13px);
+  font-weight: 500;
+  line-height: 1.9;
+
+  text-align: center;
+}
+
+/* ========================================
+   Highlighted Column
+======================================== */
+
+.highlighted {
+  color: #159447;
+
+  font-weight: 600;
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    width: 92%;
+
+    padding: 55px 0 70px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .tableScroll {
+    margin-top: 30px;
+  }
+
+  .table {
+    min-width: 720px;
+  }
+
+  .headerRow,
+  .row {
+    min-height: 58px;
+  }
+
+  .cell {
+    padding-inline: 18px;
+  }
+
+  .featureHeader,
+  .columnHeader {
+    font-size: 12px;
+  }
+
+  .featureCell,
+  .valueCell {
+    font-size: 11px;
+  }
+
+  .rowNumber {
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 600px) {
+  .section {
+    width: 92%;
+
+    padding: 42px 0 55px;
+  }
+
+  /* Heading */
+
+  .eyebrow {
+    margin-bottom: 6px;
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.8;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.8;
+  }
+
+  /* Table */
+
+  .tableScroll {
+    margin-top: 25px;
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-inline: contain;
+  }
+
+  .table {
+    min-width: 680px;
+
+    border-radius: 8px;
+  }
+
+  /* Rows */
+
+  .headerRow,
+  .row {
+    min-height: 55px;
+  }
+
+  .cell {
+    padding-inline: 14px;
+  }
+
+  /* Header text */
+
+  .featureHeader,
+  .columnHeader {
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .featureHeader {
+    font-weight: 600;
+  }
+
+  /* Body text */
+
+  .featureCell,
+  .valueCell {
+    font-size: 10.5px;
+    line-height: 1.9;
+  }
+
+  .featureCell {
+    font-weight: 500;
+  }
+
+  .valueCell {
+    font-weight: 500;
+  }
+
+  .highlighted {
+    font-weight: 600;
+  }
+
+  .rowNumber {
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   Very Small Mobile
+======================================== */
+
+@media (max-width: 400px) {
+  .section {
+    width: 94%;
+
+    padding: 36px 0 45px;
+  }
+
+  .eyebrow {
+    font-size: 10.5px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .tableScroll {
+    margin-top: 22px;
+  }
+
+  .table {
+    min-width: 650px;
+  }
+
+  .headerRow,
+  .row {
+    min-height: 53px;
+  }
+
+  .cell {
+    padding-inline: 12px;
+  }
+
+  .featureHeader,
+  .columnHeader {
+    font-size: 10.5px;
+  }
+
+  .featureCell,
+  .valueCell {
+    font-size: 10px;
+  }
+
+  .rowNumber {
+    font-size: 9.5px;
+  }
+}

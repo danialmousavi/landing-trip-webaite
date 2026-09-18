@@ -1,0 +1,584 @@
+.section {
+  position: relative;
+
+  width: 100%;
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 65px 5% 80px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 45%;
+
+  isolation: isolate;
+}
+
+/* =====================================================
+   BACKGROUND EDGE FADE
+
+   این لایه باعث می‌شود چهار طرف عکس به بکگراند سفید
+   صفحه ادغام شود و مرز تصویر دیده نشود.
+===================================================== */
+
+.backgroundFade {
+  position: absolute;
+  z-index: 1;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    /* top */
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.88) 3%,
+      rgba(255, 255, 255, 0.48) 8%,
+      rgba(255, 255, 255, 0.15) 14%,
+      transparent 22%
+    ),
+
+    /* bottom */
+    linear-gradient(
+      to top,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.95) 5%,
+      rgba(255, 255, 255, 0.65) 11%,
+      rgba(255, 255, 255, 0.25) 18%,
+      transparent 30%
+    ),
+
+    /* left */
+    linear-gradient(
+      to right,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.88) 3%,
+      rgba(255, 255, 255, 0.48) 7%,
+      rgba(255, 255, 255, 0.12) 12%,
+      transparent 19%
+    ),
+
+    /* right */
+    linear-gradient(
+      to left,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.88) 3%,
+      rgba(255, 255, 255, 0.48) 7%,
+      rgba(255, 255, 255, 0.12) 12%,
+      transparent 19%
+    );
+}
+
+/* یک haze اضافه برای طبیعی‌تر شدن fade پایین */
+
+.backgroundFade::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+  bottom: -1px;
+  left: 0;
+
+  height: 28%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 35%,
+    rgba(255, 255, 255, 0.65) 72%,
+    #ffffff 100%
+  );
+
+  filter: blur(3px);
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+  position: relative;
+  z-index: 3;
+
+  width: min(100%, 1000px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.badge {
+  position: relative;
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0 0 8px;
+
+  color: #171717;
+
+  font-size: clamp(9px, 0.7vw, 12px);
+  font-weight: 600;
+  line-height: 1.8;
+
+  white-space: nowrap;
+}
+
+.brace {
+  display: inline-block;
+
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  opacity: 0.85;
+}
+
+/* =====================================================
+   COUNTER AREA
+===================================================== */
+
+.counterArea {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /*
+   * قبلاً margin منفی باعث می‌شد بالای اعداد برود زیر badge.
+   * الان فاصله واقعی داریم.
+   */
+  margin-top: 4px;
+
+  padding-top: 8px;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+.counter {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  direction: ltr;
+
+  color: #151b23;
+
+  font-variant-numeric: tabular-nums;
+
+  line-height: 1;
+}
+
+/* =====================================================
+   NUMBER
+===================================================== */
+
+.number,
+.suffix {
+  display: inline-block;
+
+  font-size: clamp(110px, 16vw, 245px);
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.07em;
+
+  white-space: nowrap;
+
+  /*
+   * مهم:
+   * بالای عدد تا 50% کاملاً مشکی است.
+   * بنابراین بالای عدد اصلاً محو نمی‌شود.
+   *
+   * فقط از نیمه پایین fade شروع می‌شود.
+   */
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 50%,
+    rgba(0, 0, 0, 0.98) 58%,
+    rgba(0, 0, 0, 0.82) 67%,
+    rgba(0, 0, 0, 0.58) 76%,
+    rgba(0, 0, 0, 0.32) 85%,
+    rgba(0, 0, 0, 0.1) 93%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 50%,
+    rgba(0, 0, 0, 0.98) 58%,
+    rgba(0, 0, 0, 0.82) 67%,
+    rgba(0, 0, 0, 0.58) 76%,
+    rgba(0, 0, 0, 0.32) 85%,
+    rgba(0, 0, 0, 0.1) 93%,
+    transparent 100%
+  );
+}
+
+.number {
+  opacity: 0.94;
+}
+
+.suffix {
+  margin-right: 0.1em;
+
+  font-weight: 700;
+
+  opacity: 0.94;
+}
+
+/* =====================================================
+   CLOUD / NUMBER FADE
+
+   این لایه روی نیمه پایین عدد haze ایجاد می‌کند.
+===================================================== */
+
+.numberFade {
+  position: absolute;
+  z-index: 3;
+
+  right: 8%;
+  bottom: -2%;
+
+  width: 84%;
+  height: 34%;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.02) 18%,
+    rgba(255, 255, 255, 0.08) 38%,
+    rgba(255, 255, 255, 0.18) 60%,
+    rgba(255, 255, 255, 0.4) 82%,
+    rgba(255, 255, 255, 0.65) 100%
+  );
+
+  filter: blur(12px);
+}
+
+/* =====================================================
+   BOTTOM TEXT
+===================================================== */
+
+.title {
+  position: relative;
+  z-index: 5;
+
+  width: fit-content;
+
+  /*
+   * متن کمی داخل فضای پایین عدد می‌آید،
+   * مشابه reference.
+   */
+  margin: -4px 0 0;
+
+  /*
+   * در RTL مقدار مثبت یعنی از مرکز
+   * کمی به سمت چپ visually منتقلش می‌کنیم.
+   */
+  transform: translateX(-24%);
+
+  color: #111;
+
+  font-size: clamp(15px, 1.35vw, 22px);
+  font-weight: 800;
+  line-height: 1.8;
+
+  text-align: right;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (min-width: 1500px) {
+  .section {
+    min-height: 570px;
+
+    padding-top: 70px;
+    padding-bottom: 90px;
+  }
+
+  .content {
+    max-width: 1100px;
+  }
+
+  .number,
+  .suffix {
+    font-size: clamp(170px, 15vw, 260px);
+  }
+
+  .badge {
+    margin-bottom: 10px;
+  }
+
+  .title {
+    transform: translateX(-27%);
+  }
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    min-height: 450px;
+
+    padding: 55px 4% 70px;
+
+    background-position: center center;
+  }
+
+  .content {
+    width: min(100%, 780px);
+  }
+
+  .counterArea {
+    margin-top: 3px;
+
+    padding-top: 6px;
+  }
+
+  .number,
+  .suffix {
+    font-size: clamp(95px, 18vw, 180px);
+  }
+
+  .title {
+    margin-top: 0;
+
+    transform: translateX(-18%);
+
+    font-size: 17px;
+  }
+
+  .numberFade {
+    right: 5%;
+
+    width: 90%;
+    height: 32%;
+  }
+
+  .backgroundFade {
+    background:
+      linear-gradient(
+        to bottom,
+        #fff 0%,
+        rgba(255, 255, 255, 0.75) 4%,
+        rgba(255, 255, 255, 0.2) 13%,
+        transparent 22%
+      ),
+      linear-gradient(
+        to top,
+        #fff 0%,
+        rgba(255, 255, 255, 0.85) 7%,
+        rgba(255, 255, 255, 0.25) 20%,
+        transparent 32%
+      ),
+      linear-gradient(
+        to right,
+        #fff 0%,
+        rgba(255, 255, 255, 0.65) 4%,
+        rgba(255, 255, 255, 0.15) 12%,
+        transparent 20%
+      ),
+      linear-gradient(
+        to left,
+        #fff 0%,
+        rgba(255, 255, 255, 0.65) 4%,
+        rgba(255, 255, 255, 0.15) 12%,
+        transparent 20%
+      );
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .section {
+    min-height: 340px;
+
+    padding: 45px 3% 58px;
+
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .badge {
+    gap: 5px;
+
+    margin-bottom: 7px;
+
+    font-size: 8px;
+  }
+
+  .brace {
+    font-size: 12px;
+  }
+
+  .counterArea {
+    margin-top: 0;
+
+    padding-top: 5px;
+  }
+
+  .number,
+  .suffix {
+    font-size: clamp(64px, 20vw, 110px);
+
+    letter-spacing: -0.055em;
+
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.95) 62%,
+      rgba(0, 0, 0, 0.7) 74%,
+      rgba(0, 0, 0, 0.38) 85%,
+      rgba(0, 0, 0, 0.12) 94%,
+      transparent 100%
+    );
+
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.95) 62%,
+      rgba(0, 0, 0, 0.7) 74%,
+      rgba(0, 0, 0, 0.38) 85%,
+      rgba(0, 0, 0, 0.12) 94%,
+      transparent 100%
+    );
+  }
+
+  .numberFade {
+    right: 0;
+    bottom: -2%;
+
+    width: 100%;
+    height: 32%;
+
+    filter: blur(8px);
+  }
+
+  .title {
+    margin-top: 2px;
+
+    transform: none;
+
+    font-size: 14px;
+
+    text-align: center;
+
+    white-space: normal;
+  }
+
+  /*
+   * در موبایل fade کناره‌ها کمتر است
+   * تا فضای مفید تصویر از بین نرود.
+   */
+  .backgroundFade {
+    background:
+      linear-gradient(
+        to bottom,
+        #fff 0%,
+        rgba(255, 255, 255, 0.65) 5%,
+        rgba(255, 255, 255, 0.12) 15%,
+        transparent 23%
+      ),
+      linear-gradient(
+        to top,
+        #fff 0%,
+        rgba(255, 255, 255, 0.88) 7%,
+        rgba(255, 255, 255, 0.3) 20%,
+        transparent 34%
+      ),
+      linear-gradient(
+        to right,
+        #fff 0%,
+        rgba(255, 255, 255, 0.45) 3%,
+        transparent 14%
+      ),
+      linear-gradient(
+        to left,
+        #fff 0%,
+        rgba(255, 255, 255, 0.45) 3%,
+        transparent 14%
+      );
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+  .section {
+    min-height: 300px;
+
+    padding: 38px 2% 50px;
+  }
+
+  .badge {
+    font-size: 7px;
+  }
+
+  .number,
+  .suffix {
+    font-size: clamp(56px, 20vw, 78px);
+  }
+
+  .title {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,146 @@
+.wrapper {
+  width: min(100% - 48px, 1120px);
+  display: flex;
+  flex-direction: column; /* چیدمان عمودی برای قرارگیری هدر بالای لیست */
+  justify-self: center;
+  align-self: center;
+  align-items: center; 
+  justify-content: center;
+  margin: 3vw 12.5vw;
+  gap: 80px; 
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* بخش هدر متون (وسط‌چین) */
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* متون کاملاً وسط‌چین شده‌اند */
+  gap: 16px;
+  max-width: 900px;
+}
+
+.subtitle {
+  color: #6b7280; /* خاکستری روشن */
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.title {
+  color: #111827;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.description {
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 2;
+  margin: 0;
+  max-width: 850px;
+}
+
+/* بخش لیست ویژگی‌ها */
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.featureItem {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  text-align: right; /* برای خوانایی بهتر در فارسی، لیست راست‌چین می‌ماند */
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.iconImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.featureText {
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* تنظیمات ریسپانسیو برای تبلت و موبایل */
+@media (max-width: 1024px) {
+  .wrapper {
+    /* تنظیم مجدد مارجین برای جلوگیری از باریک شدن بیش از حد در موبایل */
+    margin: 40px auto; 
+    gap: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .featuresList {
+    gap: 32px;
+  }
+
+  .featureItem {
+    gap: 16px;
+  }
+
+  .featureTitle {
+    font-size: 1.05rem;
+  }
+
+  .featureText {
+    font-size: 0.875rem;
+  }
+  
+  .iconWrapper {
+    width: 24px;
+    height: 24px;
+  }
+}
