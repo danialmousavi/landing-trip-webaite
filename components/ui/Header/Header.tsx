@@ -102,6 +102,10 @@ const navItems: NavItem[] = [
     label: "تماس با ما",
     href: "/contact-us",
   },
+    {
+    label: "کمپین",
+    href: "/campaign",
+  },
 ];
 
 export default function Header({
