@@ -11,13 +11,12 @@ import corporateImage from "@/public/figma/solutionImage3.png";
 import specialServicesImage from "@/public/figma/solutionImage4.png";
 import driversImage from "@/public/figma/recruiting.png";
 import carSideView from "@/public/figma/vehicles/Car-SideView.svg";
-import mainNewsImage from "@/public/figma/mainNewsImage.png"
+import mainNewsImage from "@/public/figma/mainNewsImage.png";
 import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
-import news1Image from "@/public/figma/news-1.png"
-import news2Image from "@/public/figma/news-2.png"
-import news3Image from "@/public/figma/news-3.png"
-import news4Image from "@/public/figma/news-4.png"
-
+import news1Image from "@/public/figma/news-1.png";
+import news2Image from "@/public/figma/news-2.png";
+import news3Image from "@/public/figma/news-3.png";
+import news4Image from "@/public/figma/news-4.png";
 
 import IranCoverage, {
   CoverageItem,
@@ -30,34 +29,40 @@ import { CarFront } from "lucide-react";
 import Footer from "@/components/ui/footer/Footer";
 import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
-import NewsSection, { NewsItem } from "@/components/ui/index/NewsSection/NewsSection";
+import NewsSection, {
+  NewsItem,
+} from "@/components/ui/index/NewsSection/NewsSection";
+import FutureTransportBanner from "@/components/ui/FutureTransportBanner/FutureTransportBanner";
+import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 const A = "/figma/";
 // faq data
-const faqItems = [
-  [
-    "دات‌وان تریپ در چه شهرهایی فعالیت می‌کند؟",
-    "دات‌وان تریپ خدمات خود را به‌صورت مرحله‌ای در شهرهای مختلف توسعه می‌دهد. برای مشاهده شهرهای فعال، فهرست به‌روز مناطق تحت پوشش را بررسی کنید.",
-  ],
-  [
-    "چطور می‌توانم از دات‌وان تریپ سفر بگیرم؟",
-    "پس از نصب اپلیکیشن، مبدا و مقصد را انتخاب کنید تا نزدیک‌ترین راننده برای سفر شما اعزام شود.",
-  ],
-  [
-    "آیا خودروهای دات‌وان تریپ برقی هستند؟",
-    "بخش بزرگی از ناوگان دات‌وان تریپ از خودروهای برقی و هیبریدی کم‌آلاینده تشکیل شده است.",
-  ],
-  [
-    "رانندگان دات‌وان تریپ چگونه انتخاب می‌شوند؟",
-    "رانندگان پس از احراز هویت، ارزیابی سوابق، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند.",
-  ],
-  [
-    "چطور می‌توانم به‌عنوان راننده با دات‌وان تریپ همکاری کنم؟",
-    "از بخش همکاری با رانندگان درخواست خود را ثبت کنید تا مراحل ارزیابی و آموزش برای شما ارسال شود.",
-  ],
-  [
-    "آیا امکان خرید خودرو و همکاری با دات‌وان تریپ وجود دارد؟",
-    "جزئیات طرح‌های همکاری و لیزینگ در بخش فرصت‌های همکاری اعلام می‌شود.",
-  ],
+export const tripFaqItems: FAQItem[] = [
+  {
+    question: "از چه راه‌هایی می‌تونم رزومه‌ی خودم رو برای موقعیت",
+    answer:
+      "دات‌وان تریپ خدمات خود را به‌صورت مرحله‌ای در شهرهای مختلف توسعه می‌دهد. برای مشاهده شهرهای فعال، فهرست به‌روز مناطق تحت پوشش را بررسی کنید.",
+  },
+  {
+    question: "چطور می‌توانم از دات‌وان تریپ سفر بگیرم؟",
+    answer:
+      "در دات‌وان تریپ دو نوع سرویس دات‌وان و در اختیار ارائه می‌شود. در سرویس دات‌وان کافی است مبدا و مقصد خود را انتخاب و درخواست سفر را ثبت کنید. در سرویس در اختیار تنها مبدأ را مشخص می‌کنید و خودرو برای مدت موردنیاز در اختیار شما قرار می‌گیرد.",
+  },
+  {
+    question: "آیا خودروهای دات‌وان تریپ برقی هستند؟",
+    answer: "ناوگان دات‌وان تریپ شامل خودروهای برقی و هیبریدی نسل جدید است. توسعه ناوگان پاک و استفاده از خودروهای کم‌مصرف و سازگارتر با محیط‌زیست، یکی از محورهای اصلی توسعه مجموعه است.",
+  },
+  {
+    question: "رانندگان دات‌وان تریپ چگونه انتخاب می‌شوند؟",
+    answer: "رانندگان دات‌وان تریپ پیش از شروع فعالیت، طی فرآیند جذب، بررسی مدارک، ارزیابی، آموزش و احراز صلاحیت انتخاب می‌شوند. همچنین عملکرد رانندگان در طول فعالیت به‌صورت مستمر پایش می‌شود.",
+  },
+  {
+    question: "چطور می‌توانم به‌عنوان راننده با دات‌وان تریپ همکاری کنم؟",
+    answer: "متقاضیان همکاری می‌توانند از طریق مراجعه به بخش همکاری با دات وان تریپ درخواست خود را ثبت کنند. پس از بررسی اولیه، مراحل ارزیابی، احراز صلاحیت و آموزش انجام خواهد شد.",
+  },
+  {
+    question: "آیا امکان خرید خودرو و همکاری با دات‌وان تریپ وجود دارد؟",
+    answer: "دات‌وان تریپ برای متقاضیان، طرح‌های مشارکت و همکاری در نظر گرفته است. برای مشاهده شرایط، ثبت درخواست و دریافت اطلاعات بیشتر می‌توانید به سایت apply.dotone.ir مراجعه کنید.",
+  },
 ];
 // FleetFeature data
 const news = [
@@ -251,8 +256,7 @@ const newsData: NewsItem[] = [
   {
     id: "news-2",
 
-    title:
-      "اختلالات موقتی در برخی سرویس‌های حمل و نقل شهری در البرز",
+    title: "اختلالات موقتی در برخی سرویس‌های حمل و نقل شهری در البرز",
 
     date: "۵ آذر ۱۴۰۴",
 
@@ -318,7 +322,6 @@ function SectionHeading({
     </div>
   );
 }
-
 
 export default function Home() {
   return (
@@ -458,86 +461,72 @@ export default function Home() {
           }}
         />
       </div>
-         <VehicleShowcase
-  title="ناوگان دات‌وان تریپ را بشناسید"
-  badgeText="درباره دات‌وان تریپ"
-  vehicles={[
-    {
-      id: "byd-seal-about",
+      <VehicleShowcase
+        title="ناوگان دات‌وان تریپ را بشناسید"
+        badgeText="درباره دات‌وان تریپ"
+        vehicles={[
+          {
+            id: "byd-seal-about",
 
-      image: {
-        src: carSideView,
-        alt: "BYD Seal",
-      },
+            image: {
+              src: carSideView,
+              alt: "BYD Seal",
+            },
 
-      sideDescription:
-        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
+            sideDescription:
+              "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
 
-      footerText:
-        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
-    },
-      {
-      id: "byd-seal-about2",
+            footerText: "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+          },
+          {
+            id: "byd-seal-about2",
 
-      image: {
-        src: carSideView,
-        alt: "BYD Seal",
-      },
+            image: {
+              src: carSideView,
+              alt: "BYD Seal",
+            },
 
-      sideDescription:
-        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
+            sideDescription:
+              "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
 
-      footerText:
-        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
-    },
-      {
-      id: "byd-seal-about3",
+            footerText: "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+          },
+          {
+            id: "byd-seal-about3",
 
-      image: {
-        src: carSideView,
-        alt: "BYD Seal",
-      },
+            image: {
+              src: carSideView,
+              alt: "BYD Seal",
+            },
 
-      sideDescription:
-        "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
+            sideDescription:
+              "در دات‌وان تریپ، خودرو فقط وسیله‌ای برای رسیدن به مقصد نیست؛ بخشی از تجربه سفر است. ناوگان دات‌وان تریپ با تمرکز بر ایمنی، راحتی و فناوری انتخاب شده تا کیفیت سفر از لحظه ورود تا رسیدن به مقصد حفظ شود.",
 
-      footerText:
-        "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
-    },
-  ]}
-/>
+            footerText: "بی‌وای‌دی سیل ۵ دی‌ام-آی هیبریدی",
+          },
+        ]}
+      />
 
-         <div className="md:mt-50">
-           <DownloadBanner/>
-         </div>
+      <div className="md:mt-50">
+        <DownloadBanner />
+      </div>
 
-             <NewsSection
-      eyebrow="اخبار و رویدادها"
-      title="دات‌وان تریپ در مسیر توسعه"
-      description="آخرین اخبار، رویدادها و اتفاقات دات‌وان تریپ را دنبال کنید."
-      featuredNews={featuredNews}
-      news={newsData}
-      allNewsHref="/news"
-      allNewsLabel="مشاهده همه اخبار"
-    />
-   
-      <section className="bottom-cta section" id="cta">
-        <img src={`${A}cta-car.png`} alt="خودروی دات‌وان تریپ" />
-        <div>
-          <span>آینده حمل‌ونقل را تجربه کنید</span>
-          <h2>آماده تجربه نسل جدید حمل‌ونقل هستید؟</h2>
-          <p>
-            اپلیکیشن دات‌وان تریپ را دانلود کنید یا با خدمات و ناوگان ما بیشتر
-            آشنا شوید.
-          </p>
-          <div>
-            <BrandButton>
-              <CarFront size={18} /> درخواست سفر
-            </BrandButton>
-            <BrandButton subtle>درباره دات‌وان تریپ</BrandButton>
-          </div>
-        </div>
-      </section>
+      <NewsSection
+        eyebrow="اخبار و رویدادها"
+        title="دات‌وان تریپ در مسیر توسعه"
+        description="آخرین اخبار، رویدادها و اتفاقات دات‌وان تریپ را دنبال کنید."
+        featuredNews={featuredNews}
+        news={newsData}
+        allNewsHref="/news"
+        allNewsLabel="مشاهده همه اخبار"
+      />
+      <FAQ
+        subtitle="آشنایی با دات‌وان تریپ"
+        title="سؤالات متداول"
+        description="پاسخ سوالاتی که ممکن است قبل از استفاده از خدمات دات‌وان تریپ برای شما ایجاد شود."
+        items={tripFaqItems}
+      />
+      <FutureTransportBanner />
       <Footer />
     </main>
   );

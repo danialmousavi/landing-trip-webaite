@@ -6,10 +6,8 @@ import Link from "next/link";
 import styles from "./Footer.module.css";
 import linkdinIcon from "@/public/figma/linkdin.png";
 import telegramIcon from "@/public/figma/telegram.png";
-import youtubeIcon from "@/public/figma/youtube.png";
 import instagramIcon from "@/public/figma/instagram.png";
-import aparatIcon from "@/public/figma/aparat.png";
-import whatsappIcon from "@/public/figma/whatsapp.png";
+import baleIcon from "@/public/figma/baleIcon.png";
 import logoImage from "@/public/figma/DotOneTrip-Logo.png"; // ایمپورت لوگو
 
 const footerLinks = [
@@ -102,17 +100,12 @@ export default function Footer() {
             <Link href="#" aria-label="Telegram" className={styles.socialLink}>
               <Image src={telegramIcon} alt="تلگرام" />
             </Link>
-            <Link href="#" aria-label="YouTube" className={styles.socialLink}>
-              <Image src={youtubeIcon} alt="یوتوب" />
-            </Link>
-            <Link href="#" aria-label="WhatsApp" className={styles.socialLink}>
-              <Image src={whatsappIcon} alt="واتساپ" />
-            </Link>
+   
             <Link href="#" aria-label="Instagram" className={styles.socialLink}>
               <Image src={instagramIcon} alt="اینستاگرام" />
             </Link>
-            <Link href="#" aria-label="Aparat" className={styles.socialLink}>
-              <Image src={aparatIcon} alt="آپارات" />
+            <Link href="#" aria-label="بله" className={styles.socialLink}>
+              <Image src={baleIcon} alt="بله" />
             </Link>
           </div>
         </div>
