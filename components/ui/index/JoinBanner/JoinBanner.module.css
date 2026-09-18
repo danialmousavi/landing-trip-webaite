@@ -1,0 +1,533 @@
+/* ========================================
+   Section
+======================================== */
+
+.section {
+  width: 100%;
+
+  padding: 100px 0 60px;
+
+  background: #fff;
+
+  font-family: inherit;
+}
+
+.section * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* ========================================
+   Banner
+======================================== */
+
+.banner {
+  position: relative;
+
+  width: 92%;
+  max-width: 1320px;
+
+  /* ارتفاع بنر مشکی */
+  min-height: 240px;
+
+  margin-inline: auto;
+
+  display: flex;
+  align-items: stretch;
+
+  /*
+    مهم:
+    عکس چپ و متن راست
+  */
+  direction: ltr;
+
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.025) 30%,
+      transparent 55%
+    ),
+    linear-gradient(110deg, #101010 0%, #171717 50%, #252525 100%);
+
+  /*
+    مهم:
+    برای اینکه عکس از بالا بیرون بزند
+  */
+  overflow: visible;
+}
+
+/* ========================================
+   Image Area - LEFT
+======================================== */
+
+.imageWrapper {
+  position: relative;
+  z-index: 2;
+
+  order: 1;
+
+  width: 56%;
+  min-width: 0;
+
+  flex-shrink: 0;
+
+  /*
+    عکس از خود بنر بلندتر است
+  */
+  min-height: 320px;
+
+  /*
+    هرچه منفی‌تر شود،
+    عکس بیشتر از بالای بنر بیرون می‌زند
+  */
+  margin-top: -80px;
+
+  pointer-events: none;
+}
+
+/* ========================================
+   Image
+======================================== */
+
+.image {
+  object-fit: contain;
+
+  /*
+    تصویر به سمت چپ و پایین می‌چسبد
+  */
+  object-position: left bottom;
+}
+
+/* ========================================
+   Content - RIGHT
+======================================== */
+
+.content {
+  position: relative;
+  z-index: 5;
+
+  order: 2;
+
+  width: 44%;
+  min-width: 0;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 25px 34px 25px 18px;
+
+  direction: rtl;
+  text-align: right;
+}
+
+/* ========================================
+   Eyebrow
+======================================== */
+
+.eyebrow {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: rgba(255, 255, 255, 0.639);
+
+  font-size: clamp(12px, 0.68vw, 11px);
+  font-weight: 400;
+
+  line-height: 1.8;
+
+  text-align: right;
+}
+
+/* ========================================
+   Title
+======================================== */
+
+.title {
+  width: 100%;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(18px, 1.5vw, 25px);
+  font-weight: 700;
+
+  line-height: 1.75;
+
+  direction: rtl;
+  text-align: right;
+}
+
+.title span {
+  color: #fff;
+}
+
+/* ========================================
+   Description
+======================================== */
+
+.description {
+  width: 100%;
+  max-width: 500px;
+
+  margin: 8px 0 0;
+
+  color: rgba(255, 255, 255, 0.639);
+
+  font-size: clamp(12px, 0.7vw, 11.5px);
+  font-weight: 500;
+
+  line-height: 2;
+
+  direction: rtl;
+  text-align: right;
+}
+
+/* ========================================
+   Actions
+======================================== */
+
+.actions {
+  width: 100%;
+
+  margin-top: 17px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  direction: rtl;
+}
+
+/* ========================================
+   Primary Button
+======================================== */
+
+.primaryButton {
+  min-height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 15px;
+
+  border-radius: 7px;
+
+  background: #00b7ce;
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1.5;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 10px rgba(0, 183, 206, 0.2);
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.primaryButton:hover {
+  background: #009fb4;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 6px 14px rgba(0, 183, 206, 0.25);
+}
+
+/* ========================================
+   Secondary Button
+======================================== */
+
+.secondaryButton {
+  min-height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 1.5;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.16);
+
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   Large Desktop
+======================================== */
+
+@media (min-width: 1500px) {
+  .banner {
+    max-width: 1380px;
+    min-height: 250px;
+  }
+
+  .imageWrapper {
+    width: 57%;
+
+    min-height: 340px;
+
+    margin-top: -90px;
+  }
+
+  .content {
+    width: 43%;
+
+    padding-right: 38px;
+  }
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    padding: 80px 0 50px;
+  }
+
+  .banner {
+    width: 91%;
+
+    min-height: 225px;
+
+    border-radius: 18px;
+  }
+
+  .imageWrapper {
+    width: 53%;
+
+    min-height: 280px;
+
+    margin-top: -55px;
+  }
+
+  .content {
+    width: 47%;
+
+    padding: 22px 24px 22px 14px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .description {
+    margin-top: 6px;
+
+    font-size: 10px;
+
+    line-height: 1.9;
+  }
+
+  .actions {
+    margin-top: 14px;
+
+    gap: 7px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 33px;
+
+    padding: 7px 11px;
+
+    font-size: 9px;
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 700px) {
+  .section {
+    padding: 45px 0;
+  }
+
+  .banner {
+    width: 90%;
+
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 18px;
+
+    /*
+      در موبایل عکس داخل خود کارت قرار می‌گیرد
+    */
+    overflow: hidden;
+  }
+
+  /* ========================================
+     Content
+  ======================================== */
+
+  .content {
+    order: 1;
+
+    width: 100%;
+
+    padding: 25px 20px 15px;
+
+    align-items: flex-start;
+  }
+
+  .eyebrow {
+    margin-bottom: 3px;
+
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: 18px;
+
+    line-height: 1.7;
+  }
+
+  .description {
+    max-width: 100%;
+
+    margin-top: 6px;
+
+    font-size: 10px;
+
+    line-height: 1.9;
+  }
+
+  .actions {
+    margin-top: 14px;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 33px;
+
+    padding: 7px 11px;
+
+    font-size: 9px;
+  }
+
+  /* ========================================
+     Image
+  ======================================== */
+
+  .imageWrapper {
+    order: 2;
+
+    width: 100%;
+    min-height: 0;
+
+    margin-top: -5px;
+
+    aspect-ratio: 1.9 / 1;
+  }
+
+  .image {
+    object-position: center bottom;
+  }
+}
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 420px) {
+  .section {
+    padding: 38px 0;
+  }
+
+  .banner {
+    width: 92%;
+
+    border-radius: 16px;
+  }
+
+  .content {
+    padding: 22px 17px 14px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .description {
+    font-size: 9.5px;
+
+    line-height: 1.9;
+  }
+
+  .actions {
+    margin-top: 12px;
+
+    gap: 6px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 32px;
+
+    padding: 7px 10px;
+
+    font-size: 8.5px;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 1.65 / 1;
+
+    margin-top: -2px;
+  }
+}

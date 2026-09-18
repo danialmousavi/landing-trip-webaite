@@ -11,7 +11,7 @@ import cityTransportImage from "@/public/figma/solutionImage1.png"
 import intercityImage from "@/public/figma/solutionImage2.png"
 import corporateImage from "@/public/figma/solutionImage3.png"
 import specialServicesImage from "@/public/figma/solutionImage4.png"
-
+import driversImage from "@/public/figma/recruiting.png"
 import {
   Apple,
   BriefcaseBusiness,
@@ -30,6 +30,7 @@ import IranCoverage, { CoverageItem } from "@/components/ui/index/IranCoverage/I
 import iranMap from "@/public/figma/iran-map.png"
 import { TravelSolutionCardProps } from "@/components/ui/index/TravelSolutions/TravelSolutionCard/TravelSolutionCard";
 import TravelSolutions from "@/components/ui/index/TravelSolutions/TravelSolutions";
+import JoinBanner from "@/components/ui/index/JoinBanner/JoinBanner";
 const A = "/figma/";
 // faq data
 const faqItems = [
@@ -392,30 +393,25 @@ export default function Home() {
   description="دات‌وان تریپ، مجموعه‌ای از خدمات حمل‌ونقل را برای نیازهای مختلف مسافران، سازمان‌ها و مجموعه‌ها ارائه می‌دهد."
   cards={solutionCards}
 />
-   
-      <section className="join section">
-        <div className="join-copy">
-          <span>به دات‌وان تریپ بپیوندید</span>
-          <h2>
-            دات‌وان تریپ فقط یک سفر نیست؛
-            <br />
-            یک فرصت برای ساختن آینده است.
-          </h2>
-          <p>
-            اگر می‌خواهید بخشی از نسل جدید حمل‌ونقل باشید، دات‌وان تریپ مسیرهای
-            مختلفی برای همکاری در اختیار شما قرار می‌دهد.
-          </p>
-          <div>
-            <a href="/forms#join-drivers" className="button button-brand">
-              مشارکت در دات‌وان تریپ
-            </a>
-            <a href="/forms#join-office" className="button button-subtle">
-              فرصت‌های استخدام
-            </a>
-          </div>
-        </div>
-        <img src={`${A}recruiting.png`} alt="تیم رانندگان دات‌وان تریپ" />
-      </section>
+  <div className="md:mt-20">
+      <JoinBanner
+  eyebrow="به دات‌وان تریپ بپیوندید"
+  title="دات‌وان تریپ فقط یک سفر نیست؛"
+  highlightedText="یک فرصت برای ساختن آینده است."
+  description="اگر می‌خواهید بخشی از مسیر جدید حمل‌ونقل باشید، دات‌وان تریپ مسیرهای مختلفی برای همکاری در اختیار شما قرار می‌دهد."
+  image={driversImage}
+  imageAlt="رانندگان دات‌وان تریپ"
+  primaryAction={{
+    text: "مشارکت در دات‌وان تریپ",
+    href: "/join-us",
+  }}
+  secondaryAction={{
+    text: "فرصت‌های استخدام",
+    href: "/hiring",
+  }}
+/>
+  </div>
+
       <section className="vehicle section">
         <div className="vehicle-copy">
           <span className="pill">درباره دات‌وان تریپ</span>
