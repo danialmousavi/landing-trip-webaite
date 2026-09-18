@@ -1,6 +1,12 @@
 "use client";
 
 import Header from "@/components/ui/Header/Header";
+import AboutIntro from "@/components/ui/index/AboutIntro/AboutIntro";
+import FleetFeature from "@/components/ui/index/FleetFeature/FleetFeature";
+import modernFleetImage from "@/public/figma/car3.png"
+import trainedDriversImage from "@/public/figma/trainedDriversImage.png"
+import securiyImage from "@/public/figma/security.png"
+
 import {
   Apple,
   BriefcaseBusiness,
@@ -55,6 +61,40 @@ const news = [
   ["news-4.png", "آغاز بهره‌برداری از هاب مرکزی دات‌وان تریپ در کرج"],
 ];
 
+const modernFleetItems = [
+  {
+    text: "خودروهای برقی و هیبریدی با آلایندگی کمتر",
+  },
+  {
+    text: "کابین تمیز، مدرن و مجهز برای آسایش بیشتر",
+  },
+  {
+    text: "سرویس و نگهداری دوره‌ای مطابق استاندارد ناوگان",
+  },
+];
+
+const trainedDriverItems = [
+  {
+    text: "احراز هویت و بررسی سوابق پیش از شروع همکاری",
+  },
+  {
+    text: "آموزش رفتار حرفه‌ای و اصول ارتباط با مسافر",
+  },
+  {
+    text: "آشنایی با استانداردهای ایمنی و خدمات سفر",
+  },
+];
+const securiyItems = [
+  {
+    text: "پایش لحظه‌ای موقعیت خودرو و مسیر سفر",
+  },
+  {
+    text: "ثبت کامل جزئیات و تاریخچه هر سفر",
+  },
+  {
+    text: "افزایش امنیت از طریق مانیتورینگ و کنترل ناوگان",
+  },
+];
 function BrandButton({
   children,
   subtle = false,
@@ -121,38 +161,7 @@ export default function Home() {
           src={`${A}hero-bg.png`}
           alt="خودروی دات‌وان تریپ"
         />
-        {/* <header className="nav-shell">
-          <a className="brand" href="#home" aria-label="دات‌وان تریپ">
-            <img src={`${A}logo.png`} alt="دات‌وان تریپ" />
-          </a>
-          <nav
-            className={menuOpen ? "main-nav open" : "main-nav"}
-            aria-label="منوی اصلی"
-          >
-            <a href="#home">صفحه اصلی</a>
-            <a href="#services">خدمات</a>
-            <a href="#fleet">ناوگان</a>
-            <a href="#news">اخبار</a>
-            <a href="#blog">بلاگ</a>
-            <a href="#about">درباره ما</a>
-            <a href="#contact">تماس با ما</a>
-          </nav>
-          <div className="nav-actions">
-            <button className="button button-brand">
-              <BriefcaseBusiness size={18} /> همکاری با تریپ
-            </button>
-            <button className="button button-glass">
-              <Download size={18} /> دانلود اپلیکیشن
-            </button>
-          </div>
-          <button
-            className="menu-button"
-            aria-label="باز کردن منو"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </header> */}
+
         <Header variant="dark"/>
         <div className="hero-content">
           <h1>
@@ -183,84 +192,61 @@ export default function Home() {
           </div>
         </div>
       </section>
+<AboutIntro
+  badge="درباره دات‌وان تریپ"
+  title={`دات‌وان تریپ؛
+تجربه‌ای تازه در حمل‌ونقل`}
+  description={
+    <>
 
-      <section className="about section" id="about">
-        <div className="about-intro">
-          <div>
-            <span className="pill">درباره دات‌وان تریپ</span>
-            <h2>
-              دات‌وان تریپ؛
-              <br />
-              تجربه‌ای تازه در حمل‌ونقل
-            </h2>
-          </div>
-          <p>
-            <strong>دات‌وان تریپ</strong> یک پلتفرم حمل‌ونقل مدرن است که با
-            ترکیب <b>ناوگان برقی، فناوری و نیروی انسانی آموزش‌دیده،</b> تجربه‌ای
-            متفاوت از جابه‌جایی را برای مسافران و سازمان‌ها ایجاد می‌کند.
-            <br />
-            ما در تریپ تلاش می‌کنیم حمل‌ونقل را از یک جابه‌جایی ساده، به{" "}
-            <b>تجربه‌ای ایمن، راحت، سریع و قابل اعتماد</b> تبدیل کنیم.
-          </p>
-        </div>
-        <div className="feature-row fleet-row" id="fleet">
-          <img
-            className="feature-composite fleet-composite"
-            src={`${A}fleet-composite.png`}
-            alt="ناوگان مدرن دات‌وان تریپ"
-          />
-          <FeatureCopy
-            title="ناوگان مدرن"
-            button="مشاهده ناوگان"
-            bullets={[
-              "خودروهای برقی و هیبریدی با آلایندگی کمتر",
-              "کابین تمیز، جادار و مجهز برای آسایش بیشتر",
-              "سرویس و نگهداری دوره‌ای مطابق استاندارد ناوگان",
-            ]}
-          >
-            خودروهای دات‌وان از نسل جدید خودروهای برقی و هیبریدی انتخاب شده‌اند
-            تا تجربه‌ای آرام، ایمن و سازگار با محیط‌زیست را برای مسافران فراهم
-            کنند. تمام خودروها به‌صورت یکپارچه تحت مدیریت ناوگان نگهداری و سرویس
-            می‌شوند.
-          </FeatureCopy>
-        </div>
-        <div className="feature-row reverse">
-          <img src={`${A}drivers.png`} alt="رانندگان آموزش‌دیده دات‌وان تریپ" />
-          <FeatureCopy
-            title="رانندگان آموزش‌دیده"
-            button="مشاهده شرایط همکاری"
-            bullets={[
-              "احراز هویت و بررسی سوابق پیش از شروع همکاری",
-              "آموزش رفتار حرفه‌ای و اصول ارتباط با مسافر",
-              "آشنایی با استانداردهای ایمنی و خدمات سفر",
-            ]}
-          >
-            رانندگان دات‌وان تنها بر اساس داشتن گواهینامه انتخاب نمی‌شوند؛ آن‌ها
-            پس از ارزیابی، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند تا کیفیت
-            خدمات در همه سفرها حفظ شود.
-          </FeatureCopy>
-        </div>
-        <div className="feature-row security-row">
-          <img
-            className="feature-composite security-composite"
-            src={`${A}security-composite.png`}
-            alt="مرکز کنترل هوشمند سفر"
-          />
-          <FeatureCopy
-            title="امنیت کامل و فناوری هوشمند"
-            bullets={[
-              "پایش لحظه‌ای موقعیت خودرو و مسیر سفر",
-              "ثبت کامل جزئیات و تاریخچه هر سفر",
-              "افزایش امنیت از طریق مانیتورینگ و کنترل ناوگان",
-            ]}
-          >
-            زیرساخت نرم‌افزاری دات‌وان تمام مراحل سفر را از درخواست تا پایان
-            مسیر به‌صورت هوشمند مدیریت می‌کند تا تجربه‌ای سریع، شفاف و قابل
-            اعتماد برای مسافر و راننده ایجاد شود.
-          </FeatureCopy>
-        </div>
-      </section>
 
+  
+      <strong>دات‌وان تریپ</strong> یک پلتفرم حمل‌ونقل مدرن است که با ترکیب{" "}
+      <strong>ناوگان برقی، فناوری و نیروی</strong>
+      <br />
+      <strong>انسانی آموزش‌دیده،</strong> تجربه‌ای متفاوت از سفر را برای مسافران و
+      سازمان‌ها ایجاد می‌کند.
+      <br />
+      ما در تریپ تلاش می‌کنیم حمل‌ونقل را از یک سفر ساده، به{" "}
+      <strong>تجربه‌ای ایمن، راحت، سریع و</strong>
+      <br />
+      <strong>قابل اعتماد تبدیل کنیم.</strong> از انتخاب خودرو و مدیریت سفر تا
+      پشتیبانی و کنترل کیفیت، همه
+      <br />
+      چیز با هدف ایجاد یک تجربه بهتر طراحی شده است.
+    </>
+  }
+/>
+  <FleetFeature
+  imageSide="right"
+  image={modernFleetImage}
+  imageAlt="خودروی ناوگان دات‌وان تریپ"
+  title="ناوگان مدرن"
+  description="خودروهای دات‌وان از نسل جدید خودروهای برقی و هیبریدی انتخاب شده‌اند تا تجربه‌ای آرام، ایمن و سازگار با محیط‌زیست را برای مسافران فراهم کنند. تمام خودروها به‌صورت یکپارچه تحت مدیریت ناوگان نگهداری و سرویس می‌شوند."
+  items={modernFleetItems}
+  buttonText="مشاهده ناوگان"
+  buttonHref="/fleet"
+/>
+<FleetFeature
+  imageSide="left"
+  image={trainedDriversImage}
+  imageAlt="رانندگان آموزش‌دیده دات‌وان تریپ"
+  title="رانندگان آموزش‌دیده"
+  description="رانندگان دات‌وان تنها بر اساس داشتن گواهینامه انتخاب نمی‌شوند؛ آن‌ها پس از ارزیابی، آموزش و تأیید صلاحیت وارد ناوگان می‌شوند تا کیفیت خدمات در همه سفرها حفظ شود."
+  items={trainedDriverItems}
+  buttonText="مشاهده شرایط همکاری"
+  buttonHref="/hiring"
+/>
+<FleetFeature
+  imageSide="right"
+  image={securiyImage}
+  imageAlt="امنیت کامل و فناوری هوشمند"
+  title="رانندگان آموزش‌دیده"
+  description="زیرساخت نرم‌افزاری دات‌وان تمام مراحل سفر را از درخواست تا پایان مسیر به‌صورت هوشمند مدیریت می‌کند تا تجربه‌ای سریع، شفاف و قابل اعتماد برای مسافر و راننده ایجاد شود."
+  items={securiyItems}
+  buttonText="مشاهده شرایط همکاری"
+  buttonHref="/hiring"
+/>
       <section className="journey-section">
         <SectionHeading
           eyebrow="تجربه سفر با دات‌وان تریپ"
