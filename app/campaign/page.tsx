@@ -12,6 +12,7 @@ import AdvertisingComparison, {
 } from "@/components/ui/campain/AdvertisingComparison/AdvertisingComparison";
 import FAQ, { FAQItem } from "@/components/ui/Faq/Faq";
 import Footer from "@/components/ui/footer/Footer";
+import Car from "@/components/ui/campain/car/Car";
 export default function page() {
     //fake data for table
   const comparisonColumns: ComparisonColumn[] = [
@@ -117,6 +118,7 @@ export default function page() {
           videoSrc="/videos/campainHero.mp4"
         />
       </div>
+      <Car/>
       <CampaignFeatureSection />
       <TripCounterHero count={46519} backgroundImage="/figma/sky.png" />
       <AdvertisingGrid />

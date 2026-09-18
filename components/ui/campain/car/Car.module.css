@@ -1,0 +1,143 @@
+.carWrapper {
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+.car {
+  position: relative;
+
+  width: min(100%, 850px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+}
+
+/* ========================================
+   Car Image
+======================================== */
+
+.carImage {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* ========================================
+   Shadow
+======================================== */
+
+.shadow {
+  position: absolute;
+  z-index: 1;
+
+  left: 50%;
+  bottom: 5%;
+
+  width: 78%;
+  height: 13%;
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  filter: blur(16px);
+
+  transform: translateX(-50%) scaleY(0.65);
+
+  pointer-events: none;
+}
+
+/* سایه نرم‌تر اطراف ماشین */
+.shadow::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 15% 8%;
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  filter: blur(18px);
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 900px) {
+  .carWrapper {
+    padding: 18px 24px;
+  }
+
+  .car {
+    width: min(100%, 700px);
+  }
+
+  .shadow {
+    bottom: 5%;
+
+    width: 76%;
+    height: 12%;
+
+    filter: blur(14px);
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 640px) {
+  .carWrapper {
+    padding: 15px 18px;
+  }
+
+  .car {
+    width: 100%;
+  }
+
+  .shadow {
+    bottom: 4%;
+
+    width: 76%;
+    height: 11%;
+
+    filter: blur(11px);
+  }
+}
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 420px) {
+  .carWrapper {
+    padding: 12px 14px;
+  }
+
+  .shadow {
+    width: 74%;
+    height: 10%;
+
+    filter: blur(9px);
+  }
+}
