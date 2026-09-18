@@ -1,0 +1,375 @@
+/* ========================================
+   Section
+======================================== */
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+
+  padding: 55px 0 0;
+
+  font-family: inherit;
+}
+
+.section * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* ========================================
+   Black Background
+======================================== */
+
+.section::before {
+  content: "";
+
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  right: 0;
+  left: 0;
+
+  /*
+    بک‌گراند عمداً زودتر تمام می‌شود
+    تا کارت‌های پایین از آن بیرون بزنند.
+  */
+  height: calc(100% - 110px);
+
+  background: #111;
+}
+
+/* ========================================
+   Background Shade
+======================================== */
+
+.backgroundShade {
+  position: absolute;
+  z-index: 1;
+
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height: calc(100% - 110px);
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 68% 12%,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0.035) 22%,
+      transparent 45%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.035) 35%,
+      transparent 58%
+    );
+}
+
+.backgroundShade::before {
+  content: "";
+
+  position: absolute;
+
+  top: -30%;
+  left: 8%;
+
+  width: 28%;
+  height: 130%;
+
+  transform: rotate(22deg);
+
+  background: rgba(255, 255, 255, 0.025);
+
+  filter: blur(35px);
+}
+
+/* ========================================
+   Container
+======================================== */
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: 92%;
+  max-width: 1320px;
+
+  margin-inline: auto;
+}
+
+/* ========================================
+   Heading
+======================================== */
+
+.heading {
+  width: 88%;
+
+  margin-inline: auto;
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 6%;
+}
+
+.headingMain {
+  width: 38%;
+
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Section Badge
+======================================== */
+
+.sectionBadge {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 12px;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  background: #00b7ce;
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+.badgeDot {
+  width: 4px;
+  height: 4px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #fff;
+}
+
+/* ========================================
+   Title
+======================================== */
+
+.title {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(21px, 1.7vw, 28px);
+  font-weight: 800;
+
+  line-height: 1.7;
+
+  text-align: right;
+}
+
+/* ========================================
+   Description
+======================================== */
+
+.description {
+  width: 56%;
+  max-width: 650px;
+
+  margin: 0 0 3px;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: clamp(10px, 0.75vw, 12px);
+  font-weight: 400;
+
+  line-height: 2;
+
+  text-align: right;
+}
+
+/* ========================================
+   Cards Grid
+======================================== */
+
+.cards {
+  /*
+    کارت‌ها از عرض کل صفحه کمتر هستند
+  */
+  width: 88%;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    padding-top: 48px;
+  }
+
+  .section::before,
+  .backgroundShade {
+    height: calc(100% - 90px);
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .heading {
+    width: 94%;
+
+    gap: 5%;
+
+    margin-bottom: 22px;
+  }
+
+  .headingMain {
+    width: 40%;
+  }
+
+  .title {
+    font-size: 23px;
+  }
+
+  .description {
+    width: 55%;
+
+    font-size: 11px;
+  }
+
+  .cards {
+    width: 94%;
+
+    gap: 10px;
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 700px) {
+  .section {
+    margin-top: 20px;
+
+    padding-top: 40px;
+  }
+
+  .section::before,
+  .backgroundShade {
+    height: calc(100% - 70px);
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .heading {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+  }
+
+  .headingMain {
+    width: 100%;
+  }
+
+  .sectionBadge {
+    margin-bottom: 10px;
+
+    padding: 6px 10px;
+
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .description {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    font-size: 10.5px;
+
+    line-height: 2;
+  }
+
+  .cards {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+}
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 420px) {
+  .section {
+    padding-top: 35px;
+  }
+
+  .section::before,
+  .backgroundShade {
+    height: calc(100% - 60px);
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .heading {
+    margin-bottom: 18px;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .description {
+    font-size: 10px;
+  }
+
+  .cards {
+    gap: 8px;
+  }
+}

@@ -7,6 +7,11 @@ import modernFleetImage from "@/public/figma/car3.png"
 import trainedDriversImage from "@/public/figma/trainedDriversImage.png"
 import securiyImage from "@/public/figma/security.png"
 import tripStartImage from "@/public/figma/journey.png"
+import cityTransportImage from "@/public/figma/solutionImage1.png"
+import intercityImage from "@/public/figma/solutionImage2.png"
+import corporateImage from "@/public/figma/solutionImage3.png"
+import specialServicesImage from "@/public/figma/solutionImage4.png"
+
 import {
   Apple,
   BriefcaseBusiness,
@@ -23,7 +28,10 @@ import { useState } from "react";
 import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
 import IranCoverage, { CoverageItem } from "@/components/ui/index/IranCoverage/IranCoverage";
 import iranMap from "@/public/figma/iran-map.png"
+import { TravelSolutionCardProps } from "@/components/ui/index/TravelSolutions/TravelSolutionCard/TravelSolutionCard";
+import TravelSolutions from "@/components/ui/index/TravelSolutions/TravelSolutions";
 const A = "/figma/";
+// faq data
 const faqItems = [
   [
     "دات‌وان تریپ در چه شهرهایی فعالیت می‌کند؟",
@@ -50,6 +58,7 @@ const faqItems = [
     "جزئیات طرح‌های همکاری و لیزینگ در بخش فرصت‌های همکاری اعلام می‌شود.",
   ],
 ];
+// FleetFeature data
 const news = [
   [
     "news-1.png",
@@ -86,6 +95,7 @@ const trainedDriverItems = [
     text: "آشنایی با استانداردهای ایمنی و خدمات سفر",
   },
 ];
+
 const securiyItems = [
   {
     text: "پایش لحظه‌ای موقعیت خودرو و مسیر سفر",
@@ -97,7 +107,7 @@ const securiyItems = [
     text: "افزایش امنیت از طریق مانیتورینگ و کنترل ناوگان",
   },
 ];
-
+//coverage cars in iran data
 const coverageItems: CoverageItem[] = [
   {
     city: "تهران",
@@ -134,6 +144,70 @@ const coverageItems: CoverageItem[] = [
   {
     city: "بندر عباس",
     value: 166,
+  },
+];
+// solutions
+const solutionCards: TravelSolutionCardProps[] = [
+  {
+    title: "حمل‌ونقل شهری",
+
+    description:
+      "برای سفرهای روزمره شهری، با خودروهای مدرن و رانندگان آموزش‌دیده.",
+
+    image: cityTransportImage,
+
+    imageAlt: "حمل‌ونقل شهری دات‌وان تریپ",
+
+    buttonText: "مشاهده سرویس",
+
+    buttonHref: "/services/city",
+  },
+
+  {
+    title: "سفرهای بین‌شهری",
+
+    description:
+      "راهکاری مطمئن برای سفرهای بین‌شهری با تمرکز بر راحتی، امنیت و کیفیت تجربه سفر.",
+
+    image: intercityImage,
+
+    imageAlt: "سفرهای بین‌شهری دات‌وان تریپ",
+
+    /*
+      این کارت دکمه ندارد
+      و فقط badge نمایش داده می‌شود.
+    */
+    badge: "به‌زودی",
+  },
+
+  {
+    title: "حمل‌ونقل سازمانی",
+
+    description:
+      "مدیریت یکپارچه سفرهای کارکنان و سرویس‌های سازمانی با امکان کنترل و پایش عملکرد.",
+
+    image: corporateImage,
+
+    imageAlt: "حمل‌ونقل سازمانی دات‌وان تریپ",
+
+    buttonText: "درخواست مشاوره",
+
+    buttonHref: "/corporate",
+  },
+
+  {
+    title: "خدمات اختصاصی",
+
+    description:
+      "اگر نیاز شما متفاوت است، با توجه به نیاز سازمان و شرایط عملیاتی، راهکار اختصاصی ارائه می‌شود.",
+
+    image: specialServicesImage,
+
+    imageAlt: "خدمات اختصاصی دات‌وان تریپ",
+
+    buttonText: "با ما در ارتباط باشید",
+
+    buttonHref: "/contact",
   },
 ];
 function BrandButton({
@@ -312,68 +386,13 @@ export default function Home() {
     </>
   }
 />
-
-      <section className="services" id="services">
-        <div className="section wide">
-          <div className="services-heading">
-            <div>
-              <span className="pill cyan">خدمات دات‌وان تریپ</span>
-              <h2>هر سفر، یک راه‌حل متناسب</h2>
-            </div>
-            <p>
-              دات‌وان تریپ مجموعه‌ای از خدمات حمل‌ونقل را برای نیازهای مختلف
-              مسافران، کسب‌وکارها و سازمان‌ها ارائه می‌دهد.
-            </p>
-          </div>
-          <div className="services-grid">
-            <article className="service-card large">
-              <div>
-                <h3>حمل‌ونقل شهری</h3>
-                <p>
-                  برای سفرهای روزمره شهری، با خودروهای مدرن و رانندگان
-                  آموزش‌دیده.
-                </p>
-              </div>
-              <img src={`${A}service-city.png`} alt="حمل‌ونقل شهری" />
-              <BrandButton>مشاهده سرویس</BrandButton>
-            </article>
-            <article className="service-card">
-              <div>
-                <h3>سفرهای بین‌شهری</h3>
-                <p>
-                  راهکاری مطمئن برای سفرهای بین‌شهری با تمرکز بر راحتی، امنیت و
-                  کیفیت تجربه سفر.
-                </p>
-              </div>
-              <img src={`${A}service-intercity.png`} alt="سفرهای بین‌شهری" />
-              <BrandButton>مشاهده سرویس</BrandButton>
-            </article>
-            <article className="service-card">
-              <div>
-                <h3>حمل‌ونقل سازمانی</h3>
-                <p>
-                  مدیریت یکپارچه سفرهای کارکنان و سرویس‌های سازمانی با امکان
-                  کنترل و پایش عملکرد.
-                </p>
-              </div>
-              <img src={`${A}service-business.png`} alt="حمل‌ونقل سازمانی" />
-              <BrandButton>درخواست مشاوره</BrandButton>
-            </article>
-            <article className="service-card large">
-              <div>
-                <h3>خدمات اختصاصی</h3>
-                <p>
-                  راهکار اختصاصی متناسب با نوع سفر، تعداد مسافران و شرایط سازمان
-                  شما.
-                </p>
-              </div>
-              <img src={`${A}service-custom.png`} alt="خدمات اختصاصی" />
-              <BrandButton>با ما در ارتباط باشید</BrandButton>
-            </article>
-          </div>
-        </div>
-      </section>
-
+<TravelSolutions
+  badge="همه‌جا دات‌وان تریپ"
+  title="هر سفر، یک راه‌حل متناسب"
+  description="دات‌وان تریپ، مجموعه‌ای از خدمات حمل‌ونقل را برای نیازهای مختلف مسافران، سازمان‌ها و مجموعه‌ها ارائه می‌دهد."
+  cards={solutionCards}
+/>
+   
       <section className="join section">
         <div className="join-copy">
           <span>به دات‌وان تریپ بپیوندید</span>
