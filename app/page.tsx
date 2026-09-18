@@ -6,7 +6,7 @@ import FleetFeature from "@/components/ui/index/FleetFeature/FleetFeature";
 import modernFleetImage from "@/public/figma/car3.png"
 import trainedDriversImage from "@/public/figma/trainedDriversImage.png"
 import securiyImage from "@/public/figma/security.png"
-
+import tripStartImage from "@/public/figma/journey.png"
 import {
   Apple,
   BriefcaseBusiness,
@@ -20,6 +20,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
 
 const A = "/figma/";
 const faqItems = [
@@ -247,14 +248,14 @@ export default function Home() {
   buttonText="مشاهده شرایط همکاری"
   buttonHref="/hiring"
 />
-      <section className="journey-section">
-        <SectionHeading
-          eyebrow="تجربه سفر با دات‌وان تریپ"
-          title="سفر، از لحظه درخواست شروع می‌شود"
-          description="دات‌وان تریپ تلاش می‌کند تمام مسیر سفر، از درخواست تا رسیدن به مقصد، ساده، شفاف و قابل اعتماد باشد."
-        />
-        <img src={`${A}journey.png`} alt="مراحل سفر با دات‌وان تریپ" />
-      </section>
+<TripStartHero
+  image={tripStartImage}
+  imageAlt="شروع سفر با دات‌وان تریپ"
+  eyebrow="تجربه سفر با دات‌وان"
+  title="سفر، از لحظه درخواست شروع می‌شود"
+  description="دات‌وان تریپ تلاش می‌کند تمام مسیر سفر، از درخواست تا رسیدن به مقصد، ساده، شفاف و قابل اعتماد باشد."
+/>
+
       <section className="coverage section">
         <h2>دات‌وان تریپ در سراسر ایران</h2>
         <div className="coverage-grid">
