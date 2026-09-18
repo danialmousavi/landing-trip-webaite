@@ -1,102 +1,430 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import {
+  ChevronDown,
+  ChevronLeft,
+  Download,
+  Menu,
+  X,
+} from "lucide-react";
+
 import logo from "@/public/figma/logo.png";
 import logoDark from "@/public/figma/logo-footer.png";
 import ShakeHand from "@/public/figma/agreement.png";
 
-import { Download, Menu, X } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
 type HeaderProps = {
   variant?: "light" | "dark";
 };
 
-const navItems = [
-  { label: "صفحه اصلی", href: "/" },
-  { label: "خدمات", href: "/services" },
-  { label: "ناوگان", href: "/vehicles" },
-  { label: "اخبار", href: "/articles" },
-  { label: "بلاگ", href: "/b2b" },
-  { label: "درباره ما", href: "/about" },
-  { label: "تماس با ما", href: "#contact" },
+type NavChild = {
+  label: string;
+  href: string;
+};
+
+type NavItem = {
+  label: string;
+  href: string;
+  children?: NavChild[];
+};
+
+const navItems: NavItem[] = [
+  {
+    label: "صفحه اصلی",
+    href: "/",
+  },
+
+  {
+    label: "خدمات",
+    href: "/services",
+    children: [
+      {
+        label: "سفر شهری",
+        href: "/services/city",
+      },
+      {
+        label: "سفر بین‌شهری",
+        href: "/services/intercity",
+      },
+      {
+        label: "خدمات سازمانی",
+        href: "/services/organization",
+      },
+      {
+        label: "سرویس ویژه",
+        href: "/services/special",
+      },
+    ],
+  },
+
+  {
+    label: "ناوگان",
+    href: "/vehicles",
+  },
+
+  {
+    label: "اخبار",
+    href: "/articles",
+  },
+
+  {
+    label: "بلاگ",
+    href: "/b2b",
+  },
+
+  {
+    label: "درباره تریپ",
+    href: "/about",
+    children: [
+      {
+        label: "درباره دات‌وان تریپ",
+        href: "/about",
+      },
+      {
+        label: "چشم‌انداز ما",
+        href: "/about/vision",
+      },
+      {
+        label: "فرصت‌های شغلی",
+        href: "/hiring",
+      },
+      {
+        label: "همکاری با تریپ",
+        href: "/forms",
+      },
+    ],
+  },
+
+  {
+    label: "تماس با ما",
+    href: "#contact",
+  },
 ];
 
-export default function Header({ variant = "light" }: HeaderProps) {
+export default function Header({
+  variant = "light",
+}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const address = usePathname();
 
-  // منطق: variant === "light" → هدر سفید، variant === "dark" → هدر مشکی
+  const [openSubmenu, setOpenSubmenu] = useState<
+    string | null
+  >(null);
+
+  const pathname = usePathname();
+
   const isLightVariant = variant === "light";
 
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenSubmenu(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const isActive = (href: string) => {
+    if (href.startsWith("#")) return false;
+
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname.startsWith(href);
+  };
+
+  const toggleSubmenu = (label: string) => {
+    setOpenSubmenu((current) =>
+      current === label ? null : label,
+    );
+  };
+
   return (
-    <header
-      className={`${styles.navShell} ${
-        isLightVariant ? styles.navLight : styles.navDark
-      }`}
-    >
-      {/* Logo */}
-      <Link href="/" aria-label="دات‌وان تریپ" className={styles.brand}>
-        <Image
-          src={isLightVariant ? logoDark : logo}
-          alt="دات‌وان تریپ"
-          width={140}
-          height={50}
-          priority
-        />
-      </Link>
-
-      {/* Desktop & Mobile Navigation */}
-      <nav
-        className={`${styles.mainNav} ${menuOpen ? styles.open : ""}`}
-        aria-label="منوی اصلی"
+    <>
+      <header
+        className={`${styles.navShell} ${
+          isLightVariant
+            ? styles.navLight
+            : styles.navDark
+        }`}
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setMenuOpen(false)}
-          >
-            <span
-              className={`${item.href === address ? styles.navSelected : ""}`}
-            >
-              {item.label}
-            </span>
-          </Link>
-        ))}
-      </nav>
+        {/* Logo */}
 
-      {/* Actions */}
-      <div className={styles.navActions}>
-        <Link href="/forms#join-drivers" className="button button-brand">
-          همکاری با تریپ
-          <Image src={ShakeHand} alt="همکاری با تریپ" width={18} height={18} />
+        <Link
+          href="/"
+          aria-label="دات‌وان تریپ"
+          className={styles.brand}
+        >
+          <Image
+            src={isLightVariant ? logoDark : logo}
+            alt="دات‌وان تریپ"
+            width={140}
+            height={50}
+            priority
+          />
         </Link>
+
+        {/* Navigation */}
+
+        <nav
+          className={`${styles.mainNav} ${
+            menuOpen ? styles.open : ""
+          }`}
+          aria-label="منوی اصلی"
+        >
+          {/* Mobile header */}
+
+          <div className={styles.mobileMenuHeader}>
+            <span>منوی دات‌وان تریپ</span>
+
+            <button
+              type="button"
+              className={styles.mobileClose}
+              onClick={() => setMenuOpen(false)}
+              aria-label="بستن منو"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Links */}
+
+          <div className={styles.navLinks}>
+            {navItems.map((item) => {
+              const hasChildren =
+                item.children &&
+                item.children.length > 0;
+
+              const active = isActive(item.href);
+
+              const submenuIsOpen =
+                openSubmenu === item.label;
+
+              return (
+                <div
+                  className={`${styles.navItem} ${
+                    hasChildren
+                      ? styles.hasChildren
+                      : ""
+                  }`}
+                  key={item.label}
+                >
+                  {/* ============================
+                      Normal Link
+                  ============================ */}
+
+                  {!hasChildren && (
+                    <Link
+                      href={item.href}
+                      className={
+                        active
+                          ? styles.activeLink
+                          : ""
+                      }
+                      onClick={() =>
+                        setMenuOpen(false)
+                      }
+                    >
+                      <span>{item.label}</span>
+                    </Link>
+                  )}
+
+                  {/* ============================
+                      Link with submenu
+                  ============================ */}
+
+                  {hasChildren && (
+                    <>
+                      <div
+                        className={`${styles.parentLink} ${
+                          active
+                            ? styles.activeLink
+                            : ""
+                        }`}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => {
+                            /*
+                              روی دسکتاپ لینک اصلی کار می‌کند.
+                              روی موبایل فلش جداگانه
+                              زیرمنو را باز می‌کند.
+                            */
+                            setMenuOpen(false);
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+
+                        {/* Desktop arrow */}
+
+                        <ChevronDown
+                          size={15}
+                          strokeWidth={1.8}
+                          className={
+                            styles.desktopChevron
+                          }
+                          aria-hidden="true"
+                        />
+
+                        {/* Mobile submenu button */}
+
+                        <button
+                          type="button"
+                          className={
+                            styles.mobileSubmenuButton
+                          }
+                          onClick={() =>
+                            toggleSubmenu(item.label)
+                          }
+                          aria-label={`نمایش زیرمنوی ${item.label}`}
+                          aria-expanded={
+                            submenuIsOpen
+                          }
+                        >
+                          <ChevronLeft
+                            size={17}
+                            strokeWidth={1.8}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Submenu */}
+
+                      <div
+                        className={`${styles.submenu} ${
+                          submenuIsOpen
+                            ? styles.submenuOpen
+                            : ""
+                        }`}
+                      >
+                        {item.children?.map(
+                          (child) => (
+                            <Link
+                              href={child.href}
+                              key={child.href}
+                              onClick={() => {
+                                setMenuOpen(false);
+                                setOpenSubmenu(null);
+                              }}
+                            >
+                              {child.label}
+                            </Link>
+                          ),
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile actions */}
+
+          <div className={styles.mobileActions}>
+            <Link
+              href="/forms#join-drivers"
+              className={styles.mobilePrimary}
+              onClick={() => setMenuOpen(false)}
+            >
+              همکاری با تریپ
+
+              <Image
+                src={ShakeHand}
+                alt=""
+                width={18}
+                height={18}
+              />
+            </Link>
+
+            <button
+              type="button"
+              className={styles.mobileSecondary}
+            >
+              <Download size={17} />
+              دانلود اپلیکیشن
+            </button>
+          </div>
+        </nav>
+
+        {/* Desktop Actions */}
+
+        <div className={styles.navActions}>
+          <Link
+            href="/forms#join-drivers"
+            className="button button-brand"
+          >
+            همکاری با تریپ
+
+            <Image
+              src={ShakeHand}
+              alt=""
+              width={18}
+              height={18}
+            />
+          </Link>
+
+          <button
+            type="button"
+            className={`button ${
+              isLightVariant
+                ? "button-dark"
+                : "button-glass"
+            }`}
+          >
+            <Download size={18} />
+            دانلود اپلیکیشن
+          </button>
+        </div>
+
+        {/* Mobile menu trigger */}
 
         <button
           type="button"
-          className={`button ${
-            isLightVariant ? "button-dark" : "button-glass"
-          }`}
+          className={styles.menuButton}
+          aria-label={
+            menuOpen ? "بستن منو" : "باز کردن منو"
+          }
+          aria-expanded={menuOpen}
+          onClick={() =>
+            setMenuOpen((prev) => !prev)
+          }
         >
-          <Download size={18} />
-          دانلود اپلیکیشن
+          {menuOpen ? (
+            <X size={21} />
+          ) : (
+            <Menu size={21} />
+          )}
         </button>
-      </div>
+      </header>
 
-      {/* Mobile Menu Button */}
-      <button
-        type="button"
-        className={styles.menuButton}
-        aria-label={menuOpen ? "بستن منو" : "باز کردن منو"}
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((prev) => !prev)}
-      >
-        {menuOpen ? <X size={22} /> : <Menu size={22} />}
-      </button>
-    </header>
+      {menuOpen && (
+        <button
+          type="button"
+          className={styles.backdrop}
+          aria-label="بستن منو"
+          onClick={() => {
+            setMenuOpen(false);
+            setOpenSubmenu(null);
+          }}
+        />
+      )}
+    </>
   );
 }
