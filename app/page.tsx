@@ -21,7 +21,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
-
+import IranCoverage, { CoverageItem } from "@/components/ui/index/IranCoverage/IranCoverage";
+import iranMap from "@/public/figma/iran-map.png"
 const A = "/figma/";
 const faqItems = [
   [
@@ -94,6 +95,45 @@ const securiyItems = [
   },
   {
     text: "افزایش امنیت از طریق مانیتورینگ و کنترل ناوگان",
+  },
+];
+
+const coverageItems: CoverageItem[] = [
+  {
+    city: "تهران",
+    value: 1997,
+  },
+  {
+    city: "کرج",
+    value: 1498,
+  },
+  {
+    city: "خوزستان",
+    value: 997,
+  },
+  {
+    city: "اصفهان",
+    value: 823,
+  },
+  {
+    city: "گلستان",
+    value: 657,
+  },
+  {
+    city: "مازندران",
+    value: 598,
+  },
+  {
+    city: "یزد",
+    value: 416,
+  },
+  {
+    city: "کردستان",
+    value: 254,
+  },
+  {
+    city: "بندر عباس",
+    value: 166,
   },
 ];
 function BrandButton({
@@ -255,19 +295,23 @@ export default function Home() {
   title="سفر، از لحظه درخواست شروع می‌شود"
   description="دات‌وان تریپ تلاش می‌کند تمام مسیر سفر، از درخواست تا رسیدن به مقصد، ساده، شفاف و قابل اعتماد باشد."
 />
-
-      <section className="coverage section">
-        <h2>دات‌وان تریپ در سراسر ایران</h2>
-        <div className="coverage-grid">
-          <img src={`${A}coverage-chart.png`} alt="آمار پوشش استانی" />
-          <img src={`${A}iran-map.png`} alt="نقشه ایران" />
-        </div>
-        <p>
-          <strong>دات‌وان تریپ با توسعه ناوگان و زیرساخت حمل‌ونقل،</strong>{" "}
-          خدمات خود را به‌صورت مرحله‌ای در <b>استان‌های مختلف ایران</b> ارائه
-          می‌دهد.
-        </p>
-      </section>
+<IranCoverage
+  title="دات‌وان تریپ در سراسر ایران"
+  subtitle="آمار ثبت‌نام راننده‌ها در استان‌های کشور"
+  mapImage={iranMap}
+  mapAlt="نقشه ایران"
+  items={coverageItems}
+  description={
+    <>
+      <strong>
+        دات‌وان تریپ با توسعه ناوگان و زیرساخت حمل‌ونقل،
+      </strong>{" "}
+      خدمات خود را به‌صورت مرحله‌ای
+      <br />
+      در <strong>استان‌های مختلف ایران</strong> ارائه می‌دهد.
+    </>
+  }
+/>
 
       <section className="services" id="services">
         <div className="section wide">

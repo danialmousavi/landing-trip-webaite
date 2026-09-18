@@ -1,0 +1,519 @@
+/* ========================================
+   Section
+======================================== */
+
+.section {
+  width: 100%;
+
+  padding: clamp(55px, 6vw, 90px) 0;
+
+  background: #f7f7f7;
+
+  font-family: inherit;
+}
+
+.section * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* ========================================
+   Main Container
+======================================== */
+
+.container {
+  width: 82%;
+  max-width: 1250px;
+
+  margin-inline: auto;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 7%;
+}
+
+/* ========================================
+   Content / Chart
+======================================== */
+
+.content {
+  width: 52%;
+  max-width: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: stretch;
+}
+
+/* ========================================
+   Heading
+======================================== */
+
+.heading {
+  width: 100%;
+
+  margin-bottom: 28px;
+
+  text-align: right;
+}
+
+.title {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: clamp(23px, 1.9vw, 31px);
+  font-weight: 800;
+
+  line-height: 1.7;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+
+  color: #777;
+
+  font-size: clamp(12px, 0.75vw, 12px);
+  font-weight: 400;
+
+  line-height: 2;
+}
+
+/* ========================================
+   Chart
+======================================== */
+
+.chart {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+/* ========================================
+   Chart Row
+======================================== */
+
+.chartRow {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+}
+
+/* ========================================
+   City
+======================================== */
+
+.city {
+  width: 76px;
+
+  flex-shrink: 0;
+
+  color: #292929;
+
+  font-size: clamp(14px, 0.78vw, 13px);
+  font-weight: 500;
+
+  line-height: 1.7;
+
+  text-align: right;
+
+  white-space: nowrap;
+}
+
+/* ========================================
+   Bar Area
+======================================== */
+
+.barArea {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+
+  /*
+    چون RTL است، نوار از سمت راست شروع می‌شود
+  */
+  justify-content: flex-start;
+}
+
+/* ========================================
+   Striped Bar
+======================================== */
+
+.bar {
+  position: relative;
+
+  height: 35px;
+
+  min-width: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-inline: 10px;
+
+  overflow: hidden;
+
+  border-radius: 7px;
+
+  /*
+    زمینه مشکی + Stripe مورب
+  */
+  background:
+    repeating-linear-gradient(
+      -20deg,
+      rgba(255, 255, 255, 0.08) 0px,
+      rgba(255, 255, 255, 0.08) 8px,
+      rgba(255, 255, 255, 0) 8px,
+      rgba(255, 255, 255, 0) 18px
+    ),
+    #080808;
+
+  transition: width 500ms ease;
+}
+
+/* کمی عمق روی نوار */
+
+.bar::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+/* ========================================
+   Number
+======================================== */
+
+.value {
+  position: relative;
+  z-index: 2;
+
+  color: #fff;
+
+  font-size: clamp(9px, 0.7vw, 11px);
+  font-weight: 500;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+/* ========================================
+   Map
+======================================== */
+
+.mapColumn {
+  width: 41%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.mapWrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 510px;
+
+  aspect-ratio: 1 / 0.9;
+}
+
+.mapImage {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ========================================
+   Bottom Description
+======================================== */
+
+.bottomDescription {
+  width: 60%;
+  max-width: 760px;
+
+  margin: 30px auto 0;
+
+  color: #555;
+
+  font-size: clamp(12px, 0.9vw, 15px);
+  font-weight: 400;
+
+  line-height: 2;
+
+  text-align: center;
+}
+
+.bottomDescription strong {
+  color: #171717;
+
+  font-weight: 700;
+}
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    padding: 55px 0;
+  }
+
+  .container {
+    width: 88%;
+
+    gap: 5%;
+  }
+
+  .content {
+    width: 54%;
+  }
+
+  .mapColumn {
+    width: 41%;
+  }
+
+  .heading {
+    margin-bottom: 22px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .chart {
+    gap: 7px;
+  }
+
+  .chartRow {
+    gap: 10px;
+  }
+
+  .city {
+    width: 65px;
+
+    font-size: 11px;
+  }
+
+  .barArea {
+    height: 30px;
+  }
+
+  .bar {
+    height: 26px;
+
+    min-width: 52px;
+
+    border-radius: 6px;
+  }
+
+  .value {
+    font-size: 9px;
+  }
+
+  .bottomDescription {
+    width: 72%;
+
+    margin-top: 28px;
+
+    font-size: 12px;
+  }
+}
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 700px) {
+  .section {
+    padding: 42px 0;
+  }
+
+  .container {
+    width: 90%;
+
+    flex-direction: column;
+
+    gap: 32px;
+  }
+
+  /*
+    در موبایل ابتدا عنوان + نمودار
+    و بعد نقشه نمایش داده می‌شود
+  */
+
+  .content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .mapColumn {
+    width: 82%;
+
+    order: 2;
+  }
+
+  .heading {
+    margin-bottom: 22px;
+
+    text-align: center;
+  }
+
+  .title {
+    font-size: 21px;
+
+    line-height: 1.7;
+  }
+
+  .subtitle {
+    width: 90%;
+
+    margin: 5px auto 0;
+
+    font-size: 10px;
+  }
+
+  .chart {
+    width: 100%;
+
+    gap: 7px;
+  }
+
+  .chartRow {
+    gap: 9px;
+  }
+
+  .city {
+    width: 62px;
+
+    font-size: 10.5px;
+  }
+
+  .barArea {
+    height: 29px;
+  }
+
+  .bar {
+    height: 25px;
+
+    min-width: 48px;
+
+    padding-inline: 8px;
+
+    border-radius: 6px;
+
+    background:
+      repeating-linear-gradient(
+        -20deg,
+        rgba(255, 255, 255, 0.09) 0px,
+        rgba(255, 255, 255, 0.09) 7px,
+        transparent 7px,
+        transparent 16px
+      ),
+      #080808;
+  }
+
+  .value {
+    font-size: 9px;
+  }
+
+  .mapWrapper {
+    max-width: 400px;
+
+    margin-inline: auto;
+  }
+
+  .bottomDescription {
+    width: 88%;
+    max-width: 550px;
+
+    margin-top: 25px;
+
+    font-size: 11.5px;
+
+    line-height: 2;
+  }
+}
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 420px) {
+  .container {
+    width: 92%;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .chartRow {
+    gap: 7px;
+  }
+
+  .city {
+    width: 56px;
+
+    font-size: 10px;
+  }
+
+  .barArea {
+    height: 27px;
+  }
+
+  .bar {
+    height: 23px;
+
+    min-width: 43px;
+
+    padding-inline: 6px;
+
+    border-radius: 5px;
+  }
+
+  .value {
+    font-size: 8.5px;
+  }
+
+  .mapColumn {
+    width: 90%;
+  }
+
+  .bottomDescription {
+    width: 92%;
+
+    font-size: 11px;
+  }
+}
