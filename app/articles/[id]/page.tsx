@@ -39,7 +39,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         article={article}
         related={getRelatedArticles(article.id)}
       />
-      <FAQ />
     </>
   );
 }
