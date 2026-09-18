@@ -1,5 +1,8 @@
-"use client"
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+
 import styles from "./CorporateJobCard.module.css";
 
 export type CorporateJobLocation = {
@@ -8,40 +11,33 @@ export type CorporateJobLocation = {
 };
 
 export type CorporateJobCardProps = {
+  id: string;
   title: string;
-
   employmentType: string;
-  employmentIcon?: string;
-
   locations: CorporateJobLocation[];
-
-  buttonText?: string;
-  onButtonClick?: () => void;
 };
 
 export default function CorporateJobCard({
+  id,
   title,
   employmentType,
-  employmentIcon,
   locations,
-  buttonText = "ثبت‌نام",
-  onButtonClick,
 }: CorporateJobCardProps) {
   return (
     <article className={styles.card} dir="rtl">
       <div className={styles.content}>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>
+          {title}
+        </h3>
 
         <div className={styles.employment}>
-          {employmentIcon && (
             <Image
-              src={employmentIcon}
+              src={"/figma/svgs/clock.svg"}
               alt=""
               width={24}
               height={24}
               className={styles.employmentIcon}
             />
-          )}
 
           <span>{employmentType}</span>
         </div>
@@ -68,13 +64,12 @@ export default function CorporateJobCard({
         </div>
       </div>
 
-      <button
-        type="button"
+      <Link
+        href={`/join-us/organizational/${id}`}
         className={styles.button}
-        onClick={onButtonClick}
       >
-        {buttonText}
-      </button>
+        ثبت نام
+      </Link>
     </article>
   );
 }

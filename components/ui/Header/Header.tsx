@@ -88,12 +88,12 @@ const navItems: NavItem[] = [
       },
 
       {
-        label: "فرصت‌های شغلی",
-        href: "/hiring",
+        label: "همکاری با رانندگان",
+        href: "/join-us/drivers",
       },
       {
         label: "همکاری با تریپ",
-        href: "/forms",
+        href: "/join-us/organizational ",
       },
     ],
   },

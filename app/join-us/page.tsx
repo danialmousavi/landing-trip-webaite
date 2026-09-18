@@ -81,10 +81,10 @@ export const driverJobs: DriverHiringCardProps[] = [
 
 export const corporateJobs: CorporateJobCardProps[] = [
   {
+    id: "test",
     title: "نوع پوزیشن کاری",
 
     employmentType: "تمام وقت",
-    employmentIcon: "/figma/svgs/clock.svg",
 
     locations: [
       {
@@ -96,15 +96,13 @@ export const corporateJobs: CorporateJobCardProps[] = [
         icon: "/figma/svgs/location.svg",
       },
     ],
-
-    buttonText: "ثبت‌نام",
   },
 
   {
+    id: "test2",
     title: "نوع پوزیشن کاری",
 
     employmentType: "تمام وقت",
-    employmentIcon: "/figma/svgs/clock.svg",
 
     locations: [
       {
@@ -116,15 +114,14 @@ export const corporateJobs: CorporateJobCardProps[] = [
         icon: "/figma/svgs/location.svg",
       },
     ],
-
-    buttonText: "ثبت‌نام",
   },
 
   {
+    id: "test3",
+
     title: "نوع پوزیشن کاری",
 
     employmentType: "تمام وقت",
-    employmentIcon: "/figma/svgs/clock.svg",
 
     locations: [
       {
@@ -136,15 +133,14 @@ export const corporateJobs: CorporateJobCardProps[] = [
         icon: "/figma/svgs/location.svg",
       },
     ],
-
-    buttonText: "ثبت‌نام",
   },
 
   {
+    id: "test4",
+
     title: "نوع پوزیشن کاری",
 
     employmentType: "تمام وقت",
-    employmentIcon: "/figma/svgs/clock.svg",
 
     locations: [
       {
@@ -156,8 +152,6 @@ export const corporateJobs: CorporateJobCardProps[] = [
         icon: "/figma/svgs/location.svg",
       },
     ],
-
-    buttonText: "ثبت‌نام",
   },
 ];
 
