@@ -11,8 +11,14 @@ import corporateImage from "@/public/figma/solutionImage3.png";
 import specialServicesImage from "@/public/figma/solutionImage4.png";
 import driversImage from "@/public/figma/recruiting.png";
 import carSideView from "@/public/figma/vehicles/Car-SideView.svg";
-
+import mainNewsImage from "@/public/figma/mainNewsImage.png"
 import TripStartHero from "@/components/ui/index/TripStartHero/TripStartHero";
+import news1Image from "@/public/figma/news-1.png"
+import news2Image from "@/public/figma/news-2.png"
+import news3Image from "@/public/figma/news-3.png"
+import news4Image from "@/public/figma/news-4.png"
+
+
 import IranCoverage, {
   CoverageItem,
 } from "@/components/ui/index/IranCoverage/IranCoverage";
@@ -24,6 +30,7 @@ import { CarFront } from "lucide-react";
 import Footer from "@/components/ui/footer/Footer";
 import VehicleShowcase from "@/components/ui/VehicleShowcase/VehicleShowcase";
 import DownloadBanner from "@/components/ui/DownloadBanner/DownloadBanner";
+import NewsSection, { NewsItem } from "@/components/ui/index/NewsSection/NewsSection";
 const A = "/figma/";
 // faq data
 const faqItems = [
@@ -204,6 +211,83 @@ const solutionCards: TravelSolutionCardProps[] = [
     buttonHref: "/contact",
   },
 ];
+
+//news data
+
+const featuredNews: NewsItem = {
+  id: "featured-news",
+
+  title:
+    "بهره‌برداری رسمی از ناوگان تاکسی‌های هوشمند دات‌وان در کرج با حضور مهندس بابک زنجانی",
+
+  description:
+    "مهندس زنجانی با اشاره به نقش حیاتی هوشمندسازی ناوگان، بر توسعه خدمات حمل‌ونقل مدرن و ایجاد تجربه‌ای متفاوت برای شهروندان تأکید کرد.",
+
+  date: "۲۴ آذر ۱۴۰۴",
+
+  category: "دات وان تریپ",
+
+  image: mainNewsImage,
+
+  href: "/news/featured",
+
+  buttonText: "مشاهده خبر",
+};
+
+const newsData: NewsItem[] = [
+  {
+    id: "news-1",
+
+    title:
+      "آغاز بهره‌برداری از هزار تاکسی دات‌وان تریپ در کرج؛ زیرساختی مدرن برای حمل‌ونقل پاک",
+
+    date: "۵ آذر ۱۴۰۴",
+
+    image: news1Image,
+
+    href: "/news/1",
+  },
+
+  {
+    id: "news-2",
+
+    title:
+      "اختلالات موقتی در برخی سرویس‌های حمل و نقل شهری در البرز",
+
+    date: "۵ آذر ۱۴۰۴",
+
+    image: news2Image,
+
+    href: "/news/2",
+  },
+
+  {
+    id: "news-3",
+
+    title:
+      "رئیس شورای عالی استان‌ها: عدم حمایت از سرمایه‌گذار، خیانت به کشور است",
+
+    date: "۵ آذر ۱۴۰۴",
+
+    image: news3Image,
+
+    href: "/news/3",
+  },
+
+  {
+    id: "news-4",
+
+    title:
+      "آغاز بهره‌برداری از هزار تاکسی دات‌وان تریپ در کرج؛ زیرساختی مدرن برای حمل‌ونقل پاک",
+
+    date: "۵ آذر ۱۴۰۴",
+
+    image: news4Image,
+
+    href: "/news/4",
+  },
+];
+
 function BrandButton({
   children,
   subtle = false,
@@ -422,51 +506,21 @@ export default function Home() {
     },
   ]}
 />
+
          <div className="md:mt-50">
            <DownloadBanner/>
          </div>
-      <section className="news section" id="news">
-        <SectionHeading
-          eyebrow="اخبار و رویدادها"
-          title="دات‌وان تریپ در مسیر توسعه"
-          description="آخرین اخبار، رویدادها و اتفاقات دات‌وان تریپ را دنبال کنید."
-        />
-        <div className="news-grid">
-          <article className="featured-news">
-            <img
-              src={`${A}news-main.png`}
-              alt="بهره‌برداری رسمی از ناوگان دات‌وان"
-            />
-            <div>
-              <h3>
-                بهره‌برداری رسمی از ناوگان تاکسی‌های هوشمند دات‌وان در کرج با
-                حضور مهندس بابک زنجانی
-              </h3>
-              <p>
-                همکاری و هم‌افزایی مجموعه‌های اجرایی، عامل مهمی در سرعت‌گیری
-                اجرای پروژه و آغاز رسمی فعالیت ناوگان در استان بوده است.
-              </p>
-              <button className="button button-dark">مشاهده خبر</button>
-            </div>
-          </article>
-          <div className="news-list">
-            {news.map(([image, title]) => (
-              <article key={title}>
-                <img src={`${A}${image}`} alt="" />
-                <div>
-                  <h3>{title}</h3>
-                  <span>۵ آذر ۱۴۰۴</span>
-                  <button className="button button-dark">مشاهده خبر</button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-        <button className="button button-dark news-more">
-          مشاهده همه اخبار
-        </button>
-      </section>
 
+             <NewsSection
+      eyebrow="اخبار و رویدادها"
+      title="دات‌وان تریپ در مسیر توسعه"
+      description="آخرین اخبار، رویدادها و اتفاقات دات‌وان تریپ را دنبال کنید."
+      featuredNews={featuredNews}
+      news={newsData}
+      allNewsHref="/news"
+      allNewsLabel="مشاهده همه اخبار"
+    />
+   
       <section className="bottom-cta section" id="cta">
         <img src={`${A}cta-car.png`} alt="خودروی دات‌وان تریپ" />
         <div>
