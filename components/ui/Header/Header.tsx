@@ -336,7 +336,7 @@ export default function Header({
 
           <div className={styles.mobileActions}>
             <Link
-              href="/forms#join-drivers"
+              href="/join-us/organizational"
               className={styles.mobilePrimary}
               onClick={() => setMenuOpen(false)}
             >
@@ -364,7 +364,7 @@ export default function Header({
 
         <div className={styles.navActions}>
           <Link
-            href="/forms#join-drivers"
+            href="/join-us/organizational"
             className="button button-brand"
           >
             همکاری با تریپ

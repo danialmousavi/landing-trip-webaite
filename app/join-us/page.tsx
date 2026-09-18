@@ -48,36 +48,7 @@ const cooperationCards: CooperationCard[] = [
     position: "bottom",
   },
 ];
-export const driverJobs: DriverHiringCardProps[] = [
-  {
-    city: "مشهد",
-    driverCount: 20,
-    title: "فراخوان استخدام",
-    description:
-      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
-  },
-  {
-    city: "مشهد",
-    driverCount: 20,
-    title: "فراخوان استخدام",
-    description:
-      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
-  },
-  {
-    city: "مشهد",
-    driverCount: 20,
-    title: "فراخوان استخدام",
-    description:
-      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
-  },
-  {
-    city: "مشهد",
-    driverCount: 20,
-    title: "فراخوان استخدام",
-    description:
-      "دات‌وان تریپ برای استان مشهد به تعداد ۲۰ نفر فراخوان استخدام راننده دارد.",
-  },
-];
+
 
 export const corporateJobs: CorporateJobCardProps[] = [
   {

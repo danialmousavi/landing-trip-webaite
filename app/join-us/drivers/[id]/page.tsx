@@ -1,7 +1,7 @@
 import DriverForm from "@/components/forms/DriverForm";
 import Footer from "@/components/ui/footer/Footer";
 import Header from "@/components/ui/Header/Header";
-import JobDetails from "@/components/ui/join-us/JobDetails/JobDetails";
+import JobDetails, { JobDetailsProps } from "@/components/ui/join-us/JobDetails/JobDetails";
 import React from "react";
 export const jobDetails: JobDetailsProps = {
   title: "نوع پوزیشن کاری",
