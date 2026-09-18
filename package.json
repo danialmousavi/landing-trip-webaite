@@ -7,7 +7,7 @@
   },
   "scripts": {
     "install:ci": "bash scripts/install-pnpm.sh",
-    "dev": "next dev --hostname 192.168.221.226",
+    "dev": "next dev ",
     "dev:vinext": "node scripts/run-framework.mjs dev",
     "build": "next build",
     "build:vinext": "node scripts/run-framework.mjs build",

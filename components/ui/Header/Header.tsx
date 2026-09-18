@@ -70,12 +70,12 @@ const navItems: NavItem[] = [
 
   {
     label: "اخبار",
-    href: "/articles",
+    href: "/news",
   },
 
   {
     label: "بلاگ",
-    href: "/b2b",
+    href: "/blog",
   },
 
   {
@@ -86,10 +86,7 @@ const navItems: NavItem[] = [
         label: "درباره دات‌وان تریپ",
         href: "/about",
       },
-      {
-        label: "چشم‌انداز ما",
-        href: "/about/vision",
-      },
+
       {
         label: "فرصت‌های شغلی",
         href: "/hiring",
@@ -103,7 +100,7 @@ const navItems: NavItem[] = [
 
   {
     label: "تماس با ما",
-    href: "#contact",
+    href: "/contact-us",
   },
 ];
 

@@ -1,0 +1,1011 @@
+/* ========================================
+   Section
+======================================== */
+
+.section {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 70px 0;
+
+  overflow-x: clip;
+
+  background: #fff;
+
+  font-family: inherit;
+}
+
+.section *,
+.section *::before,
+.section *::after {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+
+/* ========================================
+   Container
+======================================== */
+
+.container {
+  width: 92%;
+  max-width: 1320px;
+  min-width: 0;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  /*
+    RTL:
+    فرم سمت راست
+    کارت تماس سمت چپ
+  */
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(260px, 0.75fr);
+
+  gap: clamp(24px, 4vw, 65px);
+
+  align-items: stretch;
+
+  overflow: visible;
+}
+
+
+/* ========================================
+   Form Side
+======================================== */
+
+.formSide {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+
+/* ========================================
+   Fields Grid
+======================================== */
+
+.fieldsGrid {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px 24px;
+}
+
+.fieldsGrid > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+
+/* ========================================
+   Inputs
+======================================== */
+
+.control {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  height: 48px;
+
+  padding: 0 15px;
+
+  border: 1px solid #dedede;
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #171717;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: normal;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.control::placeholder,
+.textarea::placeholder {
+  color: #b5b5b5;
+
+  opacity: 1;
+}
+
+.control:focus,
+.textarea:focus {
+  border-color: #00b7ce;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 183, 206, 0.08);
+}
+
+
+/* ========================================
+   Phone
+======================================== */
+
+/*
+  فقط خود input شماره LTR است.
+  در نتیجه:
+  placeholder از چپ شروع می‌شود
+  شماره هم از چپ تایپ می‌شود.
+
+  Field و label همچنان RTL باقی می‌مانند.
+*/
+
+.phoneInput {
+  direction: ltr;
+
+  text-align: left;
+
+  unicode-bidi: plaintext;
+}
+
+.phoneInput::placeholder {
+  direction: rtl;
+
+  text-align: left;
+}
+
+
+/* ========================================
+   Category
+======================================== */
+
+.categorySection {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin-top: 25px;
+}
+
+.categories {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 0;
+
+  color: #3e3e3e;
+
+  font-size: 11px;
+  font-weight: 400;
+
+  line-height: 1.6;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.radioInput {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.radioVisual {
+  position: relative;
+
+  width: 13px;
+  height: 13px;
+
+  flex: 0 0 13px;
+
+  border: 1px solid #bdbdbd;
+  border-radius: 50%;
+
+  background: #fff;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.radioInput:checked + .radioVisual {
+  border-color: #3578ff;
+}
+
+.radioInput:checked + .radioVisual::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #3578ff;
+
+  transform: translate(-50%, -50%);
+}
+
+.radioInput:focus-visible + .radioVisual {
+  box-shadow:
+    0 0 0 3px rgba(53, 120, 255, 0.12);
+}
+
+
+/* ========================================
+   Message
+======================================== */
+
+.messageField {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin-top: 28px;
+}
+
+.textarea {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
+
+  padding: 14px 15px 30px;
+
+  resize: none;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border: 1px solid #dedede;
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #171717;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 2;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.counter {
+  position: absolute;
+
+  left: 7px;
+  bottom: -24px;
+
+  color: #777;
+
+  font-size: 9px;
+  font-weight: 400;
+
+  direction: ltr;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   Errors
+======================================== */
+
+.fieldError,
+.formError {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  color: #d93025;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+}
+
+.fieldError {
+  margin-bottom: 8px;
+}
+
+.formError {
+  margin-top: 27px;
+}
+
+
+/* ========================================
+   Actions
+======================================== */
+
+.actions {
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+
+  /*
+    مطابق UI:
+    دکمه سمت چپ فرم
+  */
+  justify-content: flex-start;
+
+  margin-top: 35px;
+
+  direction: ltr;
+}
+
+.submitButton {
+  min-height: 45px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 9px 14px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #292929 0%,
+      #111 100%
+    );
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+
+  line-height: 1.5;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* ========================================
+   Contact Card
+======================================== */
+
+.contactCard {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 520px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 45px 34px 35px;
+
+  border-radius: 15px;
+
+  background: #050505;
+
+  color: #fff;
+}
+
+
+/* ========================================
+   Contact Header
+======================================== */
+
+.contactHeader {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 100%;
+
+  text-align: right;
+}
+
+.contactHeader h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(20px, 1.45vw, 25px);
+  font-weight: 700;
+
+  line-height: 1.7;
+}
+
+.contactHeader p {
+  width: 100%;
+  max-width: 320px;
+
+  margin: 5px 0 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 11px;
+  font-weight: 400;
+
+  line-height: 2;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   Contact Items
+======================================== */
+
+.contactItems {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 27px;
+
+  margin-top: 72px;
+}
+
+.contactItem {
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 11px;
+  font-weight: 400;
+
+  line-height: 1.9;
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+}
+
+.contactItem svg {
+  flex-shrink: 0;
+
+  color: #fff;
+}
+
+
+/* ========================================
+   Decorative Circles
+======================================== */
+
+/*
+  اینها absolute هستند ولی چون خود کارت
+  overflow:hidden دارد هیچ وقت نباید
+  عرض صفحه را زیاد کنند.
+*/
+
+.circleOne,
+.circleTwo {
+  position: absolute;
+
+  bottom: -40px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.circleOne {
+  right: 57%;
+
+  width: 125px;
+  height: 125px;
+
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.circleTwo {
+  right: 33%;
+
+  width: 150px;
+  height: 150px;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ========================================
+   Success
+======================================== */
+
+.successWrapper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ========================================
+   Tablet
+======================================== */
+
+@media (max-width: 1000px) {
+  .section {
+    padding: 55px 0;
+  }
+
+  .container {
+    width: 90%;
+
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(230px, 0.8fr);
+
+    gap: 25px;
+  }
+
+  .fieldsGrid {
+    gap: 18px;
+  }
+
+  .categories {
+    gap: 15px;
+  }
+
+  .contactCard {
+    min-height: 490px;
+
+    padding: 35px 25px;
+  }
+
+  .contactItems {
+    margin-top: 55px;
+
+    gap: 23px;
+  }
+}
+
+
+/* ========================================
+   Mobile / Small Tablet
+======================================== */
+
+@media (max-width: 768px) {
+  .section {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 40px 0;
+
+    overflow-x: clip;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px;
+  }
+
+
+  /* Form first */
+
+  .formSide {
+    order: 1;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+
+  /* Contact card second */
+
+  .contactCard {
+    order: 2;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    min-height: 360px;
+
+    padding: 30px 25px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+  }
+
+
+  /* ======================================
+     Fields
+  ====================================== */
+
+  .fieldsGrid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 16px;
+  }
+
+  .control {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    height: 46px;
+
+    border-radius: 10px;
+  }
+
+
+  /* شماره همچنان چپ */
+
+  .phoneInput {
+    direction: ltr;
+
+    text-align: left;
+  }
+
+  .phoneInput::placeholder {
+    direction: rtl;
+
+    text-align: left;
+  }
+
+
+  /* ======================================
+     Category
+  ====================================== */
+
+  .categorySection {
+    margin-top: 22px;
+  }
+
+  .categories {
+    gap: 12px 18px;
+  }
+
+  .radioLabel {
+    font-size: 10px;
+  }
+
+
+  /* ======================================
+     Message
+  ====================================== */
+
+  .messageField {
+    margin-top: 24px;
+  }
+
+  .textarea {
+    width: 100%;
+    max-width: 100%;
+
+    height: 135px;
+    min-height: 135px;
+    max-height: 135px;
+
+    resize: none;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    border-radius: 10px;
+  }
+
+
+  /* ======================================
+     Actions
+  ====================================== */
+
+  .actions {
+    margin-top: 34px;
+  }
+
+  .submitButton {
+    min-height: 41px;
+  }
+
+
+  /* ======================================
+     Contact
+  ====================================== */
+
+  .contactHeader h2 {
+    font-size: 21px;
+  }
+
+  .contactHeader p {
+    max-width: 380px;
+
+    font-size: 10.5px;
+  }
+
+  .contactItems {
+    margin-top: 35px;
+
+    gap: 18px;
+  }
+
+  .circleOne {
+    right: auto;
+    left: 90px;
+
+    width: 110px;
+    height: 110px;
+  }
+
+  .circleTwo {
+    right: auto;
+    left: 15px;
+
+    width: 135px;
+    height: 135px;
+  }
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 480px) {
+  .section {
+    padding: 32px 0;
+  }
+
+  .container {
+    /*
+      92% یعنی همیشه داخل viewport
+      فضای امن از دو طرف داریم.
+    */
+    width: 92%;
+    max-width: 92%;
+
+    margin-inline: auto;
+  }
+
+  .form,
+  .formSide,
+  .fieldsGrid,
+  .categorySection,
+  .messageField,
+  .actions {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .control {
+    width: 100%;
+    max-width: 100%;
+
+    height: 44px;
+
+    padding-inline: 13px;
+
+    font-size: 10.5px;
+  }
+
+  .phoneInput {
+    direction: ltr;
+
+    text-align: left;
+  }
+
+  .phoneInput::placeholder {
+    direction: rtl;
+
+    text-align: left;
+  }
+
+  .categories {
+    gap: 12px 14px;
+  }
+
+  .radioLabel {
+    font-size: 9.5px;
+  }
+
+  .textarea {
+    width: 100%;
+    max-width: 100%;
+
+    height: 125px;
+    min-height: 125px;
+    max-height: 125px;
+
+    padding: 12px 13px 28px;
+
+    font-size: 10.5px;
+
+    resize: none;
+
+    overflow-x: hidden;
+  }
+
+  .actions {
+    margin-top: 32px;
+  }
+
+  .submitButton {
+    min-height: 39px;
+
+    padding: 8px 12px;
+
+    font-size: 9.5px;
+  }
+
+  .contactCard {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 340px;
+
+    padding: 26px 20px;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+  }
+
+  .contactHeader h2 {
+    font-size: 19px;
+  }
+
+  .contactHeader p {
+    font-size: 10px;
+  }
+
+  .contactItem {
+    max-width: 100%;
+
+    gap: 10px;
+
+    font-size: 10px;
+  }
+
+  .contactItem svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+
+/* ========================================
+   Very Small Mobile
+======================================== */
+
+@media (max-width: 360px) {
+  .container {
+    width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
+  }
+
+  .control {
+    padding-inline: 11px;
+  }
+
+  .categories {
+    gap: 10px 12px;
+  }
+
+  .contactCard {
+    padding: 24px 17px;
+  }
+}
