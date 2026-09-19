@@ -9,9 +9,11 @@ export default function page() {
     <>
       <Header variant="light" />
 
-      <PopularArticles />
+      <div className="mt-20">
+         <PopularArticles />
       <LatestArticles />
       <LatestArticles compact />
+      </div>
       <Footer/>
     </>
   );
